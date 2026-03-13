@@ -1,0 +1,80 @@
+<div class="page-header">
+  <h2>Experiments</h2>
+  <button mat-flat-button color="primary" (click)="openNew()">
+    <mat-icon>add</mat-icon> New Experiment
+  </button>
+</div>
+
+<div class="filter-row">
+  <mat-form-field appearance="outline" class="filter-field">
+    <mat-label>Search</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Name, lab...">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="filter-field">
+    <mat-label>Filter by antibody type</mat-label>
+    <input matInput [formControl]="antibodyFilterControl" [matAutocomplete]="comboAuto"
+           placeholder="Search target or clone...">
+    <mat-icon matSuffix>biotech</mat-icon>
+    <mat-autocomplete #comboAuto [displayWith]="displayCombination"
+                      (optionSelected)="selectCombination($event.option.value)">
+      @for (combo of filteredCombinations; track combo.antigen_target + combo.clone) {
+        <mat-option [value]="combo">
+          <strong>{{ combo.antigen_target }}</strong> · {{ combo.clone }}
+        </mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+
+  @if (selectedCombination) {
+    <button mat-icon-button (click)="clearFilter()" title="Clear antibody filter">
+      <mat-icon>close</mat-icon>
+    </button>
+  }
+</div>
+
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z1 clickable-rows">
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+    <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+    <td mat-cell *matCellDef="let row">{{ row.date ? (row.date | date:'dd/MM/yyyy') : '—' }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="requesting_lab_name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Requesting Lab</th>
+    <td mat-cell *matCellDef="let row">{{ row.requesting_lab_name || '—' }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef>Status</th>
+    <td mat-cell *matCellDef="let row">
+      <span class="status-badge status-{{ row.status }}">{{ statusLabel(row.status) }}</span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="macswell_slides">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Slides</th>
+    <td mat-cell *matCellDef="let row" class="num-cell">{{ row.macswell_slides }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="total_cocktail_volume">
+    <th mat-header-cell *matHeaderCellDef>Cocktail Vol. (µL)</th>
+    <td mat-cell *matCellDef="let row" class="num-cell">{{ row.total_cocktail_volume | number:'1.1-1' }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="goToDetail(row)"
+      [class.insufficient-volume]="row.has_insufficient_volume"></tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell no-data" [attr.colspan]="displayedColumns.length">No experiments found</td>
+  </tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons />

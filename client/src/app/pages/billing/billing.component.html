@@ -1,0 +1,136 @@
+<div class="page-header">
+  <h2><mat-icon class="header-icon">receipt_long</mat-icon> Billing</h2>
+</div>
+
+@if (!selectedExperiment) {
+  <!-- Unbilled experiments -->
+  <h3>Awaiting Billing</h3>
+  @if (unbilledExperiments.length === 0) {
+    <p class="empty-msg">No experiments awaiting billing.</p>
+  } @else {
+    <div class="exp-list">
+      @for (exp of unbilledExperiments; track exp.id) {
+        <mat-card class="exp-card clickable" (click)="selectExperiment(exp)">
+          <mat-card-content>
+            <div class="exp-card-row">
+              <div>
+                <strong>{{ exp.name }}</strong>
+                <span class="exp-meta">{{ exp.date ? (exp.date | date:'dd/MM/yyyy') : '—' }}</span>
+                <span class="exp-meta">{{ exp.requesting_lab_name || '—' }}</span>
+              </div>
+              <mat-icon>chevron_right</mat-icon>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  }
+
+  <!-- Billed history -->
+  <mat-divider class="section-divider" />
+  <h3>Billed History</h3>
+  @if (billedExperiments.length === 0) {
+    <p class="empty-msg">No billed experiments yet.</p>
+  } @else {
+    <div class="exp-list">
+      @for (exp of billedExperiments; track exp.id) {
+        <mat-card class="exp-card" (click)="selectExperiment(exp)">
+          <mat-card-content>
+            <div class="exp-card-row">
+              <div>
+                <strong>{{ exp.name }}</strong>
+                <span class="exp-meta">{{ exp.date ? (exp.date | date:'dd/MM/yyyy') : '—' }}</span>
+                <span class="exp-meta">{{ exp.requesting_lab_name || '—' }}</span>
+                <span class="status-badge billed">Billed</span>
+              </div>
+              <mat-icon>chevron_right</mat-icon>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  }
+
+} @else {
+  <!-- Billing detail view -->
+  <button mat-button (click)="back()">
+    <mat-icon>arrow_back</mat-icon> Back to list
+  </button>
+
+  @if (loadingBilling) {
+    <div class="centered"><mat-spinner diameter="48" /></div>
+  } @else if (billingData) {
+    <mat-card class="detail-header">
+      <mat-card-content>
+        <h3>{{ billingData.experiment.name }}</h3>
+        <div class="meta-row">
+          <span>Date: {{ billingData.experiment.date ? (billingData.experiment.date | date:'dd/MM/yyyy') : '—' }}</span>
+          <span>Requesting Lab: {{ billingData.experiment.requesting_lab_name }}</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    @for (lab of billingData.labs; track lab.lab_id) {
+      <mat-card class="lab-card">
+        <mat-card-content>
+          <div class="lab-header">
+            <div>
+              <h4>{{ lab.lab_name }}</h4>
+              <span class="lab-meta" *ngIf="lab.pi_name">PI: {{ lab.pi_name }}</span>
+            </div>
+            <button mat-stroked-button (click)="downloadPdf(lab)">
+              <mat-icon>download</mat-icon> Download PDF
+            </button>
+          </div>
+
+          <table mat-table [dataSource]="lab.antibodies" class="mat-elevation-z0">
+            <ng-container matColumnDef="tube_number">
+              <th mat-header-cell *matHeaderCellDef>Tube #</th>
+              <td mat-cell *matCellDef="let row">{{ row.tube_number }}</td>
+            </ng-container>
+            <ng-container matColumnDef="target">
+              <th mat-header-cell *matHeaderCellDef>Target</th>
+              <td mat-cell *matCellDef="let row">{{ row.target }}</td>
+            </ng-container>
+            <ng-container matColumnDef="clone">
+              <th mat-header-cell *matHeaderCellDef>Clone</th>
+              <td mat-cell *matCellDef="let row">{{ row.clone }}</td>
+            </ng-container>
+            <ng-container matColumnDef="fluorochrome">
+              <th mat-header-cell *matHeaderCellDef>Fluorochrome</th>
+              <td mat-cell *matCellDef="let row">{{ row.fluorochrome }}</td>
+            </ng-container>
+            <ng-container matColumnDef="total_ul_used">
+              <th mat-header-cell *matHeaderCellDef>µL Used</th>
+              <td mat-cell *matCellDef="let row" class="num-cell">{{ row.total_ul_used | number:'1.1-1' }}</td>
+            </ng-container>
+            <ng-container matColumnDef="chf_per_ul">
+              <th mat-header-cell *matHeaderCellDef>CHF/µL</th>
+              <td mat-cell *matCellDef="let row" class="num-cell">{{ row.chf_per_ul | number:'1.2-2' }}</td>
+            </ng-container>
+            <ng-container matColumnDef="total_chf">
+              <th mat-header-cell *matHeaderCellDef>Total CHF</th>
+              <td mat-cell *matCellDef="let row" class="num-cell">{{ row.total_chf | number:'1.2-2' }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="abColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: abColumns;"></tr>
+          </table>
+
+          <div class="lab-total">
+            <span>Subtotal</span>
+            <span class="total-value">{{ lab.total_cost | number:'1.2-2' }} CHF</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    }
+
+    @if (billingData.experiment.status === 'executed_not_billed') {
+      <div class="actions-bar">
+        <button mat-flat-button color="primary" (click)="markAsBilled()">
+          <mat-icon>check_circle</mat-icon> Mark as Billed
+        </button>
+      </div>
+    }
+  }
+}

@@ -1,0 +1,152 @@
+<div class="back-bar">
+  <button mat-button routerLink="/experiments">
+    <mat-icon>arrow_back</mat-icon> Back to Experiments
+  </button>
+</div>
+
+@if (loading) {
+  <div class="centered"><mat-spinner diameter="48" /></div>
+} @else if (error) {
+  <div class="centered error-msg">
+    <mat-icon>error_outline</mat-icon>
+    <p>{{ error }}</p>
+    <button mat-stroked-button routerLink="/experiments">Back to list</button>
+  </div>
+} @else if (experiment) {
+
+  <!-- Header card -->
+  <mat-card class="header-card">
+    <mat-card-content>
+      <div class="header-row">
+        <div class="header-info">
+          <h2>{{ experiment.name }}</h2>
+          <div class="meta">
+            <span>{{ experiment.date ? (experiment.date | date:'dd/MM/yyyy') : 'No date' }}</span>
+            <span>Lab: {{ experiment.requesting_lab_name || '—' }}</span>
+            <span>Slides: {{ experiment.macswell_slides }}</span>
+            <span>Cocktail: {{ experiment.total_cocktail_volume | number:'1.1-1' }} µL</span>
+          </div>
+        </div>
+        <div class="header-actions">
+          <span class="status-badge status-{{ experiment.status }}">
+            {{ statusLabel(experiment.status) }}
+          </span>
+          @if (isPlanning) {
+            <button mat-stroked-button (click)="openEdit()">
+              <mat-icon>edit</mat-icon> Edit
+            </button>
+            <button mat-flat-button color="warn" (click)="executeExperiment()">
+              <mat-icon>play_arrow</mat-icon> Execute Experiment
+            </button>
+          }
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Antibody selector (planning only) -->
+  @if (isPlanning) {
+    <div class="selector-row">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Add Antibody</mat-label>
+        <input matInput [formControl]="searchControl" [matAutocomplete]="auto"
+               placeholder="Search by tube, target, clone...">
+        <mat-icon matSuffix>search</mat-icon>
+        <mat-autocomplete #auto [displayWith]="displayFn" (optionSelected)="selectAntibody($event.option.value)">
+          @for (ab of filteredAntibodies; track ab.id) {
+            <mat-option [value]="ab">
+              <span class="ab-option">
+                <strong>{{ ab.tube_number }}</strong>
+                {{ ab.antigen_target }} · {{ ab.clone }} · {{ ab.fluorochrome }}
+                @if (ab.processing) {
+                  <span class="ab-processing">[{{ ab.processing }}]</span>
+                }
+                <span class="ab-lab">{{ ab.lab_name }}</span>
+              </span>
+            </mat-option>
+          }
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+  }
+
+  <!-- Antibodies table -->
+  <table mat-table [dataSource]="experimentAntibodies" class="mat-elevation-z1">
+
+    <ng-container matColumnDef="tube_number">
+      <th mat-header-cell *matHeaderCellDef>Tube #</th>
+      <td mat-cell *matCellDef="let row">{{ row.tube_number }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="antigen_target">
+      <th mat-header-cell *matHeaderCellDef>Target</th>
+      <td mat-cell *matCellDef="let row">{{ row.antigen_target }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="clone">
+      <th mat-header-cell *matHeaderCellDef>Clone</th>
+      <td mat-cell *matCellDef="let row">{{ row.clone }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="fluorochrome">
+      <th mat-header-cell *matHeaderCellDef>Fluorochrome</th>
+      <td mat-cell *matCellDef="let row">{{ row.fluorochrome }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="lab_name">
+      <th mat-header-cell *matHeaderCellDef>Lab</th>
+      <td mat-cell *matCellDef="let row">{{ row.lab_name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="titration_ratio">
+      <th mat-header-cell *matHeaderCellDef>Titration (1:x)</th>
+      <td mat-cell *matCellDef="let row">
+        @if (isPlanning) {
+          <input class="titration-input" type="number" min="1"
+                 [value]="row.titration_ratio"
+                 (change)="updateTitration(row, $event)">
+        } @else {
+          1:{{ row.titration_ratio }}
+        }
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ul_per_slide">
+      <th mat-header-cell *matHeaderCellDef>µL/slide</th>
+      <td mat-cell *matCellDef="let row" class="num-cell">{{ row.ul_per_slide | number:'1.1-1' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="total_ul_used">
+      <th mat-header-cell *matHeaderCellDef>Total µL</th>
+      <td mat-cell *matCellDef="let row" class="num-cell">{{ row.total_ul_used | number:'1.1-1' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="total_chf">
+      <th mat-header-cell *matHeaderCellDef>Total CHF</th>
+      <td mat-cell *matCellDef="let row" class="num-cell">{{ row.total_chf | number:'1.2-2' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-icon-button color="warn" (click)="removeAntibody(row)" title="Remove">
+          <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns;"
+        [class.insufficient-volume]="isPlanning && isInsufficient(row)"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell no-data" [attr.colspan]="columns.length">No antibodies added yet</td>
+    </tr>
+  </table>
+
+  <!-- Total cost footer (outside table to avoid colspan issues) -->
+  <div class="total-footer">
+    <span>Total experiment cost</span>
+    <span class="total-value">{{ totalCost | number:'1.2-2' }} CHF</span>
+  </div>
+}

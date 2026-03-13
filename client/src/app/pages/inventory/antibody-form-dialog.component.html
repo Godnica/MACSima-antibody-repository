@@ -1,0 +1,105 @@
+<h2 mat-dialog-title>{{ data ? 'Edit Antibody' : 'Add Antibody' }}</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" class="form-grid">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Lab</mat-label>
+      <mat-select formControlName="lab_id">
+        @for (lab of labs; track lab.id) {
+          <mat-option [value]="lab.id">{{ lab.name }}</mat-option>
+        }
+      </mat-select>
+      <mat-error *ngIf="form.get('lab_id')?.hasError('required')">Required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Tube Number</mat-label>
+      <input matInput formControlName="tube_number">
+      <mat-error *ngIf="form.get('tube_number')?.hasError('required')">Required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Antigen / Target</mat-label>
+      <input matInput formControlName="antigen_target">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Species</mat-label>
+      <input matInput formControlName="species">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Clone</mat-label>
+      <input matInput formControlName="clone">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Fluorochrome</mat-label>
+      <input matInput formControlName="fluorochrome">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Company</mat-label>
+      <input matInput formControlName="company">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Order Number</mat-label>
+      <input matInput formControlName="order_number">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Lot Number</mat-label>
+      <input matInput formControlName="lot_number">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Quality Color</mat-label>
+      <mat-select formControlName="quality_color">
+        @for (opt of qualityOptions; track opt.value) {
+          <mat-option [value]="opt.value">{{ opt.label }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Volume on Arrival (µL)</mat-label>
+      <input matInput type="number" formControlName="volume_on_arrival" min="0.01">
+      <mat-error *ngIf="form.get('volume_on_arrival')?.hasError('required')">Required</mat-error>
+      <mat-error *ngIf="form.get('volume_on_arrival')?.hasError('min')">Must be > 0</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Cost (CHF)</mat-label>
+      <input matInput type="number" formControlName="cost_chf" min="0.01">
+      <mat-error *ngIf="form.get('cost_chf')?.hasError('required')">Required</mat-error>
+      <mat-error *ngIf="form.get('cost_chf')?.hasError('min')">Must be > 0</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>CHF / µL (auto)</mat-label>
+      <input matInput formControlName="chf_per_ul" readonly>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Processing</mat-label>
+      <mat-select formControlName="processing">
+        @for (opt of processingOptions; track opt.value) {
+          <mat-option [value]="opt.value">{{ opt.label }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Panel</mat-label>
+      <input matInput formControlName="panel">
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button color="primary" (click)="onSave()" [disabled]="form.invalid">Save</button>
+</mat-dialog-actions>

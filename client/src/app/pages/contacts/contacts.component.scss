@@ -1,0 +1,167 @@
+.contacts-page {
+  max-width: 900px;
+}
+
+.page-header {
+  margin-bottom: 24px;
+
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+  }
+}
+
+.facility-card {
+  margin-bottom: 20px;
+
+  .facility-header {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+  }
+
+  .logos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+
+  .logo {
+    display: block;
+    object-fit: contain;
+
+    &.facility-logo { height: 64px; }
+    &.ior-logo      { height: 40px; }
+    &.usi-logo      { height: 32px; }
+  }
+
+  .facility-info {
+    h3 {
+      margin: 0 0 4px;
+      font-size: 20px;
+    }
+
+    .subtitle {
+      color: var(--mat-sys-on-surface-variant);
+      font-size: 14px;
+      margin: 0 0 12px;
+    }
+
+    .description {
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0;
+    }
+  }
+}
+
+.unit-card {
+  margin-bottom: 20px;
+
+  h3 {
+    margin: 0 0 8px;
+    font-size: 18px;
+  }
+
+  .unit-description {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 0 16px;
+    color: var(--mat-sys-on-surface-variant);
+  }
+
+  mat-divider {
+    margin-bottom: 20px;
+  }
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.team-member {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+
+  .member-icon {
+    color: var(--mat-sys-primary);
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    margin-top: 2px;
+  }
+
+  strong {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 2px;
+  }
+
+  .role {
+    display: block;
+    font-size: 13px;
+    color: var(--mat-sys-on-surface-variant);
+    margin-bottom: 6px;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    color: var(--mat-sys-primary);
+    text-decoration: none;
+    margin-bottom: 2px;
+
+    mat-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  a.contact-link:hover {
+    text-decoration: underline;
+  }
+}
+
+.contact-card {
+  h3 {
+    margin: 0 0 16px;
+    font-size: 18px;
+  }
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+
+  mat-icon {
+    color: var(--mat-sys-on-surface-variant);
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
+  a {
+    color: var(--mat-sys-primary);
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
+  }
+}

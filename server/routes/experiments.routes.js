@@ -1,0 +1,37 @@
+const router = require('express').Router();
+const { body } = require('express-validator');
+const ctrl = require('../controllers/experiments.controller');
+const auth = require('../middleware/auth');
+const adminOnly = require('../middleware/adminOnly');
+const validate = require('../middleware/validate');
+
+const expValidators = [
+  body('name').trim().notEmpty().withMessage('Name is required'),
+  body('macswell_slides').isInt({ min: 1 }).withMessage('Slides must be >= 1'),
+  body('total_cocktail_volume').isFloat({ gt: 0 }).withMessage('Cocktail volume must be > 0'),
+  validate,
+];
+
+router.get('/',    auth, adminOnly, ctrl.getAll);
+router.post('/',   auth, adminOnly, ...expValidators, ctrl.create);
+router.get('/:id', auth, adminOnly, ctrl.getById);
+router.put('/:id', auth, adminOnly, ...expValidators, ctrl.update);
+
+router.post('/:id/execute',     auth, adminOnly, ctrl.execute);
+router.post('/:id/mark-billed', auth, adminOnly, ctrl.markBilled);
+
+router.get('/:id/antibodies',          auth, adminOnly, ctrl.getAntibodies);
+router.post('/:id/antibodies',         auth, adminOnly,
+  body('antibody_id').isInt({ min: 1 }).withMessage('antibody_id required'),
+  body('titration_ratio').isInt({ min: 1 }).withMessage('titration_ratio must be > 0'),
+  validate,
+  ctrl.addAntibody
+);
+router.put('/:id/antibodies/:eaId',    auth, adminOnly,
+  body('titration_ratio').isInt({ min: 1 }).withMessage('titration_ratio must be > 0'),
+  validate,
+  ctrl.updateAntibody
+);
+router.delete('/:id/antibodies/:eaId', auth, adminOnly, ctrl.removeAntibody);
+
+module.exports = router;

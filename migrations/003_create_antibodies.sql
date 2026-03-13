@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS antibodies (
+  id SERIAL PRIMARY KEY,
+  lab_id INTEGER NOT NULL REFERENCES laboratories(id),
+  tube_number VARCHAR(100) UNIQUE NOT NULL,
+  species VARCHAR(255),
+  antigen_target VARCHAR(255),
+  clone VARCHAR(255),
+  company VARCHAR(255),
+  order_number VARCHAR(255),
+  lot_number VARCHAR(255),
+  fluorochrome VARCHAR(255),
+  processing TEXT,
+  panel VARCHAR(255),
+  volume_on_arrival NUMERIC(10,2) NOT NULL,
+  current_volume NUMERIC(10,2) NOT NULL,
+  cost_chf NUMERIC(10,2) NOT NULL,
+  chf_per_ul NUMERIC(10,4) NOT NULL,
+  quality_color VARCHAR(20) NOT NULL DEFAULT 'none',
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);

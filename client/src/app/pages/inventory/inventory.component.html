@@ -1,0 +1,81 @@
+<div class="page-header">
+  <h2>Inventory</h2>
+  <button mat-flat-button color="primary" (click)="openAdd()">
+    <mat-icon>add</mat-icon> Add Antibody
+  </button>
+</div>
+
+<mat-form-field appearance="outline" class="filter-field">
+  <mat-label>Search</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Tube, target, clone, lab...">
+  <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
+
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z1">
+
+  <ng-container matColumnDef="tube_number">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Tube #</th>
+    <td mat-cell *matCellDef="let row">{{ row.tube_number }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="antigen_target">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Target</th>
+    <td mat-cell *matCellDef="let row">{{ row.antigen_target || '—' }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="clone">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Clone</th>
+    <td mat-cell *matCellDef="let row">{{ row.clone || '—' }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="fluorochrome">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Fluorochrome</th>
+    <td mat-cell *matCellDef="let row">{{ row.fluorochrome || '—' }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="lab_name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Lab</th>
+    <td mat-cell *matCellDef="let row">{{ row.lab_name }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="processing">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Processing</th>
+    <td mat-cell *matCellDef="let row">{{ row.processing || '—' }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="current_volume">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Volume (µL)</th>
+    <td mat-cell *matCellDef="let row" class="num-cell"
+        [class.low-stock]="row.current_volume < 40">
+      {{ row.current_volume | number:'1.1-1' }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="chf_per_ul">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>CHF/µL</th>
+    <td mat-cell *matCellDef="let row" class="num-cell">
+      {{ row.chf_per_ul | number:'1.2-2' }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let row" class="actions-cell">
+      <button mat-icon-button (click)="openEdit(row)" title="Edit">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="confirmDelete(row)" title="Delete">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="'quality-row-' + row.quality_color"></tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell no-data" [attr.colspan]="displayedColumns.length">No antibodies found</td>
+  </tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons />

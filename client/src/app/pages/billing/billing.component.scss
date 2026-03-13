@@ -1,0 +1,124 @@
+.page-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+
+  h2 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .header-icon { color: #5c6bc0; }
+}
+
+h3 { margin: 16px 0 8px; }
+
+.section-divider { margin: 24px 0; }
+
+.empty-msg {
+  color: var(--mat-sys-on-surface-variant);
+  padding: 8px 0;
+}
+
+.exp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.exp-card {
+  cursor: pointer;
+
+  &.clickable:hover { background: var(--mat-sys-surface-variant); }
+
+  .exp-card-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+  }
+
+  .exp-meta {
+    font-size: 13px;
+    color: var(--mat-sys-on-surface-variant);
+  }
+
+  .status-badge.billed {
+    background: #c8e6c9;
+    color: #1b5e20;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  padding: 48px;
+}
+
+.detail-header {
+  margin: 16px 0;
+
+  h3 { margin: 0 0 4px; }
+
+  .meta-row {
+    display: flex;
+    gap: 24px;
+    font-size: 14px;
+    color: var(--mat-sys-on-surface-variant);
+  }
+}
+
+.lab-card {
+  margin-bottom: 16px;
+
+  .lab-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+
+    h4 { margin: 0; }
+
+    .lab-meta {
+      font-size: 13px;
+      color: var(--mat-sys-on-surface-variant);
+    }
+  }
+
+  table { width: 100%; }
+
+  .lab-total {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 24px;
+    padding: 12px 0 0;
+    font-weight: 600;
+
+    .total-value { font-size: 15px; }
+  }
+}
+
+.num-cell {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.actions-bar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px 0;
+}

@@ -1,0 +1,78 @@
+<div class="page-header">
+  <h2><mat-icon class="header-icon">search</mat-icon> Repository</h2>
+</div>
+
+<div class="filters-row">
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Search</mat-label>
+    <input matInput [formControl]="searchControl" (keyup)="applySearch($event)" placeholder="Target, clone, tube...">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Lab</mat-label>
+    <mat-select [formControl]="labFilter" (selectionChange)="applyFilters()">
+      <mat-option value="">All</mat-option>
+      @for (lab of labs; track lab.id) {
+        <mat-option [value]="lab.id">{{ lab.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Quality</mat-label>
+    <mat-select [formControl]="qualityFilter" (selectionChange)="applyFilters()">
+      <mat-option value="">All</mat-option>
+      <mat-option value="green">Green</mat-option>
+      <mat-option value="yellow">Yellow</mat-option>
+      <mat-option value="grey">Grey</mat-option>
+      <mat-option value="none">Not evaluated</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-button (click)="clearFilters()">
+    <mat-icon>clear</mat-icon> Clear
+  </button>
+</div>
+
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z1">
+
+  <ng-container matColumnDef="tube_number">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Tube #</th>
+    <td mat-cell *matCellDef="let row">{{ row.tube_number }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="antigen_target">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Target</th>
+    <td mat-cell *matCellDef="let row">{{ row.antigen_target }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="species">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Species</th>
+    <td mat-cell *matCellDef="let row">{{ row.species }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="clone">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Clone</th>
+    <td mat-cell *matCellDef="let row">{{ row.clone }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="fluorochrome">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Fluorochrome</th>
+    <td mat-cell *matCellDef="let row">{{ row.fluorochrome }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="lab_name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Lab</th>
+    <td mat-cell *matCellDef="let row">{{ row.lab_name }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="'quality-row-' + row.quality_color"></tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell no-data" [attr.colspan]="displayedColumns.length">No antibodies found</td>
+  </tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons />
