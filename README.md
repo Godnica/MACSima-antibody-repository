@@ -24,26 +24,39 @@ Web-based tool for managing antibodies used in MACSima experiments. Tracks inven
 └── CLAUDE.md        # Full project specification
 ```
 
-## Prerequisites
+## Installation
 
-- Node.js 18+
-- PostgreSQL 15+
-- Angular CLI (`npm install -g @angular/cli`)
+### Option A — Docker (recommended)
 
-## Installation Guide
+The easiest way to run the application. Only requires Docker.
 
-### Quick Start (fresh install)
+**Prerequisites**: [Docker Desktop](https://www.docker.com/products/docker-desktop/) (Windows/Mac/Linux)
 
-1. **Clone the repository**
+```bash
+git clone <repo-url>
+cd MACSima-antibody-repository
+
+# Linux/Mac
+./start.sh
+
+# Windows
+start.bat
+```
+
+That's it. Open **http://localhost:3000** and login with `admin` / `admin`.
+
+To stop: `docker compose down`
+To stop and delete all data: `docker compose down -v`
+
+### Option B — Manual (development)
+
+**Prerequisites**: Node.js 18+, PostgreSQL 15+, Angular CLI (`npm install -g @angular/cli`)
+
+1. **Clone and configure**
 
    ```bash
    git clone <repo-url>
    cd MACSima-antibody-repository
-   ```
-
-2. **Configure environment**
-
-   ```bash
    cp .env.example .env
    ```
 
@@ -55,41 +68,61 @@ Web-based tool for managing antibodies used in MACSima experiments. Tracks inven
    PORT=3000
    ```
 
-3. **Create the PostgreSQL database**
+2. **Create the PostgreSQL database**
 
    ```bash
-   # Connect to PostgreSQL and create the database
    psql -U postgres -c "CREATE DATABASE antibody_repo;"
    ```
 
-   > If using a different user/password, update `DATABASE_URL` in `.env` accordingly.
-
-4. **Install dependencies**
+3. **Install dependencies and start**
 
    ```bash
    # Backend
-   cd server && npm install
+   cd server && npm install && npm start
 
-   # Frontend
-   cd ../client && npm install
+   # Frontend (separate terminal)
+   cd client && npm install && ng serve
    ```
 
-5. **Start the application**
+   Frontend: `http://localhost:4200` | API: `http://localhost:3000`
 
-   ```bash
-   # Backend (from /server) — migrations and seed run automatically on first start
-   npm start
+4. **First login**: `admin` / `admin` (you will be prompted to change the password).
 
-   # Frontend (from /client, in a separate terminal)
-   ng serve
+### Option C — Deploy online (Render + Neon, free)
+
+Deploy the app on the internet with zero cost.
+
+#### Step 1: Create the database on Neon
+
+1. Go to [neon.tech](https://neon.tech) and create a free account
+2. Create a new project (e.g. `antibody-repo`)
+3. Choose the region closest to you (e.g. `eu-central-1`)
+4. Copy the connection string, it looks like:
+   ```
+   postgresql://user:password@ep-xyz-123.eu-central-1.aws.neon.tech/antibody_repo?sslmode=require
    ```
 
-   The app will be available at `http://localhost:4200` (frontend) and `http://localhost:3000` (API).
+#### Step 2: Deploy on Render
 
-6. **First login**
+1. Push your code to a GitHub repository
+2. Go to [render.com](https://render.com) and create a free account
+3. Click **New > Web Service**
+4. Connect your GitHub repo
+5. Render will detect the `Dockerfile` automatically. Configure:
+   - **Name**: `antibody-repository`
+   - **Plan**: Free
+   - **Environment variables**:
+     | Key | Value |
+     |-----|-------|
+     | `DATABASE_URL` | Your Neon connection string (from Step 1) |
+     | `JWT_SECRET` | Any random string (e.g. generate one at randomkeygen.com) |
+     | `PORT` | `3000` |
+     | `NODE_ENV` | `production` |
+6. Click **Create Web Service**
 
-   - Username: `admin` / Password: `admin`
-   - You will be prompted to change the password on first login.
+After a few minutes your app will be live at `https://antibody-repository.onrender.com`.
+
+> **Note**: Render free tier spins down after 15 minutes of inactivity. First request after sleep takes ~30 seconds.
 
 ### Database Reset
 

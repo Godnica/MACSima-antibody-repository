@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: antibody-repository
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: DATABASE_URL
+        sync: false          # Set manually in Render dashboard (Neon connection string)
+      - key: JWT_SECRET
+        generateValue: true  # Render generates a random secret
+      - key: PORT
+        value: 3000
+      - key: NODE_ENV
+        value: production
+      - key: CORS_ORIGIN
+        sync: false          # Set to your Render URL, e.g. https://antibody-repository.onrender.com

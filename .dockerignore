@@ -1,0 +1,13 @@
+.git
+.env
+.claude
+node_modules
+client/node_modules
+client/dist
+client/.angular
+server/node_modules
+*.md
+tasks.md
+csv-templates
+.dockerignore
+docker-compose.yml

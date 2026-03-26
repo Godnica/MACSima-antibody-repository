@@ -1,11 +1,11 @@
 # Project Tasks — Antibody Repository Tool
 
 > Auto-generated from CLAUDE.md. Do not edit manually.
-> Last updated: 2026-03-26 12:00
+> Last updated: 2026-03-26 14:30
 
 ## Summary
-- Total: 52
-- Done: 52
+- Total: 62
+- Done: 62
 - In Progress: 0
 - Pending: 0
 
@@ -128,3 +128,23 @@
 - [x] 12.3 — Add Angular Reactive Forms validation on all forms (matching server-side rules). Show inline error messages. Disable submit until form is valid. (§12 CLAUDE.md)
 - [x] 12.4 — Navigation and role-based routing: Admin sees all 5 tabs; User sees only Repository tab. Redirect unauthorized access. Add logout button. (§7 CLAUDE.md)
 - [x] 12.5 — Final review: check all CLAUDE.md requirements are implemented, UI language is English, all status transitions are irreversible, no backwards transitions possible. (§4 CLAUDE.md)
+
+---
+
+## Phase 13 — Dockerizzazione
+
+- [x] 13.1 — **Build Angular per produzione**: Configurare il build di produzione Angular (`ng build --configuration production`) e servire i file statici direttamente da Express. Modificare `server/index.js` per servire la cartella `client/dist` come static files. Così frontend e backend girano in un unico processo Node.js.
+- [x] 13.2 — **Dockerfile**: Creare un `Dockerfile` multi-stage: stage 1 builda il frontend Angular, stage 2 copia il build + il backend in un'immagine Node.js leggera (node:20-alpine). Esporre la porta configurata via ENV.
+- [x] 13.3 — **docker-compose.yml**: Creare `docker-compose.yml` con due servizi: `app` (il container dell'applicazione) e `db` (postgres:16-alpine). Configurare volumi per persistenza dati PostgreSQL, variabili d'ambiente (DATABASE_URL, JWT_SECRET, PORT), dipendenze e healthcheck.
+- [x] 13.4 — **File .dockerignore**: Creare `.dockerignore` per escludere `node_modules`, `.git`, `.env`, file non necessari dal context del build Docker.
+- [x] 13.5 — **Script di avvio**: Creare `start.sh` (Linux/Mac) e `start.bat` (Windows) che lanciano `docker compose up -d` con un messaggio user-friendly che indica l'URL dove accedere (es. http://localhost:3000).
+- [x] 13.6 — **Test locale Docker**: Verificare che `docker compose up` funzioni correttamente: build immagini, avvio container, migrazione DB, seed dati, accesso al sito via browser.
+
+---
+
+## Phase 14 — Deploy Cloud (Render + Neon)
+
+- [x] 14.1 — **Configurazione Neon.tech**: Documentare i passi per creare un database PostgreSQL gratuito su Neon.tech e ottenere la connection string. Aggiornare `.env.example` con esempio di `DATABASE_URL` per Neon.
+- [x] 14.2 — **Configurazione Render.com**: Creare `render.yaml` (Infrastructure as Code) per deploy automatico su Render: web service con Docker, variabili d'ambiente (DATABASE_URL da Neon, JWT_SECRET, PORT). Documentare i passi per collegare il repo GitHub a Render.
+- [x] 14.3 — **Adattamenti per produzione**: Verificare/aggiungere: CORS configurabile via ENV (non hardcoded localhost), `trust proxy` per Express dietro reverse proxy, health check endpoint (`GET /api/health`), gestione corretta di `NODE_ENV=production`.
+- [x] 14.4 — **Documentazione deploy**: Aggiornare il `README.md` con guida passo-passo per: (A) installazione locale con Docker, (B) deploy su Render + Neon. Includere screenshot o comandi esatti.
