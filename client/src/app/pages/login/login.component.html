@@ -2,10 +2,6 @@
   <div class="login-card">
     <div class="login-logos">
       <img src="assets/logos/facility.png" alt="Facility Logo" class="login-logo facility">
-      <div class="login-logos-row">
-        <img src="assets/logos/ior.png" alt="IOR" class="login-logo small">
-        <img src="assets/logos/USI_Logo.png" alt="USI" class="login-logo small">
-      </div>
     </div>
 
     <h1 class="login-title">Antibody Repository</h1>
@@ -24,11 +20,12 @@
         <mat-error *ngIf="form.get('password')?.hasError('required')">Password is required</mat-error>
       </mat-form-field>
 
-      <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid || loading" class="full-width login-btn">
+      <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid || loading"
+        class="full-width login-btn">
         @if (loading) {
-          <mat-spinner diameter="20" />
+        <mat-spinner diameter="20" />
         } @else {
-          Sign In
+        Sign In
         }
       </button>
     </form>
