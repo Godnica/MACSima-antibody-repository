@@ -9,6 +9,7 @@ const expValidators = [
   body('name').trim().notEmpty().withMessage('Name is required'),
   body('macswell_slides').isInt({ min: 1 }).withMessage('Slides must be >= 1'),
   body('total_cocktail_volume').isFloat({ gt: 0 }).withMessage('Cocktail volume must be > 0'),
+  body('experiment_type').optional({ values: 'falsy' }).trim(),
   validate,
 ];
 

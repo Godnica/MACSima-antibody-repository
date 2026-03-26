@@ -10,7 +10,10 @@
     gap: 8px;
   }
 
-  .header-icon { color: #f57c00; }
+  .header-icon {
+    color: var(--accent-warning);
+    animation: pulse-warning 2s ease-in-out infinite;
+  }
 }
 
 .filter-field {
@@ -21,10 +24,7 @@
 
 table { width: 100%; }
 
-.num-cell { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
-
-.no-data {
-  padding: 24px;
-  text-align: center;
-  color: var(--mat-sys-on-surface-variant);
+@keyframes pulse-warning {
+  0%, 100% { filter: drop-shadow(0 0 2px var(--accent-warning)); }
+  50%      { filter: drop-shadow(0 0 8px var(--accent-warning)); }
 }

@@ -1,11 +1,11 @@
 # Project Tasks — Antibody Repository Tool
 
 > Auto-generated from CLAUDE.md. Do not edit manually.
-> Last updated: 2026-03-13 10:00
+> Last updated: 2026-03-26 12:00
 
 ## Summary
-- Total: 47
-- Done: 47
+- Total: 52
+- Done: 52
 - In Progress: 0
 - Pending: 0
 
@@ -106,6 +106,11 @@
 - [x] 10b.1 — In the antibody add/edit form dialog (frontend), change the "processing" field from a free text input to a nullable select/dropdown with options: (empty/null), "actual", "backup". Update both the add and edit form dialogs. (§8 CLAUDE.md)
 - [x] 10b.2 — In the experiment creation/detail view (`client/src/app/pages/experiments/`), when searching for antibodies in the searchbar/autocomplete, show the "processing" field in the dropdown options. Also filter out antibodies that have `current_volume = 0` from the search results (both frontend and backend). (§10 CLAUDE.md)
 - [x] 10b.3 — In the experiments list view (`client/src/app/pages/experiments/`), add a search bar that allows filtering experiments by antibody type. The filter should match experiments that used antibodies with the same `antigen_target`, `clone`, and `fluorochrome`. Requires backend support (`GET /api/experiments` with query param `antibody_search`) to filter experiments by antibody attributes using OR logic. (§7 CLAUDE.md)
+- [x] 10b.4 — Allow admin users to manually edit the `current_volume` (µL) field of an existing antibody. In the antibody edit form dialog (frontend), add `current_volume` as an editable numeric field (must be >= 0). In the backend `PUT /api/antibodies/:id`, accept and validate `current_volume` as an optional updatable field (admin-only). This enables admins to correct volumes manually (e.g. adjustments, spillage, recounts). (§2.2, §8 CLAUDE.md)
+- [x] 10b.5 — Rename the `panel` column to `status` in the `antibodies` table. Accepted values: null, `in use`, `backup`. Update all layers: migration SQL (`003_create_antibodies.sql`), seed data (`server/db/seed.js`), backend controller/routes/repository endpoint, frontend model (`antibody.model.ts`), form dialog (change dropdown options to null/"in use"/"backup"), inventory table, experiment views, and any other reference to `panel` across the entire codebase. (§2.2, §8 CLAUDE.md)
+- [x] 10b.6 — **Database**: Add `experiment_type` column (VARCHAR(255), nullable) to the `experiments` table. Update migration `004_create_experiments.sql` to include the column for fresh installs. Create new migration `007_add_experiment_type.sql` for existing databases. Use skill `db-admin`. (§2.3 CLAUDE.md)
+- [x] 10b.7 — **Backend**: Update experiment controller, routes, and endpoints to accept, validate, and return `experiment_type`. Update `POST /api/experiments` (create), `PUT /api/experiments/:id` (update), `GET /api/experiments` (list), and `GET /api/experiments/:id` (detail). Use skill `back-end-developer`. (§11 CLAUDE.md)
+- [x] 10b.8 — **Frontend**: Add `experiment_type` to the experiment model, creation/edit dialog form, experiments list table (new column), and experiment detail view header. Use skill `front-end-developer`. (§7, §10 CLAUDE.md)
 
 ---
 

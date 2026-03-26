@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS antibodies (
   lot_number VARCHAR(255),
   fluorochrome VARCHAR(255),
   processing TEXT,
-  panel VARCHAR(255),
+  status VARCHAR(20),
   volume_on_arrival NUMERIC(10,2) NOT NULL,
   current_volume NUMERIC(10,2) NOT NULL,
   cost_chf NUMERIC(10,2) NOT NULL,

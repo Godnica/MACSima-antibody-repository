@@ -1,43 +1,433 @@
-
-// Include theming for Angular Material with `mat.theme()`.
-// This Sass mixin will define CSS variables that are used for styling Angular Material
-// components according to the Material 3 design spec.
-// Learn more about theming and how to use it for your application's
-// custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
+
+// ── Custom Dark Theme ────────────────────────────────────────────────────────
+
+$dark-primary: mat.m2-define-palette((50: #e0f7fa, 100: #b2ebf2, 200: #80deea, 300: #4dd0e1,
+      400: #26c6da, 500: #00e5ff, 600: #00b8d4, 700: #0097a7,
+      800: #00838f, 900: #006064, A100: #84ffff, A200: #18ffff,
+      A400: #00e5ff, A700: #00b8d4,
+      contrast: (50: #000, 100: #000, 200: #000, 300: #000, 400: #000,
+        500: #000, 600: #000, 700: #fff, 800: #fff, 900: #fff,
+        A100: #000, A200: #000, A400: #000, A700: #000)));
+$dark-accent: mat.m2-define-palette((50: #e0f2f1, 100: #b9f6ca, 200: #69f0ae, 300: #00e676,
+      400: #00e676, 500: #00e676, 600: #00c853, 700: #00a844,
+      800: #008c38, 900: #00612b, A100: #b9f6ca, A200: #69f0ae,
+      A400: #00e676, A700: #00c853,
+      contrast: (50: #000, 100: #000, 200: #000, 300: #000, 400: #000,
+        500: #000, 600: #000, 700: #fff, 800: #fff, 900: #fff,
+        A100: #000, A200: #000, A400: #000, A700: #000)));
+$dark-warn: mat.m2-define-palette((50: #fce4ec, 100: #ffcdd2, 200: #ef9a9a, 300: #e57373,
+      400: #ef5350, 500: #ff1744, 600: #e53935, 700: #d32f2f,
+      800: #c62828, 900: #b71c1c, A100: #ff8a80, A200: #ff5252,
+      A400: #ff1744, A700: #d50000,
+      contrast: (50: #000, 100: #000, 200: #000, 300: #000, 400: #fff,
+        500: #fff, 600: #fff, 700: #fff, 800: #fff, 900: #fff,
+        A100: #000, A200: #fff, A400: #fff, A700: #fff)));
+
+$dark-theme: mat.m2-define-dark-theme((color: (primary: $dark-primary, accent: $dark-accent, warn: $dark-warn)));
+
+@include mat.all-component-themes($dark-theme);
+
+// ── CSS Custom Properties ────────────────────────────────────────────────────
+
+:root {
+  // Base
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --bg-tertiary: #21262d;
+  --bg-hover: #30363d;
+
+  // Text
+  --text-primary: #e6edf3;
+  --text-secondary: #8b949e;
+  --text-disabled: #ffffff;
+
+  // Accent — Cyan
+  --accent-primary: #00e5ff;
+  --accent-primary-dim: #00b8d4;
+  --accent-primary-glow: rgba(0, 229, 255, 0.15);
+
+  // Accent — Green
+  --accent-success: #00e676;
+  --accent-success-dim: #00c853;
+
+  // Accent — Amber
+  --accent-warning: #ffab00;
+  --accent-warning-dim: #ff8f00;
+
+  // Accent — Red
+  --accent-danger: #ff1744;
+  --accent-danger-dim: #d50000;
+
+  // Quality dots
+  --quality-green: #00e676;
+  --quality-yellow: #ffab00;
+  --quality-grey: #8b949e;
+
+  // Borders & shadows
+  --border-default: #30363d;
+  --border-accent: rgba(0, 229, 255, 0.3);
+  --shadow-glow: 0 0 20px rgba(0, 229, 255, 0.1);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+// ── Global Resets ────────────────────────────────────────────────────────────
 
 html {
   height: 100%;
-  @include mat.theme((
-    color: (
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-    ),
-    typography: Roboto,
-    density: 0,
-  ));
 }
 
 body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
-  color-scheme: light;
-
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-  font: var(--mat-sys-body-medium);
-
-  // Reset the user agent margin.
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Outfit', sans-serif;
   margin: 0;
   height: 100%;
 }
-/* You can add global styles to this file, and also import other style files */
 
+h1,
+h2,
+h3 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+// ── Typography — Mono for Data ───────────────────────────────────────────────
+
+.mat-mdc-table,
+.mat-mdc-cell,
+.mat-mdc-header-cell {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 13px !important;
+}
+
+// ── Scrollbar ────────────────────────────────────────────────────────────────
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: 4px;
+
+  &:hover {
+    background: var(--text-disabled);
+  }
+}
+
+// ── Angular Material Overrides ───────────────────────────────────────────────
+
+// Toolbar
+.mat-toolbar {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border-bottom: 1px solid var(--border-default);
+}
+
+// Sidenav
+.mat-sidenav {
+  background-color: var(--bg-secondary) !important;
+  border-right: 1px solid var(--border-default) !important;
+}
+
+// Tables
+.mat-mdc-table {
+  background-color: var(--bg-secondary) !important;
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.mat-mdc-header-row {
+  background-color: var(--bg-tertiary) !important;
+
+  .mat-mdc-header-cell {
+    color: var(--text-secondary) !important;
+    font-weight: 600 !important;
+    font-size: 11px !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border-default);
+  }
+}
+
+.mat-mdc-row {
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--bg-hover) !important;
+  }
+
+  .mat-mdc-cell {
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-default);
+  }
+}
+
+// Cards
+.mat-mdc-card {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-default);
+  border-radius: 12px !important;
+  box-shadow: var(--shadow-card) !important;
+}
+
+// Dialogs
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  background-color: var(--bg-tertiary) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-default);
+  border-radius: 12px !important;
+}
+
+// Form fields
+.mat-mdc-form-field {
+
+  .mdc-text-field--outlined .mdc-notched-outline__leading,
+  .mdc-text-field--outlined .mdc-notched-outline__trailing,
+  .mdc-text-field--outlined .mdc-notched-outline__notch {
+    border-color: rgba(255, 255, 255, 0.5) !important;
+  }
+
+  &.mat-focused {
+
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__trailing,
+    .mdc-notched-outline__notch {
+      border-color: var(--accent-primary) !important;
+    }
+  }
+
+  .mat-mdc-input-element,
+  .mat-mdc-select-value {
+    color: var(--text-primary) !important;
+  }
+
+  .mat-mdc-floating-label {
+    color: var(--text-secondary) !important;
+  }
+}
+
+// Selects & menus
+.mat-mdc-select-panel,
+.mat-mdc-autocomplete-panel {
+  background-color: var(--bg-tertiary) !important;
+  border: 1px solid var(--border-default);
+}
+
+.mat-mdc-option {
+  color: var(--text-primary) !important;
+
+  &:hover,
+  &.mat-mdc-option-active {
+    background-color: var(--bg-hover) !important;
+  }
+
+  &.mdc-list-item--selected {
+    background-color: var(--accent-primary-glow) !important;
+    color: var(--accent-primary) !important;
+  }
+}
+
+// Buttons
+.mat-mdc-flat-button.mat-primary,
+.mat-mdc-raised-button.mat-primary,
+.mat-mdc-unelevated-button.mat-primary {
+  background-color: var(--accent-primary) !important;
+  color: #000 !important;
+  font-weight: 600;
+  border-radius: 8px !important;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: var(--accent-primary-dim) !important;
+    box-shadow: var(--shadow-glow);
+  }
+}
+
+.mat-mdc-flat-button.mat-warn,
+.mat-mdc-raised-button.mat-warn {
+  background-color: var(--accent-danger) !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+}
+
+.mat-mdc-outlined-button,
+.mdc-button--outlined {
+  border-color: var(--border-default) !important;
+  color: var(--text-primary) !important;
+  border-radius: 8px !important;
+
+  &:hover {
+    border-color: var(--accent-primary) !important;
+    color: var(--accent-primary) !important;
+  }
+}
+
+.mat-mdc-button {
+  color: var(--text-secondary) !important;
+
+  &:hover {
+    color: var(--text-primary) !important;
+  }
+}
+
+.mat-mdc-icon-button {
+  color: var(--text-secondary) !important;
+
+  &:hover {
+    color: var(--text-primary) !important;
+  }
+
+  &.mat-warn {
+    color: var(--accent-danger) !important;
+  }
+}
+
+// Paginator
+.mat-mdc-paginator {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid var(--border-default);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+}
+
+// Snackbar
 .error-snackbar {
-  --mdc-snackbar-container-color: #d32f2f;
+  --mdc-snackbar-container-color: var(--accent-danger);
   --mdc-snackbar-supporting-text-color: #fff;
+}
+
+// Chips / badges (sort arrows)
+.mat-sort-header-arrow {
+  color: var(--text-secondary) !important;
+}
+
+// Tab labels
+.mat-mdc-tab {
+  color: var(--text-secondary) !important;
+
+  &.mdc-tab--active {
+    color: var(--accent-primary) !important;
+  }
+}
+
+// Divider
+.mat-divider {
+  border-color: var(--border-default) !important;
+}
+
+// ── Status Badges ────────────────────────────────────────────────────────────
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  font-family: 'Outfit', sans-serif;
+
+  &.status-planning {
+    background-color: var(--bg-tertiary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-default);
+  }
+
+  &.status-executed_not_billed {
+    background-color: rgba(0, 229, 255, 0.15);
+    color: var(--accent-primary);
+  }
+
+  &.status-executed_billed {
+    background-color: rgba(0, 230, 118, 0.15);
+    color: var(--accent-success);
+  }
+}
+
+// ── Quality Color Rows (dark) ────────────────────────────────────────────────
+
+.quality-row-green {
+  border-left: 3px solid var(--quality-green) !important;
+}
+
+.quality-row-yellow {
+  border-left: 3px solid var(--quality-yellow) !important;
+}
+
+.quality-row-grey {
+  border-left: 3px solid var(--quality-grey) !important;
+}
+
+// ── Low Stock / Insufficient Volume ──────────────────────────────────────────
+
+.low-stock {
+  color: var(--accent-warning) !important;
+  font-weight: 600;
+}
+
+.insufficient-volume {
+  border-left: 3px solid var(--accent-danger) !important;
+  background-color: rgba(255, 23, 68, 0.08) !important;
+
+  td {
+    color: var(--accent-danger) !important;
+  }
+
+  &:hover {
+    background-color: rgba(255, 23, 68, 0.12) !important;
+  }
+}
+
+// ── Micro-interactions ───────────────────────────────────────────────────────
+
+.page-content {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-warning {
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 2px var(--accent-warning));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 8px var(--accent-warning));
+  }
+}
+
+// ── Common Page Styles ───────────────────────────────────────────────────────
+
+.no-data {
+  padding: 24px;
+  text-align: center;
+  color: var(--text-disabled);
+}
+
+.num-cell {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }

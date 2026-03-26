@@ -13,7 +13,7 @@ export interface Antibody {
   lot_number: string | null;
   fluorochrome: string | null;
   processing: string | null;
-  panel: string | null;
+  status: string | null;
   volume_on_arrival: number;
   current_volume: number;
   cost_chf: number;
@@ -33,8 +33,12 @@ export interface CreateAntibodyDto {
   lot_number: string;
   fluorochrome: string;
   processing: string;
-  panel: string;
+  status: string;
   volume_on_arrival: number;
   cost_chf: number;
   quality_color: QualityColor;
+}
+
+export interface UpdateAntibodyDto extends CreateAntibodyDto {
+  current_volume?: number;
 }

@@ -54,11 +54,11 @@ exports.getById = async (req, res, next) => {
 
 exports.create = async (req, res, next) => {
   try {
-    const { name, date, requesting_lab_id, macswell_slides, total_cocktail_volume } = req.body;
+    const { name, date, requesting_lab_id, macswell_slides, total_cocktail_volume, experiment_type } = req.body;
     const { rows } = await pool.query(`
-      INSERT INTO experiments (name, date, requesting_lab_id, macswell_slides, total_cocktail_volume)
-      VALUES ($1, $2, $3, $4, $5) RETURNING *
-    `, [name, date || null, requesting_lab_id || null, macswell_slides, total_cocktail_volume]);
+      INSERT INTO experiments (name, date, requesting_lab_id, macswell_slides, total_cocktail_volume, experiment_type)
+      VALUES ($1, $2, $3, $4, $5, $6) RETURNING *
+    `, [name, date || null, requesting_lab_id || null, macswell_slides, total_cocktail_volume, experiment_type || null]);
     res.status(201).json(rows[0]);
   } catch (err) { next(err); }
 };
@@ -69,11 +69,11 @@ exports.update = async (req, res, next) => {
     if (!exp) return res.status(404).json({ error: 'Experiment not found' });
     if (exp.status !== 'planning') return res.status(400).json({ error: 'Only planning experiments can be edited' });
 
-    const { name, date, requesting_lab_id, macswell_slides, total_cocktail_volume } = req.body;
+    const { name, date, requesting_lab_id, macswell_slides, total_cocktail_volume, experiment_type } = req.body;
     const { rows } = await pool.query(`
-      UPDATE experiments SET name=$1, date=$2, requesting_lab_id=$3, macswell_slides=$4, total_cocktail_volume=$5
-      WHERE id=$6 RETURNING *
-    `, [name, date || null, requesting_lab_id || null, macswell_slides, total_cocktail_volume, req.params.id]);
+      UPDATE experiments SET name=$1, date=$2, requesting_lab_id=$3, macswell_slides=$4, total_cocktail_volume=$5, experiment_type=$6
+      WHERE id=$7 RETURNING *
+    `, [name, date || null, requesting_lab_id || null, macswell_slides, total_cocktail_volume, experiment_type || null, req.params.id]);
 
     // Recalculate all experiment_antibodies since slides/volume may have changed
     await recalculateAll(req.params.id, macswell_slides, total_cocktail_volume);

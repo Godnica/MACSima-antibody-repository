@@ -25,6 +25,9 @@
             <span>Lab: {{ experiment.requesting_lab_name || '—' }}</span>
             <span>Slides: {{ experiment.macswell_slides }}</span>
             <span>Cocktail: {{ experiment.total_cocktail_volume | number:'1.1-1' }} µL</span>
+            @if (experiment.experiment_type) {
+              <span>Type: {{ experiment.experiment_type }}</span>
+            }
           </div>
         </div>
         <div class="header-actions">

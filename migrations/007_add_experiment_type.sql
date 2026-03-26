@@ -1,0 +1,1 @@
+ALTER TABLE experiments ADD COLUMN IF NOT EXISTS experiment_type VARCHAR(255);

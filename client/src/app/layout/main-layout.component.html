@@ -1,22 +1,25 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav mode="side" opened class="sidenav">
     <div class="sidenav-header">
-      <img src="assets/facility_logo.png" alt="Facility Logo" class="sidenav-logo">
-      <span class="app-name">MACSima Antibody Repository</span>
+      <div class="sidenav-logos">
+        <img src="assets/logos/facility.png" alt="Facility Logo" class="sidenav-logo facility">
+      </div>
+      <span class="app-name">Antibody Repository</span>
     </div>
 
     <mat-nav-list>
       @for (item of navItems; track item.route) {
-        <a mat-list-item [routerLink]="item.route" routerLinkActive="active-link">
-          <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
-          <span matListItemTitle>{{ item.label }}</span>
-        </a>
+      <a mat-list-item [routerLink]="item.route" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        <span matListItemTitle>{{ item.label }}</span>
+      </a>
       }
     </mat-nav-list>
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
+    <mat-toolbar class="app-toolbar">
+      <span class="toolbar-title">MACSima Platform</span>
       <span class="spacer"></span>
       <span class="username">{{ authService.currentUser()?.username }}</span>
       <button mat-icon-button (click)="logout()" title="Logout">

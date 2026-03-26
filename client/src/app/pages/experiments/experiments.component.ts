@@ -42,7 +42,7 @@ export default class ExperimentsComponent implements OnInit, AfterViewInit {
   private readonly snackBar = inject(MatSnackBar);
   private readonly fb = inject(FormBuilder);
 
-  displayedColumns = ['name', 'date', 'requesting_lab_name', 'status', 'macswell_slides', 'total_cocktail_volume'];
+  displayedColumns = ['name', 'date', 'requesting_lab_name', 'experiment_type', 'status', 'macswell_slides', 'total_cocktail_volume'];
   dataSource = new MatTableDataSource<Experiment>();
 
   antibodyFilterControl = this.fb.control('');

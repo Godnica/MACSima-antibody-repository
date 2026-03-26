@@ -9,6 +9,7 @@ export interface Experiment {
   status: ExperimentStatus;
   macswell_slides: number;
   total_cocktail_volume: number;
+  experiment_type: string | null;
   created_at: string;
   has_insufficient_volume?: boolean;
 }

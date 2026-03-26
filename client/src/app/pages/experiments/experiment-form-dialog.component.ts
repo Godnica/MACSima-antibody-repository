@@ -61,6 +61,11 @@ import { Experiment } from '../../core/models/experiment.model';
           <mat-error *ngIf="form.get('total_cocktail_volume')?.hasError('required')">Required</mat-error>
           <mat-error *ngIf="form.get('total_cocktail_volume')?.hasError('min')">Must be > 0</mat-error>
         </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Experiment Type</mat-label>
+          <input matInput formControlName="experiment_type">
+        </mat-form-field>
       </form>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
@@ -85,6 +90,7 @@ export class ExperimentFormDialogComponent implements OnInit {
     requesting_lab_id:     [this.data?.requesting_lab_id ?? null,           []],
     macswell_slides:       [this.data?.macswell_slides ?? null,             [Validators.required, Validators.min(1)]],
     total_cocktail_volume: [this.data?.total_cocktail_volume ?? null,       [Validators.required, Validators.min(0.01)]],
+    experiment_type:       [this.data?.experiment_type ?? '',               []],
   });
 
   ngOnInit() { this.labService.getAll().subscribe(labs => this.labs = labs); }

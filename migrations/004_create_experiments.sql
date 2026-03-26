@@ -6,5 +6,6 @@ CREATE TABLE IF NOT EXISTS experiments (
   status VARCHAR(30) NOT NULL DEFAULT 'planning',
   macswell_slides INTEGER,
   total_cocktail_volume NUMERIC(10,2),
+  experiment_type VARCHAR(255),
   created_at TIMESTAMPTZ DEFAULT NOW()
 );

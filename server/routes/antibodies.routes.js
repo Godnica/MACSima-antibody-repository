@@ -10,6 +10,7 @@ const antibodyValidators = [
   body('tube_number').trim().notEmpty().withMessage('Tube number is required'),
   body('volume_on_arrival').isFloat({ gt: 0 }).withMessage('Volume must be > 0'),
   body('cost_chf').isFloat({ gt: 0 }).withMessage('Cost must be > 0'),
+  body('current_volume').optional().isFloat({ min: 0 }).withMessage('Current volume must be >= 0'),
   validate,
 ];
 

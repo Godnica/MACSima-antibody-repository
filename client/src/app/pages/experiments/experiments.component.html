@@ -51,6 +51,11 @@
     <td mat-cell *matCellDef="let row">{{ row.requesting_lab_name || '—' }}</td>
   </ng-container>
 
+  <ng-container matColumnDef="experiment_type">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+    <td mat-cell *matCellDef="let row">{{ row.experiment_type || '—' }}</td>
+  </ng-container>
+
   <ng-container matColumnDef="status">
     <th mat-header-cell *matHeaderCellDef>Status</th>
     <td mat-cell *matCellDef="let row">

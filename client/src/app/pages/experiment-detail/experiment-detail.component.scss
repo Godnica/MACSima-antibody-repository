@@ -8,7 +8,7 @@
 }
 
 .error-msg {
-  color: var(--mat-sys-error);
+  color: var(--accent-danger);
   mat-icon { font-size: 48px; width: 48px; height: 48px; }
 }
 
@@ -25,14 +25,14 @@
     justify-content: space-between;
     gap: 16px;
 
-    h2 { margin: 0 0 8px; }
+    h2 { margin: 0 0 8px; color: var(--text-primary); }
 
     .meta {
       display: flex;
       gap: 16px;
       flex-wrap: wrap;
       font-size: 14px;
-      color: var(--mat-sys-on-surface-variant);
+      color: var(--text-secondary);
     }
 
     .header-actions {
@@ -61,14 +61,14 @@
 
   .ab-processing {
     font-size: 11px;
-    color: var(--mat-sys-primary);
+    color: var(--accent-primary);
     font-style: italic;
   }
 
   .ab-lab {
     margin-left: auto;
     font-size: 11px;
-    color: var(--mat-sys-on-surface-variant);
+    color: var(--text-secondary);
   }
 }
 
@@ -77,53 +77,18 @@ table { width: 100%; }
 .titration-input {
   width: 80px;
   padding: 4px 6px;
-  border: 1px solid var(--mat-sys-outline);
+  border: 1px solid var(--border-default);
   border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 14px;
   text-align: right;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
 
-  &:focus { outline: 2px solid var(--mat-sys-primary); }
-}
-
-.num-cell {
-  text-align: right;
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-}
-
-.total-label {
-  text-align: right;
-  font-weight: 600;
-  padding-right: 16px;
-}
-
-.total-value {
-  font-weight: 600;
-  font-size: 15px;
-}
-
-.insufficient-volume {
-  background-color: #ffebee !important;
-
-  td { color: #c62828; }
-}
-
-.no-data {
-  padding: 24px;
-  text-align: center;
-  color: var(--mat-sys-on-surface-variant);
-}
-
-.status-badge {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 16px;
-  font-size: 13px;
-  font-weight: 500;
-
-  &.status-planning           { background: #e0e0e0; color: #424242; }
-  &.status-executed_not_billed { background: #bbdefb; color: #0d47a1; }
-  &.status-executed_billed     { background: #c8e6c9; color: #1b5e20; }
+  &:focus {
+    outline: 2px solid var(--accent-primary);
+    border-color: var(--accent-primary);
+  }
 }
 
 .total-footer {
@@ -132,13 +97,18 @@ table { width: 100%; }
   align-items: center;
   gap: 32px;
   padding: 12px 16px;
-  background: var(--mat-sys-surface-variant);
-  border-radius: 0 0 4px 4px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-default);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
   font-weight: 600;
+  color: var(--text-primary);
 
   .total-value {
+    font-family: 'JetBrains Mono', monospace;
     font-size: 16px;
     min-width: 120px;
     text-align: right;
+    color: var(--accent-primary);
   }
 }

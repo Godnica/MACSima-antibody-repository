@@ -39,7 +39,7 @@ export default class InventoryComponent implements OnInit, AfterViewInit {
 
   displayedColumns = [
     'tube_number', 'antigen_target', 'clone', 'fluorochrome',
-    'lab_name', 'processing', 'current_volume', 'chf_per_ul', 'actions',
+    'lab_name', 'processing', 'status', 'current_volume', 'chf_per_ul', 'actions',
   ];
   dataSource = new MatTableDataSource<Antibody>();
 
@@ -56,7 +56,11 @@ export default class InventoryComponent implements OnInit, AfterViewInit {
   }
 
   load() {
-    this.service.getAll().subscribe(data => this.dataSource.data = data);
+    this.service.getAll().subscribe(data => {
+      this.dataSource.data = data;
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
   applyFilter(event: Event) {

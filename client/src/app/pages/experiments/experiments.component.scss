@@ -20,34 +20,6 @@
 
 table { width: 100%; }
 
-.clickable-rows tr.mat-row { cursor: pointer; }
-.clickable-rows tr.mat-row:hover { background: var(--mat-sys-surface-variant); }
-
-.num-cell { text-align: right; white-space: nowrap; }
-
-.status-badge {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 500;
-  white-space: nowrap;
-
-  &.status-planning            { background: #e0e0e0; color: #424242; }
-  &.status-executed_not_billed { background: #bbdefb; color: #0d47a1; }
-  &.status-executed_billed     { background: #c8e6c9; color: #1b5e20; }
-}
-
-.insufficient-volume {
-  background-color: #ffebee !important;
-
-  td { color: #c62828; }
-
-  &:hover { background-color: #ffcdd2 !important; }
-}
-
-.no-data {
-  padding: 24px;
-  text-align: center;
-  color: var(--mat-sys-on-surface-variant);
+.clickable-rows tr.mat-mdc-row {
+  cursor: pointer;
 }

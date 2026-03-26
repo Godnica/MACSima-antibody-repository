@@ -1,0 +1,2 @@
+ALTER TABLE antibodies RENAME COLUMN panel TO status;
+ALTER TABLE antibodies ALTER COLUMN status TYPE VARCHAR(20);

@@ -13,18 +13,10 @@
   margin-bottom: 16px;
 }
 
-table {
-  width: 100%;
-}
+table { width: 100%; }
 
 .actions-cell {
   white-space: nowrap;
   text-align: right;
   width: 100px;
-}
-
-.no-data {
-  padding: 24px;
-  text-align: center;
-  color: var(--mat-sys-on-surface-variant);
 }

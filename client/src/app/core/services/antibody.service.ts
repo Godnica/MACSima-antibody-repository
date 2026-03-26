@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Antibody, CreateAntibodyDto } from '../models/antibody.model';
+import { Antibody, CreateAntibodyDto, UpdateAntibodyDto } from '../models/antibody.model';
 
 @Injectable({ providedIn: 'root' })
 export class AntibodyService {
@@ -27,7 +27,7 @@ export class AntibodyService {
     return this.http.post<Antibody>(this.baseUrl, data);
   }
 
-  update(id: number, data: CreateAntibodyDto) {
+  update(id: number, data: UpdateAntibodyDto) {
     return this.http.put<Antibody>(`${this.baseUrl}/${id}`, data);
   }
 

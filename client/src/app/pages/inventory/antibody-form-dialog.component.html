@@ -70,6 +70,14 @@
       <mat-error *ngIf="form.get('volume_on_arrival')?.hasError('min')">Must be > 0</mat-error>
     </mat-form-field>
 
+    @if (isEdit) {
+      <mat-form-field appearance="outline">
+        <mat-label>Current Volume (µL)</mat-label>
+        <input matInput type="number" formControlName="current_volume" min="0">
+        <mat-error *ngIf="form.get('current_volume')?.hasError('min')">Must be >= 0</mat-error>
+      </mat-form-field>
+    }
+
     <mat-form-field appearance="outline">
       <mat-label>Cost (CHF)</mat-label>
       <input matInput type="number" formControlName="cost_chf" min="0.01">
@@ -84,16 +92,16 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Processing</mat-label>
-      <mat-select formControlName="processing">
-        @for (opt of processingOptions; track opt.value) {
+      <input matInput formControlName="processing" placeholder="FFPE or PFA or Other">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        @for (opt of statusOptions; track opt.value) {
           <mat-option [value]="opt.value">{{ opt.label }}</mat-option>
         }
       </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Panel</mat-label>
-      <input matInput formControlName="panel">
     </mat-form-field>
 
   </form>
