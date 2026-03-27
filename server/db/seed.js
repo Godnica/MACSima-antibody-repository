@@ -62,6 +62,7 @@ module.exports = async function seed() {
       [row.name, row.pi_name, row.email, row.billing_address, row.institute || null]
     );
     labMap[lab.name] = lab.id;
+    if (row.pi_name) labMap[row.pi_name.trim()] = lab.id;
   }
 
   console.log(`[seed] Inserted ${labRows.length} laboratories.`);

@@ -16,9 +16,10 @@ WORKDIR /app
 COPY server/package.json server/package-lock.json ./server/
 RUN cd server && npm ci --omit=dev
 
-# Copy server source + migrations
+# Copy server source, migrations and init CSV files
 COPY server/ ./server/
 COPY migrations/ ./migrations/
+COPY init-csv/ ./init-csv/
 
 # Copy Angular build from stage 1
 COPY --from=frontend-build /app/client/dist ./client/dist
