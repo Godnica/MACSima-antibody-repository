@@ -1,6 +1,32 @@
+const fs = require('fs');
+const path = require('path');
 const bcrypt = require('bcrypt');
 const pool = require('./pool');
 const calc = require('../utils/calculations');
+
+const INIT_CSV_DIR = path.join(__dirname, '../../init-csv');
+
+function parseCSV(filename) {
+  const filePath = path.join(INIT_CSV_DIR, filename);
+  const content = fs.readFileSync(filePath, 'utf8');
+  const lines = content.split('\n').filter(l => l.trim() !== '');
+  const headers = lines[0].split(';').map(h => h.trim());
+  return lines.slice(1).map(line => {
+    const values = line.split(';').map(v => v.trim());
+    const obj = {};
+    headers.forEach((h, i) => { obj[h] = values[i] ?? ''; });
+    return obj;
+  });
+}
+
+function mapQualityColor(raw) {
+  switch ((raw || '').toLowerCase()) {
+    case 'good': return 'green';
+    case 'ok':   return 'yellow';
+    case 'no':   return 'grey';
+    default:     return 'none';
+  }
+}
 
 module.exports = async function seed() {
   const { rows } = await pool.query('SELECT COUNT(*) FROM users');
@@ -9,7 +35,7 @@ module.exports = async function seed() {
     return;
   }
 
-  console.log('[seed] Seeding database...');
+  console.log('[seed] Seeding database from CSV files...');
 
   // 1. Admin user
   const passwordHash = await bcrypt.hash('admin', 10);
@@ -19,79 +45,60 @@ module.exports = async function seed() {
     ['admin', passwordHash]
   );
 
-  // 2. Laboratories
-  const { rows: labs } = await pool.query(`
-    INSERT INTO laboratories (name, pi_name, email, billing_address) VALUES
-      ('Lab Immunology', 'Prof. Anna Rossi', 'a.rossi@university.ch', 'Via Immunologia 1, 6500 Bellinzona'),
-      ('Lab Oncology', 'Prof. Marco Bianchi', 'm.bianchi@university.ch', 'Via Oncologia 5, 6900 Lugano'),
-      ('Lab Neuroscience', 'Prof. Laura Verdi', 'l.verdi@university.ch', 'Via Neuroscienze 3, 6600 Locarno')
-    RETURNING id, name
-  `);
-  const [labImmuno, labOnco, labNeuro] = labs;
+  // 2. Laboratories from CSV
+  const labRows = parseCSV('laboratories.csv');
+  const labMap = {}; // name → id
 
-  // 3. Antibodies (10 total, spread across labs)
-  //    chf_per_ul = cost_chf / volume_on_arrival
-  const antibodies = [
-    // Lab Immunology (4 antibodies)
-    { lab_id: labImmuno.id, tube: 'IMM-001', species: 'Mouse', target: 'CD3',    clone: 'UCHT1',  company: 'BioLegend', order: 'BL-300401', lot: 'B123456', fluoro: 'FITC',    vol: 100, cost: 250.00 },
-    { lab_id: labImmuno.id, tube: 'IMM-002', species: 'Mouse', target: 'CD4',    clone: 'RPA-T4', company: 'BioLegend', order: 'BL-300507', lot: 'B234567', fluoro: 'PE',      vol: 100, cost: 280.00 },
-    { lab_id: labImmuno.id, tube: 'IMM-003', species: 'Mouse', target: 'CD8',    clone: 'SK1',    company: 'BD Biosciences', order: 'BD-555635', lot: 'C345678', fluoro: 'APC',     vol: 50,  cost: 180.00 },
-    { lab_id: labImmuno.id, tube: 'IMM-004', species: 'Mouse', target: 'CD19',   clone: 'HIB19',  company: 'BioLegend', order: 'BL-302206', lot: 'B456789', fluoro: 'BV421',   vol: 25,  cost: 150.00 },
-    // Lab Oncology (3 antibodies)
-    { lab_id: labOnco.id,   tube: 'ONC-001', species: 'Rabbit', target: 'Ki67',   clone: 'SP6',    company: 'Abcam',     order: 'AB-15580',  lot: 'D567890', fluoro: 'Alexa488', vol: 200, cost: 400.00 },
-    { lab_id: labOnco.id,   tube: 'ONC-002', species: 'Mouse',  target: 'HER2',   clone: 'CB11',   company: 'Leica',     order: 'LC-NCL-CB11', lot: 'E678901', fluoro: 'PE-Cy7',  vol: 100, cost: 320.00 },
-    { lab_id: labOnco.id,   tube: 'ONC-003', species: 'Mouse',  target: 'PCNA',   clone: 'PC10',   company: 'Sigma',     order: 'SG-P8825',  lot: 'F789012', fluoro: 'FITC',    vol: 150, cost: 220.00 },
-    // Lab Neuroscience (3 antibodies)
-    { lab_id: labNeuro.id,  tube: 'NEU-001', species: 'Rabbit', target: 'GFAP',   clone: 'EP672Y', company: 'Abcam',     order: 'AB-68428',  lot: 'G890123', fluoro: 'Alexa555', vol: 100, cost: 350.00 },
-    { lab_id: labNeuro.id,  tube: 'NEU-002', species: 'Mouse',  target: 'NeuN',   clone: 'A60',    company: 'Millipore', order: 'MP-MAB377', lot: 'H901234', fluoro: 'APC',      vol: 50,  cost: 290.00 },
-    { lab_id: labNeuro.id,  tube: 'NEU-003', species: 'Rabbit', target: 'Iba1',   clone: 'EPR16588', company: 'Abcam',  order: 'AB-178846', lot: 'I012345', fluoro: 'PE',       vol: 30,  cost: 180.00 },
-  ];
-
-  const insertedAbs = [];
-  for (const ab of antibodies) {
-    const chfPerUl = calc.chfPerUl(ab.cost, ab.vol);
-    const { rows: [row] } = await pool.query(
-      `INSERT INTO antibodies
-         (lab_id, tube_number, species, antigen_target, clone, company, order_number,
-          lot_number, fluorochrome, volume_on_arrival, current_volume, cost_chf, chf_per_ul)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$10,$11,$12)
-       RETURNING id`,
-      [ab.lab_id, ab.tube, ab.species, ab.target, ab.clone, ab.company,
-       ab.order, ab.lot, ab.fluoro, ab.vol, ab.cost, chfPerUl]
+  for (const row of labRows) {
+    const { rows: [lab] } = await pool.query(
+      `INSERT INTO laboratories (name, pi_name, email, billing_address, institute)
+       VALUES ($1, $2, $3, $4, $5)
+       ON CONFLICT (name) DO UPDATE
+         SET pi_name = EXCLUDED.pi_name,
+             email = EXCLUDED.email,
+             billing_address = EXCLUDED.billing_address,
+             institute = EXCLUDED.institute
+       RETURNING id, name`,
+      [row.name, row.pi_name, row.email, row.billing_address, row.institute || null]
     );
-    insertedAbs.push({ id: row.id, ...ab, chf_per_ul: chfPerUl });
+    labMap[lab.name] = lab.id;
   }
 
-  // 4. Experiment in 'planning' with 3 antibodies
-  const cocktailVolume = 200;
-  const slides = 3;
+  console.log(`[seed] Inserted ${labRows.length} laboratories.`);
 
-  const { rows: [experiment] } = await pool.query(
-    `INSERT INTO experiments (name, date, requesting_lab_id, status, macswell_slides, total_cocktail_volume)
-     VALUES ($1, CURRENT_DATE, $2, 'planning', $3, $4)
-     RETURNING id`,
-    ['Pilot MACSima Run #1', labImmuno.id, slides, cocktailVolume]
-  );
+  // 3. Antibodies from CSV
+  const abRows = parseCSV('antibodies .csv');
+  let abCount = 0;
 
-  // Pick first 3 antibodies: IMM-001 (1:100), IMM-002 (1:200), ONC-001 (1:50)
-  const expAntibodies = [
-    { ab: insertedAbs[0], titration: 100 },
-    { ab: insertedAbs[1], titration: 200 },
-    { ab: insertedAbs[4], titration: 50  },
-  ];
+  for (const row of abRows) {
+    const labId = labMap[row.lab_name];
+    if (!labId) {
+      console.warn(`[seed] Unknown lab "${row.lab_name}" for tube ${row.tube_number}, skipping.`);
+      continue;
+    }
 
-  for (const { ab, titration } of expAntibodies) {
-    const ulSlide  = calc.ulPerSlide(cocktailVolume, titration);
-    const totalUl  = calc.totalUlUsed(ulSlide, slides);
-    const totalChf = calc.totalChf(totalUl, ab.chf_per_ul);
+    const volOnArrival = parseFloat(row.volume_on_arrival) || 0;
+    const costChf = parseFloat(row.cost_chf) || 0;
+    const chfPerUl = calc.chfPerUl(costChf, volOnArrival);
+    const qualityColor = mapQualityColor(row.quality_color);
 
     await pool.query(
-      `INSERT INTO experiment_antibodies
-         (experiment_id, antibody_id, titration_ratio, ul_per_slide, total_ul_used, total_chf)
-       VALUES ($1,$2,$3,$4,$5,$6)`,
-      [experiment.id, ab.id, titration, ulSlide, totalUl, totalChf]
+      `INSERT INTO antibodies
+         (lab_id, tube_number, species, antigen_target, clone, company, order_number,
+          lot_number, fluorochrome, processing, status, volume_on_arrival, current_volume,
+          cost_chf, chf_per_ul, quality_color)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$12,$13,$14,$15)
+       ON CONFLICT (tube_number) DO NOTHING`,
+      [
+        labId, row.tube_number, row.species, row.antigen_target, row.clone,
+        row.company, row.order_number, row.lot_number, row.fluorochrome,
+        row.processing || null, row.status || null,
+        volOnArrival, costChf, chfPerUl, qualityColor
+      ]
     );
+    abCount++;
   }
 
-  console.log('[seed] Done: 1 admin, 3 labs, 10 antibodies, 1 experiment.');
+  console.log(`[seed] Inserted ${abCount} antibodies.`);
+  console.log('[seed] Done: 1 admin, labs and antibodies from CSV.');
 };

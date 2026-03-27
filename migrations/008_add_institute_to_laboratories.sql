@@ -1,0 +1,2 @@
+ALTER TABLE laboratories
+  ADD COLUMN IF NOT EXISTS institute VARCHAR(100);
