@@ -54,9 +54,9 @@ export default class ExperimentDetailComponent implements OnInit {
   error: string | null = null;
 
   displayedColumns = ['tube_number', 'antigen_target', 'clone', 'fluorochrome', 'lab_name',
-    'titration_ratio', 'ul_per_slide', 'total_ul_used', 'total_chf', 'actions'];
+    'titration_ratio', 'ul_per_slide', 'chf_per_ul', 'total_chf', 'actions'];
   displayedColumnsReadonly = ['tube_number', 'antigen_target', 'clone', 'fluorochrome', 'lab_name',
-    'titration_ratio', 'ul_per_slide', 'total_ul_used', 'total_chf'];
+    'titration_ratio', 'ul_per_slide', 'chf_per_ul', 'total_chf'];
 
   searchControl = this.fb.control('');
 
@@ -160,6 +160,20 @@ export default class ExperimentDetailComponent implements OnInit {
     });
   }
 
+  downloadQuote() {
+    this.experimentService.downloadQuotePdf(this.experiment!.id).subscribe({
+      next: (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `quote_${this.experiment!.name.replace(/[^a-zA-Z0-9_-]/g, '_')}.pdf`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: () => this.snackBar.open('Error downloading quote', 'Close', { duration: 5000, panelClass: 'error-snackbar' }),
+    });
+  }
+
   executeExperiment() {
     this.dialog.open(ConfirmDialogComponent, {
       width: '480px',
@@ -180,7 +194,7 @@ export default class ExperimentDetailComponent implements OnInit {
           const details = err.error?.details;
           if (details?.length) {
             const msg = details.map((d: any) =>
-              `${d.tube_number}: needs ${d.required.toFixed(1)}µL, has ${d.available.toFixed(1)}µL`
+              `${d.tube_number}: needs ${d.required.toFixed(1)}uL, has ${d.available.toFixed(1)}uL`
             ).join(' | ');
             this.snackBar.open('Insufficient volume: ' + msg, 'Close', { duration: 8000, panelClass: 'error-snackbar' });
           } else {

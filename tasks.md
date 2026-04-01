@@ -4,8 +4,8 @@
 > Last updated: 2026-03-26 14:30
 
 ## Summary
-- Total: 62
-- Done: 62
+- Total: 68
+- Done: 68
 - In Progress: 0
 - Pending: 0
 
@@ -148,3 +148,14 @@
 - [x] 14.2 — **Configurazione Render.com**: Creare `render.yaml` (Infrastructure as Code) per deploy automatico su Render: web service con Docker, variabili d'ambiente (DATABASE_URL da Neon, JWT_SECRET, PORT). Documentare i passi per collegare il repo GitHub a Render.
 - [x] 14.3 — **Adattamenti per produzione**: Verificare/aggiungere: CORS configurabile via ENV (non hardcoded localhost), `trust proxy` per Express dietro reverse proxy, health check endpoint (`GET /api/health`), gestione corretta di `NODE_ENV=production`.
 - [x] 14.4 — **Documentazione deploy**: Aggiornare il `README.md` con guida passo-passo per: (A) installazione locale con Docker, (B) deploy su Render + Neon. Includere screenshot o comandi esatti.
+
+---
+
+## Phase 15 — Admin User Management
+
+- [x] 15.1 — **Migration**: Create migration `009_add_display_name_to_users.sql` to add optional `display_name` (VARCHAR 255) column to `users` table, useful for showing a friendly name in the user list. The existing `users` table already has `id`, `username`, `password_hash`, `role`, `must_change_password`, `created_at`.
+- [x] 15.2 — **Backend API — Users CRUD**: Create `server/routes/users.routes.js` and `server/controllers/users.controller.js`. Implement endpoints (all admin-only): `GET /api/users` (list all users, exclude password_hash), `POST /api/users` (create user: username, password, role, display_name; hash password with bcrypt; username must be unique), `DELETE /api/users/:id` (delete user, block deleting own account). Mount routes in `server/index.js`.
+- [x] 15.3 — **Backend API — Reset Password**: Add `POST /api/users/:id/reset-password` endpoint (admin-only): accepts `newPassword`, hashes it, updates the user, sets `must_change_password = true` so the user is forced to change it on next login.
+- [x] 15.4 — **Frontend Service**: Create `client/src/app/core/services/user.service.ts` with methods: `getAll()`, `create(data)`, `remove(id)`, `resetPassword(id, newPassword)`. Add `UserAdmin` interface to models.
+- [x] 15.5 — **Frontend Component**: Create `client/src/app/pages/admin-users/admin-users.component.ts|html|scss` (standalone). Table showing all users (username, display name, role, created_at). "Add User" button opens a dialog with form (username, display name, password, role dropdown admin/user). Delete button with confirmation. Reset password button with password input dialog. Wire to UserService.
+- [x] 15.6 — **Navigation & Routing**: Add route `/admin/users` in `app.routes.ts` (lazy-loaded, admin-only guard). Add "User Management" nav item in `main-layout.component.ts` with icon `group` and `adminOnly: true`. Place it after "Laboratories" in the nav list.

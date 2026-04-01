@@ -27,16 +27,20 @@ app.use('/api/antibodies',   require('./routes/antibodies.routes'));
 app.use('/api/experiments',  require('./routes/experiments.routes'));
 app.use('/api/billing',      require('./routes/billing.routes'));
 app.use('/api/repository',   require('./routes/repository.routes'));
+app.use('/api/users',        require('./routes/users.routes'));
 
 app.use(errorHandler);
 
 // Serve Angular frontend in production
 const clientDist = path.join(__dirname, '../client/dist/client/browser');
-app.use(express.static(clientDist));
-app.get('*', (_req, res, next) => {
-  if (_req.path.startsWith('/api/')) return next();
-  res.sendFile(path.join(clientDist, 'index.html'));
-});
+const fs = require('fs');
+if (fs.existsSync(clientDist)) {
+  app.use(express.static(clientDist));
+  app.get('*', (_req, res, next) => {
+    if (_req.path.startsWith('/api/')) return next();
+    res.sendFile(path.join(clientDist, 'index.html'));
+  });
+}
 
 const PORT = process.env.PORT || 3000;
 

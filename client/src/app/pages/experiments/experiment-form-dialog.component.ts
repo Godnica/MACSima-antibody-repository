@@ -56,7 +56,7 @@ import { Experiment } from '../../core/models/experiment.model';
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Total Cocktail Volume (µL)</mat-label>
+          <mat-label>Total Cocktail Volume (uL)</mat-label>
           <input matInput type="number" formControlName="total_cocktail_volume" min="0.01">
           <mat-error *ngIf="form.get('total_cocktail_volume')?.hasError('required')">Required</mat-error>
           <mat-error *ngIf="form.get('total_cocktail_volume')?.hasError('min')">Must be > 0</mat-error>
@@ -85,12 +85,12 @@ export class ExperimentFormDialogComponent implements OnInit {
   labs: Laboratory[] = [];
 
   form = this.fb.group({
-    name:                  [this.data?.name ?? '',                          Validators.required],
-    date:                  [this.data?.date ? new Date(this.data.date) : null, []],
-    requesting_lab_id:     [this.data?.requesting_lab_id ?? null,           []],
-    macswell_slides:       [this.data?.macswell_slides ?? null,             [Validators.required, Validators.min(1)]],
-    total_cocktail_volume: [this.data?.total_cocktail_volume ?? null,       [Validators.required, Validators.min(0.01)]],
-    experiment_type:       [this.data?.experiment_type ?? '',               []],
+    name: [this.data?.name ?? '', Validators.required],
+    date: [this.data?.date ? new Date(this.data.date) : null, []],
+    requesting_lab_id: [this.data?.requesting_lab_id ?? null, []],
+    macswell_slides: [this.data?.macswell_slides ?? null, [Validators.required, Validators.min(1)]],
+    total_cocktail_volume: [this.data?.total_cocktail_volume ?? null, [Validators.required, Validators.min(0.01)]],
+    experiment_type: [this.data?.experiment_type ?? '', []],
   });
 
   ngOnInit() { this.labService.getAll().subscribe(labs => this.labs = labs); }

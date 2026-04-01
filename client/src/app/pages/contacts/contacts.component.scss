@@ -88,10 +88,11 @@
   }
 }
 
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
+.team-list {
+  padding: 2em;
+  display: flex;
+
+  gap: 2em;
 }
 
 .team-member {

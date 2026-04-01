@@ -35,7 +35,7 @@
 
   <ng-container matColumnDef="lab_name">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Lab</th>
-    <td mat-cell *matCellDef="let row">{{ row.lab_name }}</td>
+    <td mat-cell *matCellDef="let row">{{ row.lab_name }} <strong>{{ row.pi_name ? '(' + row.pi_name + ')' : '' }}</strong></td>
   </ng-container>
 
   <ng-container matColumnDef="processing">
@@ -49,15 +49,14 @@
   </ng-container>
 
   <ng-container matColumnDef="current_volume">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Volume (µL)</th>
-    <td mat-cell *matCellDef="let row" class="num-cell"
-        [class.low-stock]="row.current_volume < 40">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Volume (uL)</th>
+    <td mat-cell *matCellDef="let row" class="num-cell" [class.low-stock]="row.current_volume < 40">
       {{ row.current_volume | number:'1.1-1' }}
     </td>
   </ng-container>
 
   <ng-container matColumnDef="chf_per_ul">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>CHF/µL</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>CHF/uL</th>
     <td mat-cell *matCellDef="let row" class="num-cell">
       {{ row.chf_per_ul | number:'1.2-2' }}
     </td>

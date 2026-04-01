@@ -21,6 +21,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Low Stock',    icon: 'warning',        route: '/low-stock',    adminOnly: true  },
   { label: 'Billing',      icon: 'receipt_long',   route: '/billing',      adminOnly: true  },
   { label: 'Laboratories', icon: 'business',       route: '/laboratories', adminOnly: true  },
+  { label: 'User Management', icon: 'group',     route: '/admin/users',  adminOnly: true  },
   { label: 'Repository',   icon: 'search',         route: '/repository',   adminOnly: false },
   { label: 'Contacts',     icon: 'contact_mail',   route: '/contacts',     adminOnly: false },
 ];

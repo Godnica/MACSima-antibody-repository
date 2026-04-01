@@ -15,22 +15,22 @@
   <mat-form-field appearance="outline" class="filter-field">
     <mat-label>Filter by antibody type</mat-label>
     <input matInput [formControl]="antibodyFilterControl" [matAutocomplete]="comboAuto"
-           placeholder="Search target or clone...">
+      placeholder="Search target or clone...">
     <mat-icon matSuffix>biotech</mat-icon>
     <mat-autocomplete #comboAuto [displayWith]="displayCombination"
-                      (optionSelected)="selectCombination($event.option.value)">
+      (optionSelected)="selectCombination($event.option.value)">
       @for (combo of filteredCombinations; track combo.antigen_target + combo.clone) {
-        <mat-option [value]="combo">
-          <strong>{{ combo.antigen_target }}</strong> · {{ combo.clone }}
-        </mat-option>
+      <mat-option [value]="combo">
+        <strong>{{ combo.antigen_target }}</strong> · {{ combo.clone }}
+      </mat-option>
       }
     </mat-autocomplete>
   </mat-form-field>
 
   @if (selectedCombination) {
-    <button mat-icon-button (click)="clearFilter()" title="Clear antibody filter">
-      <mat-icon>close</mat-icon>
-    </button>
+  <button mat-icon-button (click)="clearFilter()" title="Clear antibody filter">
+    <mat-icon>close</mat-icon>
+  </button>
   }
 </div>
 
@@ -38,8 +38,10 @@
 
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-    <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+    <td mat-cell *matCellDef="let row">{{ row.name }} </td>
+
   </ng-container>
+
 
   <ng-container matColumnDef="date">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
@@ -69,13 +71,13 @@
   </ng-container>
 
   <ng-container matColumnDef="total_cocktail_volume">
-    <th mat-header-cell *matHeaderCellDef>Cocktail Vol. (µL)</th>
+    <th mat-header-cell *matHeaderCellDef>Cocktail Vol. (uL)</th>
     <td mat-cell *matCellDef="let row" class="num-cell">{{ row.total_cocktail_volume | number:'1.1-1' }}</td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="goToDetail(row)"
-      [class.insufficient-volume]="row.has_insufficient_volume"></tr>
+    [class.insufficient-volume]="row.has_insufficient_volume"></tr>
 
   <tr class="mat-row" *matNoDataRow>
     <td class="mat-cell no-data" [attr.colspan]="displayedColumns.length">No experiments found</td>

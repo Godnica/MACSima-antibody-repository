@@ -18,6 +18,7 @@ router.post('/',   auth, adminOnly, ...expValidators, ctrl.create);
 router.get('/:id', auth, adminOnly, ctrl.getById);
 router.put('/:id', auth, adminOnly, ...expValidators, ctrl.update);
 
+router.get('/:id/quote-pdf',    auth, adminOnly, ctrl.quotePdf);
 router.post('/:id/execute',     auth, adminOnly, ctrl.execute);
 router.post('/:id/mark-billed', auth, adminOnly, ctrl.markBilled);
 

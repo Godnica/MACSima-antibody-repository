@@ -1,0 +1,52 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: antibody
+      POSTGRES_PASSWORD: antibody
+      POSTGRES_DB: antibody_repo
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U antibody -d antibody_repo"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  server:
+    image: node:20-alpine
+    working_dir: /app/server
+    command: sh -c "npm install && npx nodemon index.js"
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://antibody:antibody@db:5432/antibody_repo
+      JWT_SECRET: dev-secret
+      PORT: 3000
+      NODE_ENV: development
+    volumes:
+      - ./server:/app/server
+      - ./migrations:/app/migrations
+      - ./init-csv:/app/init-csv
+      - server_modules:/app/server/node_modules
+    depends_on:
+      db:
+        condition: service_healthy
+
+  client:
+    image: node:20-alpine
+    working_dir: /app/client
+    command: sh -c "npm install && npx ng serve --host 0.0.0.0 --proxy-config proxy.conf.docker.json"
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./client:/app/client
+      - client_modules:/app/client/node_modules
+    depends_on:
+      - server
+
+volumes:
+  pgdata:
+  server_modules:
+  client_modules:

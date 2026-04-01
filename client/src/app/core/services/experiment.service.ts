@@ -17,6 +17,9 @@ export class ExperimentService {
   create(data: Partial<Experiment>)       { return this.http.post<Experiment>(this.base, data); }
   update(id: number, data: Partial<Experiment>) { return this.http.put<Experiment>(`${this.base}/${id}`, data); }
 
+  downloadQuotePdf(id: number) {
+    return this.http.get(`${this.base}/${id}/quote-pdf`, { responseType: 'blob' });
+  }
   execute(id: number)    { return this.http.post<any>(`${this.base}/${id}/execute`, {}); }
   markBilled(id: number) { return this.http.post<Experiment>(`${this.base}/${id}/mark-billed`, {}); }
 

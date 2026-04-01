@@ -19,7 +19,7 @@ exports.getAll = async (req, res, next) => {
     const whereClause = where.length ? `WHERE ${where.join(' AND ')}` : '';
 
     const { rows } = await pool.query(`
-      SELECT a.*, l.name AS lab_name
+      SELECT a.*, l.name AS lab_name, l.pi_name
       FROM antibodies a
       JOIN laboratories l ON a.lab_id = l.id
       ${whereClause}

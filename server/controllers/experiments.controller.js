@@ -1,5 +1,6 @@
 const pool = require('../db/pool');
 const calc = require('../utils/calculations');
+const pdfGenerator = require('../utils/pdfGenerator');
 
 // ── Experiments CRUD ──────────────────────────────────────────────────────────
 
@@ -80,6 +81,72 @@ exports.update = async (req, res, next) => {
 
     res.json(rows[0]);
   } catch (err) { next(err); }
+};
+
+// ── Quote PDF ────────────────────────────────────────────────────────────────
+
+exports.quotePdf = async (req, res, next) => {
+  try {
+    const { rows: [experiment] } = await pool.query(`
+      SELECT e.*, l.name AS requesting_lab_name
+      FROM experiments e
+      LEFT JOIN laboratories l ON e.requesting_lab_id = l.id
+      WHERE e.id = $1
+    `, [req.params.id]);
+
+    if (!experiment) return res.status(404).json({ error: 'Experiment not found' });
+
+    const { rows: antibodies } = await pool.query(`
+      SELECT ea.titration_ratio, ea.ul_per_slide, ea.total_ul_used, ea.total_chf,
+             a.tube_number, a.antigen_target, a.clone, a.fluorochrome, a.chf_per_ul,
+             l.name AS lab_name
+      FROM experiment_antibodies ea
+      JOIN antibodies a ON ea.antibody_id = a.id
+      JOIN laboratories l ON a.lab_id = l.id
+      WHERE ea.experiment_id = $1
+      ORDER BY ea.id
+    `, [req.params.id]);
+
+    const abData = antibodies.map(ab => ({
+      tube_number: ab.tube_number,
+      target: ab.antigen_target,
+      clone: ab.clone,
+      fluorochrome: ab.fluorochrome,
+      lab_name: ab.lab_name,
+      titration_ratio: parseInt(ab.titration_ratio),
+      ul_per_slide: parseFloat(ab.ul_per_slide),
+      total_ul_used: parseFloat(ab.total_ul_used),
+      chf_per_ul: parseFloat(ab.chf_per_ul),
+      total_chf: parseFloat(ab.total_chf),
+    }));
+
+    const totalCost = abData.reduce((sum, ab) => sum + ab.total_chf, 0);
+
+    const expDate = experiment.date
+      ? new Date(experiment.date).toLocaleDateString('en-GB')
+      : '—';
+
+    const data = {
+      experimentName: experiment.name,
+      experimentDate: expDate,
+      experimentType: experiment.experiment_type || '',
+      requestingLab: experiment.requesting_lab_name || '—',
+      macswellSlides: parseInt(experiment.macswell_slides),
+      totalCocktailVolume: parseFloat(experiment.total_cocktail_volume),
+      antibodies: abData,
+      totalCost,
+    };
+
+    const safeName = experiment.name.replace(/[^a-zA-Z0-9_-]/g, '_');
+
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename="quote_${safeName}.pdf"`);
+
+    const doc = pdfGenerator.generateQuotePdf(data);
+    doc.pipe(res);
+  } catch (err) {
+    next(err);
+  }
 };
 
 // ── Execute (Planning → Executed Not Billed) ─────────────────────────────────

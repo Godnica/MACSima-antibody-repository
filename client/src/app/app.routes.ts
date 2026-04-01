@@ -23,6 +23,7 @@ export const routes: Routes = [
       { path: 'low-stock',    loadComponent: () => import('./pages/low-stock/low-stock.component'),           canActivate: [adminGuard] },
       { path: 'billing',      loadComponent: () => import('./pages/billing/billing.component'),               canActivate: [adminGuard] },
       { path: 'laboratories', loadComponent: () => import('./pages/laboratories/laboratories.component'),     canActivate: [adminGuard] },
+      { path: 'admin/users',  loadComponent: () => import('./pages/admin-users/admin-users.component'),       canActivate: [adminGuard] },
       { path: 'repository',   loadComponent: () => import('./pages/repository/repository.component') },
       { path: 'contacts',     loadComponent: () => import('./pages/contacts/contacts.component') },
       { path: '', redirectTo: 'inventory', pathMatch: 'full' },
