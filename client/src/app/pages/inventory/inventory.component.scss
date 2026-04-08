@@ -23,3 +23,15 @@ table { width: 100%; }
   text-align: right;
   width: 100px;
 }
+
+:host ::ng-deep {
+  .quality-row-green {
+    background-color: rgba(76, 175, 80, 0.12);
+  }
+  .quality-row-yellow {
+    background-color: rgba(255, 152, 0, 0.12);
+  }
+  .quality-row-grey {
+    background-color: rgba(158, 158, 158, 0.12);
+  }
+}
