@@ -45,7 +45,6 @@
 
     &.usi-logo {
       height: 32px;
-      filter: brightness(0) invert(1) opacity(0.8);
     }
   }
 
@@ -66,6 +65,7 @@
       font-size: 14px;
       line-height: 1.6;
       margin: 0;
+      margin-top: 1em;
       color: var(--text-secondary);
     }
   }

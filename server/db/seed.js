@@ -18,20 +18,6 @@ function parseSemicolonCSV(filename) {
   });
 }
 
-function parseCommaCSV(filename) {
-  const filePath = path.join(INIT_CSV_DIR, filename);
-  const content = fs.readFileSync(filePath, 'utf8');
-  const lines = content.split('\n').filter(l => l.trim() !== '');
-  const headers = lines[0].split(',').map(h => h.trim());
-  return lines.slice(1).map(line => {
-    // Simple comma split — fields in this CSV don't contain quoted commas
-    const values = line.split(',').map(v => v.trim());
-    const obj = {};
-    headers.forEach((h, i) => { obj[h] = values[i] ?? ''; });
-    return obj;
-  });
-}
-
 function mapQualityColor(raw) {
   switch ((raw || '').toLowerCase().trim()) {
     case 'good':       return 'green';
@@ -40,6 +26,13 @@ function mapQualityColor(raw) {
     case 'not tested': return 'none';
     default:           return 'none';
   }
+}
+
+/** Parse a numeric value, stripping non-numeric trailing chars (e.g. "100?") */
+function parseNum(val) {
+  if (!val || val.toLowerCase() === 'free') return 0;
+  const cleaned = val.replace(/[^0-9.\-]/g, '');
+  return parseFloat(cleaned) || 0;
 }
 
 module.exports = async function seed() {
@@ -76,14 +69,13 @@ module.exports = async function seed() {
       [row.name, row.pi_name, row.email, row.billing_address, row.institute || null]
     );
     labMap[lab.name] = lab.id;
-    // Also map by PI surname so antibodies CSV can reference labs by PI name
     if (lab.pi_name) labMap[lab.pi_name.trim()] = lab.id;
   }
 
   console.log(`[seed] Inserted ${labRows.length} laboratories.`);
 
-  // 3. Antibodies from CSV (comma-separated)
-  const abRows = parseCommaCSV('antibodies .csv');
+  // 3. Antibodies from CSV (semicolon-separated)
+  const abRows = parseSemicolonCSV('antibodies.csv');
   let abCount = 0;
   let skipped = 0;
 
@@ -95,9 +87,11 @@ module.exports = async function seed() {
       continue;
     }
 
-    const volOnArrival = parseFloat(row.volume_on_arrival) || 0;
-    const chfPerUl = parseFloat(row['chf/ul']) || 0;
+    const volOnArrival = parseNum(row.volume_on_arrival);
+    // CSV column "cost_chf" actually contains CHF per µL (same values as old "chf/ul" column)
+    const chfPerUl = parseNum(row.cost_chf);
     const costChf = chfPerUl * volOnArrival;
+    const currentVolume = parseNum(row.current_vol) || volOnArrival;
     const qualityColor = mapQualityColor(row.quality_color);
 
     await pool.query(
@@ -105,13 +99,13 @@ module.exports = async function seed() {
          (lab_id, tube_number, species, antigen_target, clone, company, order_number,
           lot_number, fluorochrome, processing, status, volume_on_arrival, current_volume,
           cost_chf, chf_per_ul, quality_color)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$12,$13,$14,$15)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)
        ON CONFLICT (tube_number) DO NOTHING`,
       [
         labId, row.tube_number, row.species, row.antigen_target, row.clone,
         row.company, row.order_number, row.lot_number || null, row.fluorochrome,
         row.processing || null, row.status || null,
-        volOnArrival, costChf, chfPerUl, qualityColor
+        volOnArrival, currentVolume, costChf, chfPerUl, qualityColor
       ]
     );
     abCount++;

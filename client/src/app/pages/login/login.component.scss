@@ -4,8 +4,8 @@
   justify-content: center;
   min-height: 100vh;
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(0, 229, 255, 0.06) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 50%, rgba(0, 230, 118, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 50%, rgba(0, 150, 136, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(63, 81, 181, 0.04) 0%, transparent 50%),
     var(--bg-primary);
 }
 
@@ -39,7 +39,7 @@
   &.facility { height: 56px; }
   &.small {
     height: 32px;
-    filter: brightness(0) invert(1) opacity(0.7);
+    opacity: 0.7;
   }
 }
 

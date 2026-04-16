@@ -37,7 +37,7 @@
     &.facility { height: 48px; }
     &.small {
       height: 28px;
-      filter: brightness(0) invert(1) opacity(0.7);
+      opacity: 0.7;
     }
   }
 
@@ -71,7 +71,6 @@
 
   .mat-icon {
     color: var(--accent-primary) !important;
-    filter: drop-shadow(0 0 6px var(--accent-primary));
   }
 }
 
@@ -88,7 +87,7 @@
   font-family: 'Outfit', sans-serif;
   font-size: 14px;
   font-weight: 500;
-  color: var(--text-disabled);
+  color: var(--text-secondary);
   letter-spacing: 0.5px;
 }
 
@@ -97,8 +96,9 @@
 }
 
 .username {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Outfit', sans-serif;
   font-size: 13px;
+  font-weight: 500;
   margin-right: 8px;
   color: var(--accent-primary);
 }

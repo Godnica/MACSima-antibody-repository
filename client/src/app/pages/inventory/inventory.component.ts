@@ -53,6 +53,27 @@ export default class InventoryComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sortingDataAccessor = (item: any, property: string) => {
+      if (property === 'tube_number') {
+        return this.tubeSortKey(item.tube_number);
+      }
+      return item[property];
+    };
+  }
+
+  /**
+   * Build a sort key from a tube number of shape: number [letter [number]].
+   * Examples: "7" → "0000000007|_|0000000000"
+   *           "12B" → "0000000012|B|0000000000"
+   *           "3A4" → "0000000003|A|0000000004"
+   */
+  private tubeSortKey(tube: string | null | undefined): string {
+    if (!tube) return '~';
+    const match = /^(\d+)?([A-Za-z]+)?(\d+)?/.exec(tube.trim());
+    const n1 = match?.[1] ? parseInt(match[1], 10) : 0;
+    const letter = match?.[2]?.toUpperCase() || '_';
+    const n2 = match?.[3] ? parseInt(match[3], 10) : 0;
+    return `${String(n1).padStart(10, '0')}|${letter}|${String(n2).padStart(10, '0')}`;
   }
 
   load() {
