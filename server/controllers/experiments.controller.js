@@ -111,7 +111,7 @@ exports.quotePdf = async (req, res, next) => {
 
     const { rows: antibodies } = await pool.query(`
       SELECT ea.titration_ratio, ea.ul_per_slide, ea.total_ul_used, ea.total_chf,
-             a.tube_number, a.antigen_target, a.clone, a.fluorochrome, a.chf_per_ul,
+             a.tube_number, a.antibody_code, a.antigen_target, a.clone, a.fluorochrome, a.chf_per_ul,
              l.name AS lab_name
       FROM experiment_antibodies ea
       JOIN antibodies a ON ea.antibody_id = a.id
@@ -244,7 +244,7 @@ exports.getAntibodies = async (req, res, next) => {
   try {
     const { rows } = await pool.query(`
       SELECT ea.*,
-             a.tube_number, a.antigen_target, a.clone, a.fluorochrome,
+             a.tube_number, a.antibody_code, a.antigen_target, a.clone, a.fluorochrome,
              a.chf_per_ul, a.current_volume,
              l.name AS lab_name, l.pi_name
       FROM experiment_antibodies ea

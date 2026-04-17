@@ -51,6 +51,7 @@ export class AntibodyFormDialogComponent implements OnInit {
 
   form = this.fb.group({
     lab_id:            [this.data?.lab_id ?? null,             Validators.required],
+    antibody_code:     [this.data?.antibody_code ?? null,       []],
     tube_number:       [this.data?.tube_number ?? '',          Validators.required],
     species:           [this.data?.species ?? '',              []],
     antigen_target:    [this.data?.antigen_target ?? '',       []],

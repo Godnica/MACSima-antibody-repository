@@ -20,6 +20,7 @@ export interface Antibody {
   cost_chf: number;
   chf_per_ul: number;
   quality_color: QualityColor;
+  antibody_code: number | null;
   created_at: string;
 }
 
@@ -38,6 +39,7 @@ export interface CreateAntibodyDto {
   volume_on_arrival: number;
   cost_chf: number;
   quality_color: QualityColor;
+  antibody_code?: number | null;
 }
 
 export interface UpdateAntibodyDto extends CreateAntibodyDto {

@@ -40,7 +40,7 @@ export default class InventoryComponent implements OnInit, AfterViewInit {
   private readonly snackBar = inject(MatSnackBar);
 
   displayedColumns = [
-    'tube_number', 'antigen_target', 'clone', 'fluorochrome',
+    'tube_number', 'antibody_code', 'antigen_target', 'clone', 'fluorochrome',
     'lab_name', 'processing', 'status', 'current_volume', 'chf_per_ul', 'actions',
   ];
   dataSource = new MatTableDataSource<Antibody>();

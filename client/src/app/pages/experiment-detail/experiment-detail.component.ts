@@ -53,9 +53,9 @@ export default class ExperimentDetailComponent implements OnInit {
   loading = true;
   error: string | null = null;
 
-  displayedColumns = ['tube_number', 'antigen_target', 'clone', 'fluorochrome', 'lab_name',
+  displayedColumns = ['tube_number', 'antibody_code', 'antigen_target', 'clone', 'fluorochrome', 'lab_name',
     'titration_ratio', 'ul_per_slide', 'chf_per_ul', 'total_chf', 'actions'];
-  displayedColumnsReadonly = ['tube_number', 'antigen_target', 'clone', 'fluorochrome', 'lab_name',
+  displayedColumnsReadonly = ['tube_number', 'antibody_code', 'antigen_target', 'clone', 'fluorochrome', 'lab_name',
     'titration_ratio', 'ul_per_slide', 'chf_per_ul', 'total_chf'];
 
   searchControl = this.fb.control('');
@@ -91,6 +91,7 @@ export default class ExperimentDetailComponent implements OnInit {
       this.filteredAntibodies = this.allAntibodies.filter(ab =>
         !q ||
         ab.tube_number?.toLowerCase().includes(q) ||
+        ab.antibody_code?.toString().includes(q) ||
         ab.antigen_target?.toLowerCase().includes(q) ||
         ab.clone?.toLowerCase().includes(q) ||
         ab.fluorochrome?.toLowerCase().includes(q)

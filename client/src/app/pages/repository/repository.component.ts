@@ -34,7 +34,7 @@ export default class RepositoryComponent implements OnInit, AfterViewInit {
   private readonly fb = inject(FormBuilder);
   private readonly cdr = inject(ChangeDetectorRef);
 
-  displayedColumns = ['tube_number', 'antigen_target', 'species', 'clone', 'fluorochrome', 'lab_name'];
+  displayedColumns = ['tube_number', 'antibody_code', 'antigen_target', 'species', 'fluorochrome', 'lab_name'];
   dataSource = new MatTableDataSource<Antibody>();
   labs: Laboratory[] = [];
 

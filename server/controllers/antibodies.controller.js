@@ -65,7 +65,7 @@ exports.create = async (req, res, next) => {
     const {
       lab_id, tube_number, species, antigen_target, clone, company,
       order_number, lot_number, fluorochrome, processing, status,
-      volume_on_arrival, cost_chf, quality_color,
+      volume_on_arrival, cost_chf, quality_color, antibody_code,
     } = req.body;
 
     const chfPerUl = calc.chfPerUl(parseFloat(cost_chf), parseFloat(volume_on_arrival));
@@ -74,13 +74,13 @@ exports.create = async (req, res, next) => {
       INSERT INTO antibodies
         (lab_id, tube_number, species, antigen_target, clone, company,
          order_number, lot_number, fluorochrome, processing, status,
-         volume_on_arrival, current_volume, cost_chf, chf_per_ul, quality_color)
-      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$12,$13,$14,$15)
+         volume_on_arrival, current_volume, cost_chf, chf_per_ul, quality_color, antibody_code)
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$12,$13,$14,$15,$16)
       RETURNING *
     `, [
       lab_id, tube_number, species, antigen_target, clone, company,
       order_number, lot_number, fluorochrome, processing || null, status || null,
-      volume_on_arrival, cost_chf, chfPerUl, quality_color || 'none',
+      volume_on_arrival, cost_chf, chfPerUl, quality_color || 'none', antibody_code || null,
     ]);
 
     res.status(201).json(rows[0]);
@@ -94,7 +94,7 @@ exports.update = async (req, res, next) => {
     const {
       lab_id, tube_number, species, antigen_target, clone, company,
       order_number, lot_number, fluorochrome, processing, status,
-      volume_on_arrival, cost_chf, quality_color, current_volume,
+      volume_on_arrival, cost_chf, quality_color, current_volume, antibody_code,
     } = req.body;
 
     const chfPerUl = calc.chfPerUl(parseFloat(cost_chf), parseFloat(volume_on_arrival));
@@ -104,14 +104,15 @@ exports.update = async (req, res, next) => {
         lab_id=$1, tube_number=$2, species=$3, antigen_target=$4, clone=$5,
         company=$6, order_number=$7, lot_number=$8, fluorochrome=$9,
         processing=$10, status=$11, volume_on_arrival=$12, cost_chf=$13,
-        chf_per_ul=$14, quality_color=$15, current_volume=$16
-      WHERE id=$17
+        chf_per_ul=$14, quality_color=$15, current_volume=$16, antibody_code=$17
+      WHERE id=$18
       RETURNING *
     `, [
       lab_id, tube_number, species, antigen_target, clone, company,
       order_number, lot_number, fluorochrome, processing || null, status || null,
       volume_on_arrival, cost_chf, chfPerUl, quality_color || 'none',
       current_volume != null ? current_volume : volume_on_arrival,
+      antibody_code || null,
       req.params.id,
     ]);
 
