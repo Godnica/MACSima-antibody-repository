@@ -91,21 +91,23 @@ module.exports = async function seed() {
     // CSV column "cost_chf" actually contains CHF per µL (same values as old "chf/ul" column)
     const chfPerUl = parseNum(row.cost_chf);
     const costChf = chfPerUl * volOnArrival;
-    const currentVolume = parseNum(row.current_vol) || volOnArrival;
+    const rawCurrent = (row.current_vol ?? '').trim();
+    const currentVolume = rawCurrent === '' ? volOnArrival : parseNum(rawCurrent);
     const qualityColor = mapQualityColor(row.quality_color);
+    const antibodyCode = row.antibody_code ? parseInt(row.antibody_code, 10) : null;
 
     await pool.query(
       `INSERT INTO antibodies
          (lab_id, tube_number, species, antigen_target, clone, company, order_number,
           lot_number, fluorochrome, processing, status, volume_on_arrival, current_volume,
-          cost_chf, chf_per_ul, quality_color)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)
+          cost_chf, chf_per_ul, quality_color, antibody_code)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17)
        ON CONFLICT (tube_number) DO NOTHING`,
       [
         labId, row.tube_number, row.species, row.antigen_target, row.clone,
         row.company, row.order_number, row.lot_number || null, row.fluorochrome,
         row.processing || null, row.status || null,
-        volOnArrival, currentVolume, costChf, chfPerUl, qualityColor
+        volOnArrival, currentVolume, costChf, chfPerUl, qualityColor, antibodyCode
       ]
     );
     abCount++;

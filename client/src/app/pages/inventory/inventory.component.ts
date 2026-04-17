@@ -13,6 +13,7 @@ import { AntibodyService } from '../../core/services/antibody.service';
 import { Antibody } from '../../core/models/antibody.model';
 import { AntibodyFormDialogComponent } from './antibody-form-dialog.component';
 import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/confirm-dialog.component';
+import { QualityLegendComponent } from '../../shared/components/quality-legend/quality-legend.component';
 
 @Component({
   selector: 'app-inventory',
@@ -28,6 +29,7 @@ import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/c
     MatInputModule,
     MatDialogModule,
     MatSnackBarModule,
+    QualityLegendComponent,
   ],
   templateUrl: './inventory.component.html',
   styleUrl: './inventory.component.scss',

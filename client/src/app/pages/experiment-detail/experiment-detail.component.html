@@ -41,6 +41,9 @@
         <button mat-stroked-button (click)="openEdit()">
           <mat-icon>edit</mat-icon> Edit
         </button>
+        <button mat-stroked-button color="warn" (click)="deleteExperiment()">
+          <mat-icon>delete</mat-icon> Delete
+        </button>
         <button mat-flat-button color="warn" (click)="executeExperiment()">
           <mat-icon>play_arrow</mat-icon> Execute Experiment
         </button>
@@ -53,7 +56,7 @@
 <!-- Antibody selector (planning only) -->
 @if (isPlanning) {
 <div class="selector-row">
-  <mat-form-field appearance="outline" class="search-field">
+  <mat-form-field appearance="outline" class="search-field" subscriptSizing="dynamic">
     <mat-label>Add Antibody</mat-label>
     <input matInput [formControl]="searchControl" [matAutocomplete]="auto"
       placeholder="Search by tube, target, clone...">
@@ -73,6 +76,17 @@
       }
     </mat-autocomplete>
   </mat-form-field>
+
+  <mat-form-field appearance="outline" class="import-field" subscriptSizing="dynamic">
+    <mat-label>Bulk import (antibody codes, comma-separated)</mat-label>
+    <input matInput [formControl]="importCodesControl" placeholder="e.g. 1, 3, 12, 27">
+    <mat-icon matSuffix>playlist_add</mat-icon>
+  </mat-form-field>
+  <button mat-flat-button color="primary" class="import-btn"
+    [disabled]="importing || !importCodesControl.value?.trim()"
+    (click)="importByCodes()">
+    <mat-icon>upload</mat-icon> Import
+  </button>
 </div>
 }
 
@@ -101,7 +115,9 @@
 
   <ng-container matColumnDef="lab_name">
     <th mat-header-cell *matHeaderCellDef>Lab</th>
-    <td mat-cell *matCellDef="let row">{{ row.lab_name }}</td>
+    <td mat-cell *matCellDef="let row">
+      {{ row.lab_name }} <strong *ngIf="row.pi_name">({{ row.pi_name }})</strong>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="titration_ratio">

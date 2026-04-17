@@ -1,287 +1,287 @@
-lab_name;tube_number;species;antigen_target;clone;company;order_number;lot_number;fluorochrome;processing;status;volume_on_arrival;cost_chf;quality_color;current_vol
-Experimental Pathology Facility;26E;mouse;iNOS;SP126;Abcam;ab310816;;APC;FFPE;;100;6;ok;63.28
-Experimental Pathology Facility;27E;mouse;CD138 (Syndecan-1);EPR6454;Abcam;ab209584;;PE;FFPE;;100;6.2;no;68.46
-Experimental Pathology Facility;2,80E+01;mouse;B220;RA36B2;Miltenyi;130-118-462;;FITC;FFPE;;200;0.2;good;1.14
-Experimental Pathology Facility;2,80E+02;mouse;B220;RA36B2;Miltenyi;130-118-462;;FITC;FFPE;;200;0.2;good;200
-Experimental Pathology Facility;29E;mouse;F4/80;D2S9R;bioconcept/Cell Signaling;25514SF;;PE (in-house conj);FFPE;;100;13;ok;43.28
-Experimental Pathology Facility;59E;mouse;F4/80;D2S9R;bioconcept/Cell Signaling;25514SF;;FITC (in house conj);FFPE;;100;11;ok;86.75
-Experimental Pathology Facility;30E;mouse;Vimentin;D21H3;bioconcept/Cell Signaling;46173SF;;APC (in-house conj);FFPE;;100;13;good;49.83
-Experimental Pathology Facility;31E;mouse;CD11b;EPR1344;Abcam;ab307387;;AF488;FFPE;;100;6;good;32.67
-Experimental Pathology Facility;32E;mouse;CD11b;EPR1344;Abcam;ab209970;;FITC (in-house conj);FFPE;;100;11.2;good;100
-Experimental Pathology Facility;33E;mouse;Foxp3;FJK-16s;ThermoFischer;12-5773-82;;PE;FFPE;;500;1.1;good;421.26
-Experimental Pathology Facility;34E;mouse;Alpha-smooth muscle actin;REAL650;Miltenyi;130-123-363;;FITC;FFPE;;200;1.3;good;127.47
-Experimental Pathology Facility;35E;mouse;Ly6G;1A8;Miltenyi;130-123-712;;PE;FFPE;;200;0.3;good;115.76
-Experimental Pathology Facility;36E;mouse;CD3;REA641;Miltenyi;130-119-798;;FITC;FFPE;;200;0.2;no;147.5
-Experimental Pathology Facility;53E;mouse;CD3e;APA1/1;Thermo;MA1-10182;;FITC (in house conj);FFPE;;100;6.5;no;78.38
-Experimental Pathology Facility;37E;mouse;pERK1/2;D13.14.4E;bioconcept/Cell Signaling;45899SF;;PE (in-house conj);FFPE;;100;13.4;good;26.51
-Experimental Pathology Facility;57E;mouse;pERK1/2;D13.14.4E;bioconcept/Cell Signaling;4284S;;AF647;FFPE;;100;6.6;good;100
-Experimental Pathology Facility;3,80E+01;mouse;Ki-67;REA183;Miltenyi;130-117-691;;FITC;FFPE;;200;1.1;good;3.55
-Experimental Pathology Facility;3,80E+02;mouse;Ki-67;REA183;Miltenyi;130-117-691;;FITC;FFPE;;200;1.1;good;200
-Experimental Pathology Facility;39E;mouse;MHC II;M5/114.15.2;Miltenyi;130-102-186;;PE;FFPE;;1000;0.1;no;959.9
-Experimental Pathology Facility;40E;mouse;CD31;EPR17259;Abcam;ab305267;;AF488;FFPE;;100;5.7;good;24.34
-Experimental Pathology Facility;41E;mouse;CD31;EPR17259;Abcam;ab225883;;APC (in-house conj);FFPE;;100;11.2;good;99.25
-Experimental Pathology Facility;42E;mouse;NK1.1;PK136;ThermoFischer;MA1-70100;;PE (in-house conj);FFPE;;250;3.6;ok;223.76
-Experimental Pathology Facility;52E;mouse;NK1.1;PK136;Biolegend;108708;;PE;FFPE;;1000;0.2;ok;860.25
-Experimental Pathology Facility;43E;mouse;Epcam;EPR20532-222;Abcam;ab313667;;AF488;FFPE;;100;6;good;59.19
-Experimental Pathology Facility;44E;mouse;Epcam;EPR20532-222;Abcam;ab232539;;APC (in-house conj);FFPE;;100;11.2;good;100
-Experimental Pathology Facility;45E;mouse;E-cadherin;24E_10;bioconcept/Cell Signaling;96743SF;;APC (in-house conj);FFPE;;100;13;good;63.86
-Experimental Pathology Facility;46E;mouse;CD8;EPR21769;Abcam;ab237367;;FITC;FFPE;;100;5.8;no;100
-Experimental Pathology Facility;55E;mouse;CD8a;D8A8Y;BioConcept;28512S;;AF647;FFPE;;100;7;no;68
-Experimental Pathology Facility;47E;mouse;CD44;IM7;Miltenyi;130-102-606;;PE;FFPE;;1000;0.1;good;935.058
-Experimental Pathology Facility;48E;mouse;p21;EPR362;Abcam;ab282187;;AF488;FFPE;;100;6.2;good;73.76
-Experimental Pathology Facility;5,40E+01;mouse;p21;EPR18021;Abcam;AB232512;;FITC (in house conj);FFPE;;100;9.6;good;2.25
-Experimental Pathology Facility;5,40E+02;mouse;p21;EPR18021;Abcam;AB232512;;FITC (in house conj);FFPE;;100;9.6;good;15
-Experimental Pathology Facility;56E;mouse;p21;EPR18021;Abcam;ab237265;;AF647;FFPE;;100;5.9;good;88
-Experimental Pathology Facility;49E;mouse;Fibronectin;EPR19241-46;Abcam;ab237287;;AF647;FFPE;;100;5.7;good;63.19
-Experimental Pathology Facility;50E;mouse;CD4;BLR167J;Thermo;MA5-44519;;APC (in house conj);FFPE;;100;6.2;no;33.75
-Experimental Pathology Facility;51E;mouse;CD20;L26;invitrogen;14-0202-82;;APC (in house conj);FFPE;;100;6.2;no;86.25
-Experimental Pathology Facility;5,80E+01;mouse;CD4;4SM95;Thermo Fischer;14-9766-82;;APC (in house conj);FFPE;;100;7;good;15
-Experimental Pathology Facility;5,80E+02;mouse;CD4;4SM95;Thermo Fischer;14-9766-82;;APC (in house conj);FFPE;;100;7;good;79
-Experimental Pathology Facility;59E;Rabbit;Donkey anti-Rabbit IgG (H+L);polyclonal donkey IgG;Thermo Fischer;A-21206;;AF488;FFPE;;500;1.008;good;498
-Experimental Pathology Facility;60E;mouse;Donkey anti-Mouse IgG (H+L);polyclonal donkey IgG;Thermo Fischer;A-31571;;AF647;FFPE;;500;1.008;good;498
-Experimental Pathology Facility;61E;goat;Donkey anti-Goat IgG (H+L);polyclonal donkey IgG;Thermo Fischer;A-21447;;AF647;FFPE;;500;0.916;good;498
-Experimental Pathology Facility;7E;human;Annexin 1;REA1122;Miltenyi;130-119-352;;FITC;PFA;;200;1.8;not tested;194
-Experimental Pathology Facility;8E;human/mouse;TOM22;REA1185;Miltenyi;130-122-078;;PE;PFA;;200;1.8;not tested;194
-Experimental Pathology Facility;9E;human;CD3;REA1151;Miltenyi;130-120-267;;APC;PFA;;200;1.8;not tested;194
-Experimental Pathology Facility;10E;human;CD163;REA812;Miltenyi;130-112-132;;FITC;PFA;;200;1.8;not tested;194
-Experimental Pathology Facility;11E;human;CD183 (CXCR3);REA232;Miltenyi;130-112-128;;PE;PFA;;200;1.8;not tested;194
-Experimental Pathology Facility;13E;human;CD271 (LNGFR);REAL709;Miltenyi;130-125-053;;PE;PFA;;200;2.2;not tested;176
-Experimental Pathology Facility;15E;human;CD2AP;REA1147;Miltenyi;130-119-791;;PE;PFA;;200;1.8;not tested;194
-Experimental Pathology Facility;16E;human;CD147;REA282;Miltenyi;130-124-221;;FITC;PFA;;200;1.8;not tested;194
-Experimental Pathology Facility;17E;human;CD38;REA671;Miltenyi;130-117-717;;PE;PFA;;200;1.8;not tested;194
-Experimental Pathology Facility;18E;human;Cytokeratin LMW;REA831;Miltenyi;130-112-743;;FITC;PFA;;200;1.8;not tested;194
-Experimental Pathology Facility;20E;human;CD31;REA1028;Miltenyi;130-117-224;;FITC;PFA;;200;1.8;not tested;194
-Experimental Pathology Facility;21E;human;CD20;REA1087;Miltenyi;130-118-293;;PE;PFA;;200;1.8;not tested;194
-Experimental Pathology Facility;22E;human;CD45RA;REA562;Miltenyi;130-113-365;;FITC;PFA;;200;1.3;not tested;194
-Experimental Pathology Facility;23E;human/mouse;JNK2 (MAPK9);REA1153;Miltenyi;130-120-271;;PE;PFA;;200;1.8;not tested;194
-Experimental Pathology Facility;24E;human;CD45RB;REA119;Miltenyi;130-100-391;;APC;PFA;;200;1.8;not tested;194
-Experimental Pathology Facility;25E;human;Vimentin;REA409;Miltenyi;130-116-508;;FITC;PFA;;200;1.8;not tested;194
-Experimental Pathology Facility;1E;human;Cytokeratin LMW;REA831;Miltenyi;130-112-743;;FITC;PFA;;200;1.8;not tested;200
-Experimental Pathology Facility;2E;human;CD8;REA734;Miltenyi;130-110-678;;PE;PFA;;200;1.8;not tested;200
-Experimental Pathology Facility;3E;human/mouse;Ki67;REA183;Miltenyi;130-117-691;;FITC;PFA;;200;1.8;not tested;200
-Experimental Pathology Facility;3E;human/mouse;Ki67;REA183;Miltenyi;130-117-691;;FITC;PFA;;200;1.8;not tested;194
-Experimental Pathology Facility;4,00E+00;human;CD45RO;REA611;Miltenyi;130-113-558;;FITC;PFA;;200;1.8;not tested;200
-Experimental Pathology Facility;4,00E+01;human;CD45RO;REA611;Miltenyi;130-113-558;;FITC;PFA;;200;1.8;not tested;194
-Experimental Pathology Facility;5,00E+00;human;HLA-DR_DP_DQ;REA332;Miltenyi;130-120-715;;PE;PFA;;200;1.8;not tested;200
-Experimental Pathology Facility;5,00E+01;human;HLA-DR_DP_DQ;REA332;Miltenyi;130-120-715;;PE;PFA;;200;1.8;not tested;194
-Experimental Pathology Facility;6E;human;CD57_REA769;REA769;Miltenyi;130-111-810;;PE;PFA;;200;1.8;not tested;200
-Gonzalez;1G;human;CD56;CD564;Leica biosystems;NCL-L-CD56-504;;primary;FFPE;;1000;0.6;good;994.5
-Gonzalez;2G;human;Podoplanin;REA446;miltenyi;130-126-165;;APC;FFPE;;200;1.7;good;189
-Gonzalez;3G;human;LY VE-1;REAL1161;miltenyi;130-128-001;;FITC;FFPE;;200;2.1;good;189
-Gonzalez;4G;human;VEGFR-3 (FLT-4);REAL1031;miltenyi;130-127-944;;FITC;FFPE;;200;2.2;good;189
-Gonzalez;5G;human;CD49a (Integrin a1);REA1474;miltenyi;130-138-990;;PE;FFPE;;200;1.7;good;189
-Gonzalez;6G;human;CD158I (KIR2DS4);JJC11.6;miltenyi;130-126-360;;PE;FFPE;;200;1.7;good;189
-Gonzalez;7G;human;GranzymeB;REA1399;miltenyi;130-136-373;;PE;FFPE;;200;1.5;good;135
-Rossi;1R0;mouse;CD5;EPR26533-75;Abcam;AB314468-1001;;AF647;FFPE;;100;5.6;good;0
-Rossi;1R1;mouse;CD5;EPR26533-75;Abcam;AB314468-1001;;AF647;FFPE;;100;5.6;good;47
-Rossi;2R;mouse;IgM;E8M1B;BioConcept;49314SF;;FITC (in house conj);FFPE;;100;12.2;ok;93.82
-Rossi;3R0;mouse;CD23 ;Polyclonal rabbit;Thermo Fischer;PA5-79242;;FITC (in house conj);FFPE;;100;8.3;ok;0
-Rossi;3R1;mouse;CD23 ;Polyclonal rabbit;Thermo Fischer;PA5-79242;;FITC (in house conj);FFPE;;100;8.3;ok;100
-Rossi;4R;mouse;IgD ;11-26c ;Thermo Fischer;12-5993-82;;PE;FFPE;;500;0.5;no;467
-Rossi;5R0;mouse;CD21;SP186;Abcam;AB306326;;APC;FFPE;;100;4.7;good;17.75
-Rossi;5R1;mouse;CD21;SP186;Abcam;AB306326;;APC;FFPE;;100;4.7;good;68
-Rossi;6R0;mouse;MadCAM1;EPR27223-58;Abcam;AB318244;;AF647;FFPE;;100;5.4;ok;0
-Rossi;6R1;mouse;MadCAM1;EPR27223-58;Abcam;AB318244;;AF647;FFPE;;100;5.4;ok;33.75
-Rossi;7R;mouse;CD98;EPR27111-83;Abcam;AB317482;;APC;FFPE;;100;5.4;no;78
-Rossi;8R;mouse;TLR9;26C593.2;Abcam;AB134368;;APC (in-house conj);FFPE;;100;6.3;good;70.07
-Rossi;9R;mouse;DLL1;Rabbit Polyclonal;Abcam;AB10554;;APC (in-house conj);FFPE;;100;7;good;70.2
-Rossi;10R;mouse;EDG3/S1P3;EPR4541(2);Abcam;AB318370;;PE;FFPE;;100;5.4;ok;51.13
-Rossi;11R;mouse/human;CD27;Rabbit Polyclonal;Abcam;AB175403;;primary;FFPE;;100;7.6;no;95.89
-Rossi;12R;mouse;CD1d;1B1;BD pharm;553846;;PE;FFPE;;500;0.3;no;489
-Rossi;13R;mouse;PAX5;D7H5X;Cell Signaling;65895S;;AF488;FFPE;;100;6.2;good;81.42
-Rossi;14R;mouse;BAFF;2P6I3;Thermo Fischer;MA5-58152;;APC (in-house conj);FFPE;;100;7.1;no;93.13
-Rossi;15R;mouse;TACI;8F10;Stemcell;60116PE.1;;PE;FFPE;;250;0.5;no;239
-Rossi;16R;mouse;IgG;goat anti-mouse IgG;LuBioScience;AI-9200-1.5;;FITC (in house conj);FFPE;;100;5.3;no;78
-Rossi;17R;mouse;Bcl6;7D1;Abcam;AB252245;;APC (in-house conj);FFPE;;100;9.4;no;47
-Rossi;18R0;mouse;Marco;EPR22944-64;Abcam;AB319578;;AF488;FFPE;;100;5.2;good;0
-Rossi;18R1;mouse;Marco;EPR22944-64;Abcam;AB319578;;AF488;FFPE;;100;5.2;good;79
-Rossi;19R0;mouse;Signr1;EPR27427-87;Abcam;AB319018;;AF488;FFPE;;100;5.2;good;36
-Rossi;19R1;mouse;Signr1;EPR27427-87;Abcam;AB319018;;AF488;FFPE;;100;5.2;good;84
-Rossi;20R;mouse;CD169;EPR27102-11;Abcam;AB317479;;AF488;FFPE;;100;5.2;ok;62.25
-Rossi;21R0;mouse;CD68;RM1031;Abcam;AB303566;;FITC (in house conj);FFPE;;100;9.4;good;0
-Rossi;21R1;mouse;CD68;RM1031;Abcam;AB303566;;FITC (in house conj);FFPE;;100;9.4;good;72
-Rossi;22R0;mouse;CD3e;E4T1B;BioConcept;86315S;;AF647;FFPE;;100;6.2;good;0
-Rossi;22R1;mouse;CD3e;E4T1B;BioConcept;86315S;;AF647;FFPE;;100;6.2;good;15
-Rossi;22R2;mouse;CD3e;E4T1B;BioConcept;86315S;;AF647;FFPE;;100;6.2;good;100
-Rossi;23R0;mouse;IRF-4;E8H3S;BioConcept;52410S;;PE;FFPE;;100;6.2;good;0
-Rossi;23R1;mouse;IRF-4;E8H3S;BioConcept;52410S;;PE;FFPE;;100;6.2;good;68
-Rossi;23R2;mouse;IRF-4;E8H3S;BioConcept;52410S;;PE;FFPE;;100;6.2;good;100
-Rossi;24R;mouse;KLF2;E7K8Y;BioConcept;51221S;;FITC (in house conj);FFPE;;100;9.2;no;47
-Rossi;25R;mouse;Notch2;Polyclonal rabbit;Abcam;ab8926;;primary;FFPE;;200;3;good;199.45
-Rossi;26R;mouse;CD79a;IGA/1790R;LifeTechnologies;973-RBM10-P1;;APC (in-house conj);FFPE;;500;1.8;no;478
-Rossi;27R0;mouse;CD8;D4W2Z;BioConcept;60168SF;;APC (in-house conj);FFPE;;100;11.3;good;0
-Rossi;27R1;mouse;CD8;D4W2Z;BioConcept;60168SF;;AF647 (in-house conj);FFPE;;100;11.3;good;36
-Rossi;27R2;mouse;CD8;D4W2Z;BioConcept;60168SF;;APC (in-house conj);FFPE;;100;11.3;good;100?
-Rossi;28R0;mouse;CD11c;D1V9Y;Cell Signaling;88204S;;AF647;FFPE;;100;6.2;good;6
-Rossi;28R1;mouse;CD11c;D1V9Y;Cell Signaling;88204S;;AF647;FFPE;;100;6.2;good;100
-Rossi;29R;mouse;CD138;281-2;BD pharm;553712;;APC (in-house conj);FFPE;;100;4;good;70.75
-Rossi;30R;mouse;Notch2;D76A6;Cell Signaling;70948S;;AF488;FFPE;;100;6.2;no;94.75
-Rossi;31R;mouse;BCL2;EPR17509;Abcam;ab219608;;FITC (in house conj);FFPE;;100;10;no;58
-Rossi;32R;mouse;c-Myc;Y69;Abcam;ab190560;;AF647;FFPE;;100;6.7;good;0
-Rossi;33R;mouse;IgG;polyclonal goat IgG;Thermo Fischer;31981;;APC;FFPE;;500;1;good;373
-Rossi;34R;mouse;IgM;polyclonal goat IgG;Thermo Fischer;A-21238;;AF647;FFPE;;250;1.4;good;193.58
-Rossi;35R;mouse;c-Myc;Y69;Abcam;AB201807-1001;;APC (in-house conj);FFPE;;100;11;good;89.5
-Baggiolini;1B;human;beta-Tubulin 3;REA1152;Miltenyi;130-120-264;;FITC;FFPE;;200;1.2;good;189
-Baggiolini;2B;human;GAD65;REAL1083;Miltenyi;130-129-276;;PE;FFPE;;200;2.1;no;178
-Baggiolini;3B;human/mouse;NeuN;REA1131;Miltenyi;130-119-492;;FITC;FFPE;;200;1.2;good;161.75
-Baggiolini;4B;human;Synaptotagmin;REAL1459;Miltenyi;130-132-781;;APC;FFPE;;200;2.1;no;178
-Baggiolini;5B;human/mouse;S100B;REAL1328;Miltenyi;130-130-619;;PE;FFPE;;200;1.8;good;194.5
-Baggiolini;6B;human;CD44;REA690;Miltenyi;130-113-341;;FITC;FFPE;;200;1.2;good;189
-Baggiolini;7B;human;MAP2;REAL1048;Miltenyi;130-128-142;;PE;FFPE;;200;2.1;good;189
-Baggiolini;8B;human;Ki-67;REA183;Miltenyi;130-117-691;;FITC;FFPE;;200;1.2;good;189
-Baggiolini;9B;human;MART-1;REA1093;Miltenyi;130-118-609;;PE;FFPE;;200;1.5;good;189
-Baggiolini;10B;human/mouse;Synapsin-1;REA1125;Miltenyi;130-119-358;;FITC;FFPE;;200;1.2;good;134.5
-Baggiolini;11B;human;VEGF;REAL1004;Miltenyi;130-127-122;;PE;FFPE;;200;2.1;no;178
-Baggiolini;12B;human;Melanocyte PMEL;REA927;Miltenyi;130-115-472;;FITC;FFPE;;200;1.2;good;189
-Baggiolini;13B;human;Desmin;REA1134;Miltenyi;130-119-490;;PE;FFPE;;200;1.5;ok;189
-Baggiolini;14B;human/mouse;Neurofilament;REA1127;Miltenyi;130-119-495;;FITC;FFPE;;200;1.2;good;146
-Baggiolini;15B;human;TOM22;REA1185;Miltenyi;130-122-079;;APC;FFPE;;200;1.5;good;189
-Baggiolini;16B;human;Sox2;REA320;Miltenyi;130-121-053;;PE;FFPE;;200;1.4;good;189
-Baggiolini;17B;human/mouse;Synaptophysin;REA1143;Miltenyi;130-119-724;;FITC;FFPE;;200;1.2;ok;156
-Baggiolini;18B;human;GFAP;REAL735;Miltenyi;130-125-681;;PE;FFPE;;200;2.1;good;166
-Baggiolini;19B;human;Vimentin;REA409;Miltenyi;130-118-361;;APC;FFPE;;200;1.4;good;189
-Baggiolini;20B;human/mouse;SOX10;EPR4007;Abcam;ab305382;;PE;FFPE;;100;5.6;good;73
-Baggiolini;21B;human;PSD95 pdz domain;108E10_;SYSY antibodies;124011;;APC (in house conj);FFPE;;100;7.8;good;10
-Alimonti;1A;mouse;CD20;Goat polyclonal;Abcam;AB194970-1001;;FITC (in house conj);FFPE;;100;6.9;no;68
-Alimonti;2A;mouse;CD19 ;EPR23174-145;Abcam;ab245235;;primary;FFPE;;20;Free;not tested;20
-Alimonti;3A;mouse;Microtubule Associated Protein Tau 13;T49;Sigma Aldrich;ZMS1137-4X25UL;;APC (in-house conj);FFPE;;100;7.1;good;79
-Alimonti;4A;mouse;Ubiquitin C-Terminal Hydrolase L1 (PGP9.5);13C4 / I3C4;abcam;ab8189;;APC (in-house conj);FFPE;;100;8.7;no;89
-Alimonti;5A;mouse;CHRNA 1 (Cholinergic Receptor_Nicotinic_Alpha Polypeptide 1 (Muscle));Rabbit polyclonal;Proteintech Europe;10613-1-AP;;APC (in-house conj);FFPE;;100;7.1;not tested;78
-Alimonti;6A;mouse;Neural Cell Adhesion Molecule 1 - NCAM (CD56);EPR21827;Abcam;ab302694;;AF647;FFPE;;100;6.7;good;68
-Alimonti;7A;mouse;PDGRa (Platelet Derived Growth Factor Receptor alpha);Goat polyclonal;Biotechne;AF1062;;APC (in-house conj);FFPE;;100;10.1;good;78
-Alimonti;8A;mouse;CD4;D7D2Z;BioConcept;25229T;;primary;FFPE;;20;11.8;no;20
-Alimonti;44A;mouse;CD4;D7D2Z;BioConcept;27520;;FITC (in-house conj);FFPE;;100;11.3;no;57
-Alimonti;9A;mouse;phospho-Histone H2A.X (Ser139);2.00E+04;BioConcept;5763S;;PE;FFPE;;100;7.4;good;100
-Alimonti;10A;mouse;Nectin 2;EPR6717;Abcam;AB237121-1004;;PE;FFPE;;100;5.9;good;58
-Alimonti;11A;human;FOXP3;REA1253;Miltenyi;130-125-580;;APC;FFPE;;200;1.5;not tested;200
-Alimonti;12A;human;CD3;REA1151;Miltenyi;130-120-269;;APC;FFPE;;200;1.5;good;156
-Alimonti;13A;human/mouse;PARP1;EPR18461;Abcam;ab311131;;AF647;FFPE;;100;6.6;ok;68.5
-Alimonti;14A;human;53BP1;REAL 1211;Miltenyi;130-130-617;;PE;FFPE;;200;2.2;not tested;188
-Alimonti;15A;human/mouse/rat;PCNA;REA858;Miltenyi;130-114-511;;FITC;FFPE;;200;1.2;good;0
-Alimonti;16A;mouse;HB9/HLXB9/MNX1;Rabbit polyclonal;Abcam;AB92606-1001;;APC (in-house conj);FFPE;;100;8.5;ok;89
-Alimonti;17A;mouse;TRPV1;EPR25057-67;Abcam;AB313673;;AF647;FFPE;;100;6.6;no;89
-Alimonti;18A;Human (maybe mouse?);Anti-Choline Acetyltransferase;EPR13024(B);Abcam;AB192466-1002;;AF647;FFPE;;100;6.6;good;92
-Alimonti;19A;mouse;Neurofilament/NF-L;EPR22035-112;Abcam;ab307394;;AF488;FFPE;;100;6.6;not tested;100
-Alimonti;20A;mouse;BRN3A;EPR23257-285;Abcam;ab300744;;AF647;FFPE;;100;6.4;ok;89
-Alimonti;21A;mouse;SLC18A3;Rabbit polyclonal;LuBioScience GmbH;A16068-100ul;;FITC (in-house conj);FFPE;;100;6.9;ok;94.5
-Alimonti;22A;mouse;CD11c;EPR21826;Abcam;ab240558;;APC (in-house conj);FFPE;;100;9.3;no;47
-Alimonti;23A;mouse/human;CD3 ;SP162;Abcam;AB245731;;FITC (in-house conj);FFPE;;100;8.6;no;58
-Alimonti;24A;mouse;MHC1;R1-21.2;Abcam;ab281902;;primary;FFPE;;200;2.5;good;179
-Alimonti;25A;mouse;MSH2;EPR21017-2;Abcam;ab228325;;APC (in-house conj);FFPE;;100;9.3;good;58
-Alimonti;26A;mouse;PTEN;EPR9941-2;Abcam;ab271924;;primary;FFPE;;100;9.3;not tested;100
-Alimonti;27A;mouse;p27 KIP 1;Y236];Abcam;AB310920;;PE;FFPE;;100;5.6;good;25
-Alimonti;28A0;mouse;CDKN2A/p16INK4a;PABLO33B;Abcam;AB241543;;FITC (in-house conj);FFPE;;100;6.5;ok;37
-Alimonti;28A1;mouse;CDKN2A/p16INK4a;PABLO33B;Abcam;AB241543;;FITC (in-house conj);FFPE;;100;6.5;ok;100
-Alimonti;29A;mouse;PAI1;EPR21850-262;Abcam;AB317605;;APC (in-house conj);FFPE;;100;9.6;good;46
-Alimonti;30A;human;TET2 Recombinant Superclonal (C-terminal);7HCLC;Thermo;712150;;FITC (in-house conj);FFPE;;200;5.8;not tested;200
-Alimonti;31A;human;TET2 (N-terminal);C-7;Santa Cruz;sc-398535 PE;;PE;FFPE;;1000;0.5;not tested;1000
-Alimonti;32A;human;TET2 (N-terminal2);GT649;Thermo;MA5-27838;;APC (in-house conj);FFPE;;100;10;not tested;100
-Alimonti;33A;mouse;NCR1;EPR23097-35;Abcam;ab267792;;APC (in-house conj);FFPE;;100;11.2;not tested;79
-Alimonti;34A;mouse;Ly6G;REA526 | 1A8;Miltenyi;130-123-780;;PE;PFA;;200;0.4;good;116
-Alimonti;35A;mouse;CD101;Moushi101;Thermo Fisher;12-1011-82;;PE;PFA;;500;0.8;not tested;479
-Alimonti;36A;mouse;Gr-1;REA810 | RB6-8C5;Miltenyi;130-112-306;;PE;PFA;;200;0.4;good;157
-Alimonti;37A;mouse;CD73;REA778 | TY/11.8;Miltenyi;130-111-517;;PE;PFA;;200;0.5;not tested;179
-Alimonti;38A;mouse;Anti-Glucose Transporter GLUT1 antibody [SP168];SP168;Abcam;ab243915;;APC (in-house conj);PFA;;100;11.2;not tested;79
-Alimonti;39A;mouse;DcTRAIL-R1;mDcR1-3;Biolegend;133804;;PE;PFA;;500;0.5;not tested;479
-Alimonti;40A;mouse;Histone H3;RM1001;Abcam;ab281584;;APC (in-house conj);PFA;;80;5;not tested;56.38
-Alimonti;41A;mouse;CXCR2;242216;R and D;MAB2164;;primary;FFPE;;25;10;good;0
-Alimonti;42A;human;CLEC4F;goat polyclonal;BioTechne;AF2784-SP;;primary;FFPE;;25;10.6;good;22
-Alimonti;43A;mouse;CD45;D3F8Q;Cell Signaling;81143S;;AF647;FFPE;;100;7;good;79
-Calcinotto;1C0;human;CD279 (PD1);PD1.3.1.3;Miltenyi;130-117-694;;APC;FFPE;;60;2.3;ok;0
-Calcinotto;1C1;human;CD279 (PD1);PD1.3.1.3;Miltenyi;130-117-694;;APC;FFPE;;200;1.8;ok;189
-Calcinotto;2C;human;LOX1;LOX1;BioLegend;358604;;PE;FFPE;;100;2.9;good;79.25
-Calcinotto;3C;human;H2AX pS139;REA502;Miltenyi;130-125-860;;PE;FFPE;;200;1.7;good;97.25
-Calcinotto;4C0;human;CD45;5B1;Miltenyi;130-113-114;;APC;FFPE;;60;2;no;0
-Calcinotto;4C1;human;CD45;5B1;Miltenyi;130-113-114;;APC;FFPE;;200;2;no;200
-Calcinotto;5C;human;CD274 (PD-L1);REA1308;Miltenyi;130-127-907;;PE;FFPE;;200;1.7;good;192.5
-Calcinotto;6C;human;CAIX/CA9;polyclonal goat;R and D systems;AF2188;;APC (in-house conj);FFPE;;100;9.7;good;92.5
-Calcinotto;7C;human;Cleaved PARP (Asp214);F21-852;BD Biosciences;552933;;PE;FFPE;;2000;0.2;no;1950.5
-Calcinotto;8C;human/mouse;Active Caspase-3;C92-605.rMAb;BD Biosciences;570185;;PE;FFPE;;500;0.6;good;384.25
-Calcinotto;9C;human/rat;CCR4;Polyclonal rabbit IgG;abcam;AB216560;;APC (in-house conj);FFPE;;100;8.5;no;41.25
-Calcinotto;10C;human;Cytokeratin 5;REAL899;Miltenyi;130-127-020;;FITC;FFPE;;200;2.1;good;168.5
-Calcinotto;11C;human;CD183 (CXCR3);REAL756;Miltenyi;130-125-780;;APC;FFPE;;200;2.4;good;162.67
-Calcinotto;12C;human;CD31;REA1312;Miltenyi;130-128-769;;PE;FFPE;;200;2.5;good;147
-Calcinotto;13C0;human;CD15;VIMC6;Miltenyi;130-113-482;;APC;FFPE;;60;2.3;good;0
-Calcinotto;13C1;human;CD15;VIMC6;Miltenyi;130-113-482;;APC;FFPE;;200;2.3;good;91.5
-Calcinotto;14C;human;ErbB-2 (HER2);REA1315;Miltenyi;130-127-979;;PE;FFPE;;200;1.7;good;164.64
-Calcinotto;15C;human;CD117;REA787;Miltenyi;130-111-671;;APC;FFPE;;60;2;no;52.5
-Calcinotto;16C;human;FcER1a;CRA1;Miltenyi;130-117-361;;FITC;FFPE;;200;1.4;no;192.5
-Calcinotto;17C0;human;CD182 (CXCR2);REA208;Miltenyi;130-126-167;;PE;FFPE;;60;2.3;good;6
-Calcinotto;17C1;human;CD182 (CXCR2);REA208;Miltenyi;130-126-167;;PE;FFPE;;200;1.9;good;200
-Calcinotto;18C;human;Collagen I;REAL958;Miltenyi;130-127-017;;APC;FFPE;;200;2.4;good;165.5
-Calcinotto;19C0;human;Bcl-2;REA872;Miltenyi;130-114-230;;FITC;FFPE;;60;1.9;good;25.5
-Calcinotto;19C1;human;Bcl-2;REA872;Miltenyi;130-114-230;;FITC;FFPE;;200;1.5;good;200
-Calcinotto;20C;human;IFN-g;REAL788;Miltenyi;130-125-275;;PE;FFPE;;200;2.4;no;137.5
-Calcinotto;21C;human;MPO;REA491;Miltenyi;130-120-062;;PE;FFPE;;200;1.4;ok;139.5
-Calcinotto;22C0;human;p2y14;5A3F1;Invitrogen;MA5-31819;;APC (in-house conj);FFPE;;100;8.1;good;0
-Calcinotto;22C1;human;p2y14;5A3F1;Invitrogen;MA5-31819;;APC (in-house conj);FFPE;;100;8.1;good;67
-Calcinotto;23C;human;Siglec 8;Polyclonal rabbit IgG;abcam;AB198690;;FITC (in house conj);FFPE;;100;8.1;no;96.25
-Calcinotto;24C0;human;CD44;REA690;Miltenyi;130-113-338;;APC;FFPE;;60;2.3;good;5
-Calcinotto;24C1;human;CD44;REA690;Miltenyi;130-113-338;;APC;FFPE;;200;2.3;good;186.5
-Calcinotto;25C0;human;CD66b;REA306;Miltenyi;130-123-694;;FITC;FFPE;;200;0.6;ok;0
-Calcinotto;25C1;human;CD66b;REA306;Miltenyi;130-123-694;;FITC;FFPE;;200;0.6;ok;189.5
-Calcinotto;26C;human;CD4;REA1307;Miltenyi;130-127-906;;PE;FFPE;;200;1.5;good;78.5
-Calcinotto;27C;human;CD8a;REA1024;Miltenyi;130-117-202;;APC;FFPE;;200;1.7;good;136
-Calcinotto;28C;human;HLA-DR;REAL550;Miltenyi;130-123-076;;FITC;FFPE;;200;1.6;good;106.13
-Calcinotto;29C;human;CD11b;REA1321;Miltenyi;130-128-773;;PE;FFPE;;200;1.5;good;114.25
-Calcinotto;30C;human;CD56 (NCAM1);REAL1142;Miltenyi;130-128-467;;FITC;FFPE;;200;2;no;179.25
-Calcinotto;31C;human/mouse;TREM2;237920;R and D systems;FAB17291A;;APC;FFPE;;100;6.5;no;92.5
-Calcinotto;32C;human;CD16;REA1324;Miltenyi;130-128-774;;PE;FFPE;;200;1.5;good;157.5
-Calcinotto;33C;human;CD20 Cytoplasmic;REA1087;Miltenyi;130-118-292;;FITC;FFPE;;200;1.5;good;157.25
-Calcinotto;34C;human;CD14;REA1314;Miltenyi;130-128-771;;PE;FFPE;;200;1.5;good;149.5
-Calcinotto;35C0;human;Ki-67;REA183;Miltenyi;130-117-691;;FITC;FFPE;;60;1.9;good;0
-Calcinotto;35C1;human;Ki-67;REA183;Miltenyi;130-130-859;;FITC;FFPE;;200;1.4;good;115
-Calcinotto;36C;human;CD11c;REA1310;Miltenyi;130-128-346;;PE;FFPE;;200;1.4;good;135.25
-Calcinotto;37C0;human;Cytokeratin 8;REA885;Miltenyi;130-114-455;;FITC;FFPE;;60;2;good;9.75
-Calcinotto;37C1;human;Cytokeratin 8;REA885;Miltenyi;130-114-455;;FITC;FFPE;;200;1.5;good;200
-Calcinotto;38C;human;CD68;REA1306;Miltenyi;130-128-345;;PE;FFPE;;200;1.5;good;149.25
-Calcinotto;39C;human;Cytokeratin 14;REAL831;Miltenyi;130-125-683;;FITC;FFPE;;200;2.1;good;173.75
-Calcinotto;40C;human;beta-Actin;REAL571;Miltenyi;130-122-273;;PE;FFPE;;200;2.4;good;184.5
-Calcinotto;41C;human;Vimentin;REAL1008;Miltenyi;130-127-022;;FITC;FFPE;;200;2;good;168.5
-Calcinotto;42C;human;Cytokeratin 19;REAL822;Miltenyi;130-125-272;;PE;FFPE;;200;2.4;good;159.5
-Calcinotto;43C;human;Cytokeratin HMW;REAL645;Miltenyi;130-125-783;;FITC;FFPE;;200;2.1;good;192.5
-Calcinotto;44C;human;CD326 (EpCAM);REA1311;Miltenyi;130-127-909;;PE;FFPE;;200;1.7;good;174
-Calcinotto;45C;human;Actin (Smooth Muscle);REAL650;Miltenyi;130-123-363;;FITC;FFPE;;200;1.6;good;179
-Calcinotto;46C;human;CCR6;REA190;Miltenyi;130-120-458;;PE;FFPE;;200;1.3;no;154.75
-Calcinotto;47C;human;CD66b;REA306;Miltenyi;130-122-922;;PE;FFPE;;60;2.3;ok;60
-Calcinotto;48C0;human;Pan-Cytokeratin;REA1141;Miltenyi;130-120-094;;FITC;FFPE;;200;1.5;good;26.5
-Calcinotto;48C1;human;Pan-Cytokeratin;REA1141;Miltenyi;130-120-094;;FITC;FFPE;;200;1.5;good;200
-Calcinotto;49C;human;CD324 (E-cadherin);REA1319;Miltenyi;130-135-494;;APC;FFPE;;200;1.8;good;149.5
-Calcinotto;50C0;human;Tryptase;AA1;abcam;ab2378;;FITC (in house conj);FFPE;;100;8;good;0
-Calcinotto;50C1;human;Tryptase;AA1;abcam;ab2378;;FITC (in house conj);FFPE;;100;8;good;0
-Calcinotto;50C2;human;Tryptase;AA1;abcam;ab2378;;FITC (in house conj);FFPE;;100;8;good;0
-Calcinotto;50C3;human;Tryptase;AA1;abcam;ab2378;;FITC (in house conj);FFPE;;100;8;good;62.5
-Calcinotto;51C;human;cKIT (CD117);YR145;abcam;ab32363;;APC (in-house conj);FFPE;;60;10;good;16
-Calcinotto;62C0;human;cKIT (CD117);YR145;abcam;ab216450;;APC (in-house conj);FFPE;;100;11.2;good;0
-Calcinotto;62C1;human;cKIT (CD117);YR145;abcam;ab216450;;APC (in-house conj);FFPE;;100;11.2;good;0
-Calcinotto;62C2;human;cKIT (CD117);YR145;abcam;ab216450;;APC (in-house conj);FFPE;;100;11.2;good;34.5
-Calcinotto;70C;human;CCR4;Polyclonal rabbit IgG;abcam;ab216560-1003;;primary;FFPE;;100;5.5;no;86.5
-Calcinotto;71C;human;IFNg;EPR21704;abcam;ab231301;;FITC (in house conj);FFPE;;100;11.2;ok;14
-Calcinotto;73C;human;TBET;4B10;Santa Cruz;sc-21749 PE;;PE;FFPE;;1000;0.5;good;935
-Calcinotto;74C;human;Granzyme B;EPR8260;abcam;ab225185;;AF647;FFPE;;100;6.3;not tested;100
-Calcinotto;75C;human;Perforin;5B10;abcam;ab89821;1123866-1;primary;FFPE;;500;0.9;good;472.75
-Calcinotto;76C;human;UAP1;Polyclonal rabbit IgG;abcam;ab95949;;primary;FFPE;;50;10;good;39.27
-Calcinotto;77C;human;COX2;(D5H5) Rabbit;cell signaling;12282T;;primary;FFPE;;20;10.9;good;0
-Calcinotto;80C;human;COX2;(D5H5) Rabbit;cell signaling;81707S;;AF647;FFPE;;100;6.3;good;78.5
-Calcinotto;78C;human;IL-1b;(3A6) Mouse;cell signaling;12242T;;primary;FFPE;;20;9.8;good;0
-Calcinotto;81C;human;IL-1b;(3A6) Mouse;cell signaling;27989SF;;APC (in-house conj);FFPE;;100;11.2;good;94.64
-Calcinotto;79C;human;CD45;2B11 and PD7/26;Novus Biologicals;NBP2-34528AF647;;AF647;FFPE;;100;6.3;good;72.5
-Calcinotto;83C;human;cKIT (CD117);YR145;abcam;ab311175;;AF647;FFPE;;100;6.6;not tested;100
-Calcinotto;52C;human;p53;REA609;Miltenyi;130-131-265;;APC;FFPE;;200;1.5;no;98.75
-Calcinotto;53C;human;S100A9/MRP14;REA859;Miltenyi;130-114-516;;PE;FFPE;;200;1.5;good;159.58
-Calcinotto;54C0;human/mouse/rat;PCNA;REA858;Miltenyi;130-114-511;;FITC;FFPE;;200;1.2;good;0
-Calcinotto;54C1;human/mouse/rat;PCNA;REA858;Miltenyi;130-114-511;;FITC;FFPE;;200;1.2;good;145.5
-Calcinotto;55C;human;CD68;REA1306;Miltenyi;130-128-345;;PE;FFPE;;200;1.5;good;155
-Calcinotto;56C;human;Laminin;polyclonal rabbit;bioTechne;NB300-144PE;;PE;FFPE;;100;7.1;no;57
-Calcinotto;82C;human;IL-8 antibody;EPR19358-37;Abcam;ab242515;;primary;FFPE;;100;7.5;not tested;100
-Calcinotto;57C;mouse;Cytokeratin 8;EP1628Y;Abcam;AB209297;;PE;FFPE;;100;5.2;good;57.44
-Calcinotto;58C;mouse;Cytokeratin 5;EP1601Y;Abcam;AB224984;;APC;FFPE;;100;4.7;good;61.3
-Calcinotto;59C;mouse;CD117;polyclonal goat;R and D bioTechne;AF1356;;APC (in-house conj);FFPE;;100;9.9;good;83.5
-Calcinotto;63C;mouse Human;PDGF Receptor alpha;rabbit IgG;Cell Signaling;32641SF;;APC (in-house conj);FFPE;;100;12.2;good;75.25
-Calcinotto;64C;mouse Human;TOP2A;rabbit IgG;ThermoFischer;24641-1-AP;;APC (in-house conj);FFPE;;100;7.1;no;75.25
-Calcinotto;66C;mouse;CD45;D3F8Q;Cell Signaling;81143S;;AF647;FFPE;;100;7;good;17.75
-Calcinotto;67C;mouse Human;Beta Actin;2F1-1;BioLegend;643810;;AF647;FFPE;;200;1.1;no;178.25
-Calcinotto;68C;mouse Human;Collagen 1;EPR24331-53;abcam;ab309248;;AF488;FFPE;;100;6.6;good;53.5
-Calcinotto;69C;human;CD34;REA1164;Miltenyi;130-120-520;;PE;FFPE;;60;1.7;ok;54
-Calcinotto;60C;human;CXCR2 (CD182);REA208;Miltenyi;130-120-133;;APC;FFPE;;60;1.9;good;54
-Calcinotto;61C;human;CD117;REA787;Miltenyi;130-111-670;;PE;FFPE;;60;1.7;no;54
+﻿lab_name;tube_number;species;antigen_target;clone;company;order_number;lot_number;fluorochrome;processing;status;volume_on_arrival;cost_chf;quality_color;current_vol;antibody_code
+Experimental Pathology Facility;26E;mouse;iNOS;SP126;Abcam;ab310816;;APC;FFPE;in use;100;6;ok;63.28;1
+Experimental Pathology Facility;27E;mouse;CD138 (Syndecan-1);EPR6454;Abcam;ab209584;;PE;FFPE;in use;100;6.2;no;68.46;2
+Experimental Pathology Facility;28E01;mouse;B220;RA36B2;Miltenyi;130-118-462;;FITC;FFPE;in use;200;0.2;good;1.14;3
+Experimental Pathology Facility;28E02;mouse;B220;RA36B2;Miltenyi;130-118-462;;FITC;FFPE;backup;200;0.2;good;200;3
+Experimental Pathology Facility;29E;mouse;F4/80;D2S9R;bioconcept/Cell Signaling;25514SF;;PE (in-house conj);FFPE;in use;100;13;ok;43.28;4
+Experimental Pathology Facility;59E;mouse;F4/80;D2S9R;bioconcept/Cell Signaling;25514SF;;FITC (in house conj);FFPE;in use;100;11;ok;86.75;5
+Experimental Pathology Facility;30E;mouse;Vimentin;D21H3;bioconcept/Cell Signaling;46173SF;;APC (in-house conj);FFPE;in use;100;13;good;49.83;6
+Experimental Pathology Facility;31E;mouse;CD11b;EPR1344;Abcam;ab307387;;AF488;FFPE;in use;100;6;good;32.67;7
+Experimental Pathology Facility;32E;mouse;CD11b;EPR1344;Abcam;ab209970;;FITC (in-house conj);FFPE;in use;100;11.2;good;100;8
+Experimental Pathology Facility;33E;mouse;Foxp3;FJK-16s;ThermoFischer;12-5773-82;;PE;FFPE;in use;500;1.1;good;421.26;9
+Experimental Pathology Facility;34E;mouse;Alpha-smooth muscle actin;REAL650;Miltenyi;130-123-363;;FITC;FFPE;in use;200;1.3;good;127.47;10
+Experimental Pathology Facility;35E;mouse;Ly6G;1A8;Miltenyi;130-123-712;;PE;FFPE;in use;200;0.3;good;115.76;11
+Experimental Pathology Facility;36E;mouse;CD3;REA641;Miltenyi;130-119-798;;FITC;FFPE;in use;200;0.2;no;147.5;12
+Experimental Pathology Facility;53E;mouse;CD3e;APA1/1;Thermo;MA1-10182;;FITC (in house conj);FFPE;in use;100;6.5;no;78.38;13
+Experimental Pathology Facility;37E;mouse;pERK1/2;D13.14.4E;bioconcept/Cell Signaling;45899SF;;PE (in-house conj);FFPE;in use;100;13.4;good;26.51;14
+Experimental Pathology Facility;57E;mouse;pERK1/2;D13.14.4E;bioconcept/Cell Signaling;4284S;;AF647;FFPE;in use;100;6.6;good;100;15
+Experimental Pathology Facility;38E01;mouse;Ki-67;REA183;Miltenyi;130-117-691;;FITC;FFPE;in use;200;1.1;good;3.55;16
+Experimental Pathology Facility;38E02;mouse;Ki-67;REA183;Miltenyi;130-117-691;;FITC;FFPE;backup;200;1.1;good;200;16
+Experimental Pathology Facility;39E;mouse;MHC II;M5/114.15.2;Miltenyi;130-102-186;;PE;FFPE;in use;1000;0.1;no;959.9;17
+Experimental Pathology Facility;40E;mouse;CD31;EPR17259;Abcam;ab305267;;AF488;FFPE;in use;100;5.7;good;24.34;18
+Experimental Pathology Facility;41E;mouse;CD31;EPR17259;Abcam;ab225883;;APC (in-house conj);FFPE;in use;100;11.2;good;99.25;19
+Experimental Pathology Facility;42E;mouse;NK1.1;PK136;ThermoFischer;MA1-70100;;PE (in-house conj);FFPE;in use;250;3.6;ok;223.76;20
+Experimental Pathology Facility;52E;mouse;NK1.1;PK136;Biolegend;108708;;PE;FFPE;in use;1000;0.2;ok;860.25;21
+Experimental Pathology Facility;43E;mouse;Epcam;EPR20532-222;Abcam;ab313667;;AF488;FFPE;in use;100;6;good;59.19;22
+Experimental Pathology Facility;44E;mouse;Epcam;EPR20532-222;Abcam;ab232539;;APC (in-house conj);FFPE;in use;100;11.2;good;100;23
+Experimental Pathology Facility;45E;mouse;E-cadherin;24E_10;bioconcept/Cell Signaling;96743SF;;APC (in-house conj);FFPE;in use;100;13;good;63.86;24
+Experimental Pathology Facility;46E;mouse;CD8;EPR21769;Abcam;ab237367;;FITC;FFPE;in use;100;5.8;no;100;25
+Experimental Pathology Facility;55E;mouse;CD8a;D8A8Y;BioConcept;28512S;;AF647;FFPE;in use;100;7;no;68;26
+Experimental Pathology Facility;47E;mouse;CD44;IM7;Miltenyi;130-102-606;;PE;FFPE;in use;1000;0.1;good;935.058;27
+Experimental Pathology Facility;48E;mouse;p21;EPR362;Abcam;ab282187;;AF488;FFPE;in use;100;6.2;good;73.76;28
+Experimental Pathology Facility;54E01;mouse;p21;EPR18021;Abcam;AB232512;;FITC (in house conj);FFPE;none;100;9.6;good;2.25;29
+Experimental Pathology Facility;54E02;mouse;p21;EPR18021;Abcam;AB232512;;FITC (in house conj);FFPE;in use;100;9.6;good;15;29
+Experimental Pathology Facility;56E;mouse;p21;EPR18021;Abcam;ab237265;;AF647;FFPE;in use;100;5.9;good;88;30
+Experimental Pathology Facility;49E;mouse;Fibronectin;EPR19241-46;Abcam;ab237287;;AF647;FFPE;in use;100;5.7;good;63.19;31
+Experimental Pathology Facility;50E;mouse;CD4;BLR167J;Thermo;MA5-44519;;APC (in house conj);FFPE;in use;100;6.2;no;33.75;32
+Experimental Pathology Facility;51E;mouse;CD20;L26;invitrogen;14-0202-82;;APC (in house conj);FFPE;in use;100;6.2;no;86.25;33
+Experimental Pathology Facility;58E01;mouse;CD4;4SM95;Thermo Fischer;14-9766-82;;APC (in house conj);FFPE;none;100;7;good;15;34
+Experimental Pathology Facility;58E02;mouse;CD4;4SM95;Thermo Fischer;14-9766-82;;APC (in house conj);FFPE;in use;100;7;good;79;34
+Experimental Pathology Facility;62E;Rabbit;Donkey anti-Rabbit IgG (H+L);polyclonal donkey IgG;Thermo Fischer;A-21206;;AF488;FFPE;in use;500;1.008;good;498;35
+Experimental Pathology Facility;60E;mouse;Donkey anti-Mouse IgG (H+L);polyclonal donkey IgG;Thermo Fischer;A-31571;;AF647;FFPE;in use;500;1.008;good;498;36
+Experimental Pathology Facility;61E;goat;Donkey anti-Goat IgG (H+L);polyclonal donkey IgG;Thermo Fischer;A-21447;;AF647;FFPE;in use;500;0.916;good;498;37
+Experimental Pathology Facility;7E;human;Annexin 1;REA1122;Miltenyi;130-119-352;;FITC;PFA;in use;200;1.8;not tested;194;38
+Experimental Pathology Facility;8E;human/mouse;TOM22;REA1185;Miltenyi;130-122-078;;PE;PFA;in use;200;1.8;not tested;194;39
+Experimental Pathology Facility;9E;human;CD3;REA1151;Miltenyi;130-120-267;;APC;PFA;in use;200;1.8;not tested;194;40
+Experimental Pathology Facility;10E;human;CD163;REA812;Miltenyi;130-112-132;;FITC;PFA;in use;200;1.8;not tested;194;41
+Experimental Pathology Facility;11E;human;CD183 (CXCR3);REA232;Miltenyi;130-112-128;;PE;PFA;in use;200;1.8;not tested;194;42
+Experimental Pathology Facility;13E;human;CD271 (LNGFR);REAL709;Miltenyi;130-125-053;;PE;PFA;in use;200;2.2;not tested;176;43
+Experimental Pathology Facility;15E;human;CD2AP;REA1147;Miltenyi;130-119-791;;PE;PFA;in use;200;1.8;not tested;194;44
+Experimental Pathology Facility;16E;human;CD147;REA282;Miltenyi;130-124-221;;FITC;PFA;in use;200;1.8;not tested;194;45
+Experimental Pathology Facility;17E;human;CD38;REA671;Miltenyi;130-117-717;;PE;PFA;in use;200;1.8;not tested;194;46
+Experimental Pathology Facility;18E;human;Cytokeratin LMW;REA831;Miltenyi;130-112-743;;FITC;PFA;in use;200;1.8;not tested;194;47
+Experimental Pathology Facility;20E;human;CD31;REA1028;Miltenyi;130-117-224;;FITC;PFA;in use;200;1.8;not tested;194;48
+Experimental Pathology Facility;21E;human;CD20;REA1087;Miltenyi;130-118-293;;PE;PFA;in use;200;1.8;not tested;194;49
+Experimental Pathology Facility;22E;human;CD45RA;REA562;Miltenyi;130-113-365;;FITC;PFA;in use;200;1.3;not tested;194;50
+Experimental Pathology Facility;23E;human/mouse;JNK2 (MAPK9);REA1153;Miltenyi;130-120-271;;PE;PFA;in use;200;1.8;not tested;194;51
+Experimental Pathology Facility;24E;human;CD45RB;REA119;Miltenyi;130-100-391;;APC;PFA;in use;200;1.8;not tested;194;52
+Experimental Pathology Facility;25E;human;Vimentin;REA409;Miltenyi;130-116-508;;FITC;PFA;in use;200;1.8;not tested;194;53
+Experimental Pathology Facility;1E;human;Cytokeratin LMW;REA831;Miltenyi;130-112-743;;FITC;PFA;in use;200;1.8;not tested;200;54
+Experimental Pathology Facility;2E;human;CD8;REA734;Miltenyi;130-110-678;;PE;PFA;in use;200;1.8;not tested;200;55
+Experimental Pathology Facility;3E01;human/mouse;Ki67;REA183;Miltenyi;130-117-691;;FITC;PFA;in use;200;1.8;not tested;200;56
+Experimental Pathology Facility;3E02;human/mouse;Ki67;REA183;Miltenyi;130-117-691;;FITC;PFA;in use;200;1.8;not tested;194;57
+Experimental Pathology Facility;4E01;human;CD45RO;REA611;Miltenyi;130-113-558;;FITC;PFA;backup;200;1.8;not tested;200;58
+Experimental Pathology Facility;4E02;human;CD45RO;REA611;Miltenyi;130-113-558;;FITC;PFA;in use;200;1.8;not tested;194;58
+Experimental Pathology Facility;5E01;human;HLA-DR_DP_DQ;REA332;Miltenyi;130-120-715;;PE;PFA;backup;200;1.8;not tested;200;59
+Experimental Pathology Facility;5E02;human;HLA-DR_DP_DQ;REA332;Miltenyi;130-120-715;;PE;PFA;in use;200;1.8;not tested;194;59
+Experimental Pathology Facility;6E;human;CD57_REA769;REA769;Miltenyi;130-111-810;;PE;PFA;in use;200;1.8;not tested;200;60
+Gonzalez;1G;human;CD56;CD564;Leica biosystems;NCL-L-CD56-504;;primary;FFPE;in use;1000;0.6;good;994.5;61
+Gonzalez;2G;human;Podoplanin;REA446;miltenyi;130-126-165;;APC;FFPE;in use;200;1.7;good;189;62
+Gonzalez;3G;human;LY VE-1;REAL1161;miltenyi;130-128-001;;FITC;FFPE;in use;200;2.1;good;189;63
+Gonzalez;4G;human;VEGFR-3 (FLT-4);REAL1031;miltenyi;130-127-944;;FITC;FFPE;in use;200;2.2;good;189;64
+Gonzalez;5G;human;CD49a (Integrin a1);REA1474;miltenyi;130-138-990;;PE;FFPE;in use;200;1.7;good;189;65
+Gonzalez;6G;human;CD158I (KIR2DS4);JJC11.6;miltenyi;130-126-360;;PE;FFPE;in use;200;1.7;good;189;66
+Gonzalez;7G;human;GranzymeB;REA1399;miltenyi;130-136-373;;PE;FFPE;in use;200;1.5;good;135;67
+Rossi;1R0;mouse;CD5;EPR26533-75;Abcam;AB314468-1001;;AF647;FFPE;none;100;5.6;good;0;68
+Rossi;1R1;mouse;CD5;EPR26533-75;Abcam;AB314468-1001;;AF647;FFPE;in use;100;5.6;good;47;69
+Rossi;2R;mouse;IgM;E8M1B;BioConcept;49314SF;;FITC (in house conj);FFPE;in use;100;12.2;ok;93.82;70
+Rossi;3R0;mouse;CD23 ;Polyclonal rabbit;Thermo Fischer;PA5-79242;;FITC (in house conj);FFPE;none;100;8.3;ok;0;71
+Rossi;3R1;mouse;CD23 ;Polyclonal rabbit;Thermo Fischer;PA5-79242;;FITC (in house conj);FFPE;in use;100;8.3;ok;100;71
+Rossi;4R;mouse;IgD ;11-26c ;Thermo Fischer;12-5993-82;;PE;FFPE;in use;500;0.5;no;467;72
+Rossi;5R0;mouse;CD21;SP186;Abcam;AB306326;;APC;FFPE;none;100;4.7;good;17.75;73
+Rossi;5R1;mouse;CD21;SP186;Abcam;AB306326;;APC;FFPE;in use;100;4.7;good;68;73
+Rossi;6R0;mouse;MadCAM1;EPR27223-58;Abcam;AB318244;;AF647;FFPE;none;100;5.4;ok;0;74
+Rossi;6R1;mouse;MadCAM1;EPR27223-58;Abcam;AB318244;;AF647;FFPE;in use;100;5.4;ok;33.75;74
+Rossi;7R;mouse;CD98;EPR27111-83;Abcam;AB317482;;APC;FFPE;in use;100;5.4;no;78;84
+Rossi;8R;mouse;TLR9;26C593.2;Abcam;AB134368;;APC (in-house conj);FFPE;in use;100;6.3;good;70.07;85
+Rossi;9R;mouse;DLL1;Rabbit Polyclonal;Abcam;AB10554;;APC (in-house conj);FFPE;in use;100;7;good;70.2;86
+Rossi;10R;mouse;EDG3/S1P3;EPR4541(2);Abcam;AB318370;;PE;FFPE;in use;100;5.4;ok;51.13;87
+Rossi;11R;mouse/human;CD27;Rabbit Polyclonal;Abcam;AB175403;;primary;FFPE;in use;100;7.6;no;95.89;88
+Rossi;12R;mouse;CD1d;1B1;BD pharm;553846;;PE;FFPE;in use;500;0.3;no;489;89
+Rossi;13R;mouse;PAX5;D7H5X;Cell Signaling;65895S;;AF488;FFPE;in use;100;6.2;good;81.42;90
+Rossi;14R;mouse;BAFF;2P6I3;Thermo Fischer;MA5-58152;;APC (in-house conj);FFPE;in use;100;7.1;no;93.13;91
+Rossi;15R;mouse;TACI;8F10;Stemcell;60116PE.1;;PE;FFPE;in use;250;0.5;no;239;92
+Rossi;16R;mouse;IgG;goat anti-mouse IgG;LuBioScience;AI-9200-1.5;;FITC (in house conj);FFPE;in use;100;5.3;no;78;93
+Rossi;17R;mouse;Bcl6;7D1;Abcam;AB252245;;APC (in-house conj);FFPE;in use;100;9.4;no;47;94
+Rossi;18R0;mouse;Marco;EPR22944-64;Abcam;AB319578;;AF488;FFPE;none;100;5.2;good;0;95
+Rossi;18R1;mouse;Marco;EPR22944-64;Abcam;AB319578;;AF488;FFPE;in use;100;5.2;good;79;95
+Rossi;19R0;mouse;Signr1;EPR27427-87;Abcam;AB319018;;AF488;FFPE;in use;100;5.2;good;36;96
+Rossi;19R1;mouse;Signr1;EPR27427-87;Abcam;AB319018;;AF488;FFPE;in use;100;5.2;good;84;96
+Rossi;20R;mouse;CD169;EPR27102-11;Abcam;AB317479;;AF488;FFPE;in use;100;5.2;ok;62.25;97
+Rossi;21R0;mouse;CD68;RM1031;Abcam;AB303566;;FITC (in house conj);FFPE;none;100;9.4;good;0;98
+Rossi;21R1;mouse;CD68;RM1031;Abcam;AB303566;;FITC (in house conj);FFPE;in use;100;9.4;good;72;98
+Rossi;22R0;mouse;CD3e;E4T1B;BioConcept;86315S;;AF647;FFPE;none;100;6.2;good;0;99
+Rossi;22R1;mouse;CD3e;E4T1B;BioConcept;86315S;;AF647;FFPE;in use;100;6.2;good;15;99
+Rossi;22R2;mouse;CD3e;E4T1B;BioConcept;86315S;;AF647;FFPE;backup;100;6.2;good;100;99
+Rossi;23R0;mouse;IRF-4;E8H3S;BioConcept;52410S;;PE;FFPE;none;100;6.2;good;0;100
+Rossi;23R1;mouse;IRF-4;E8H3S;BioConcept;52410S;;PE;FFPE;in use;100;6.2;good;68;100
+Rossi;23R2;mouse;IRF-4;E8H3S;BioConcept;52410S;;PE;FFPE;backup;100;6.2;good;100;100
+Rossi;24R;mouse;KLF2;E7K8Y;BioConcept;51221S;;FITC (in house conj);FFPE;in use;100;9.2;no;47;101
+Rossi;25R;mouse;Notch2;Polyclonal rabbit;Abcam;ab8926;;primary;FFPE;in use;200;3;good;199.45;102
+Rossi;26R;mouse;CD79a;IGA/1790R;LifeTechnologies;973-RBM10-P1;;APC (in-house conj);FFPE;in use;500;1.8;no;478;103
+Rossi;27R0;mouse;CD8;D4W2Z;BioConcept;60168SF;;APC (in-house conj);FFPE;none;100;11.3;good;0;104
+Rossi;27R1;mouse;CD8;D4W2Z;BioConcept;60168SF;;AF647 (in-house conj);FFPE;in use;100;11.3;good;36;104
+Rossi;27R2;mouse;CD8;D4W2Z;BioConcept;60168SF;;APC (in-house conj);FFPE;backup;100;11.3;good;100;104
+Rossi;28R0;mouse;CD11c;D1V9Y;Cell Signaling;88204S;;AF647;FFPE;in use;100;6.2;good;6;105
+Rossi;28R1;mouse;CD11c;D1V9Y;Cell Signaling;88204S;;AF647;FFPE;backup;100;6.2;good;100;105
+Rossi;29R;mouse;CD138;281-2;BD pharm;553712;;APC (in-house conj);FFPE;in use;100;4;good;70.75;106
+Rossi;30R;mouse;Notch2;D76A6;Cell Signaling;70948S;;AF488;FFPE;in use;100;6.2;no;94.75;107
+Rossi;31R;mouse;BCL2;EPR17509;Abcam;ab219608;;FITC (in house conj);FFPE;in use;100;10;no;58;108
+Rossi;32R;mouse;c-Myc;Y69;Abcam;ab190560;;AF647;FFPE;in use;100;6.7;good;0;109
+Rossi;33R;mouse;IgG;polyclonal goat IgG;Thermo Fischer;31981;;APC;FFPE;in use;500;1;good;373;110
+Rossi;34R;mouse;IgM;polyclonal goat IgG;Thermo Fischer;A-21238;;AF647;FFPE;in use;250;1.4;good;193.58;111
+Rossi;35R;mouse;c-Myc;Y69;Abcam;AB201807-1001;;APC (in-house conj);FFPE;in use;100;11;good;89.5;112
+Baggiolini;1B;human;beta-Tubulin 3;REA1152;Miltenyi;130-120-264;;FITC;FFPE;in use;200;1.2;good;189;113
+Baggiolini;2B;human;GAD65;REAL1083;Miltenyi;130-129-276;;PE;FFPE;in use;200;2.1;no;178;114
+Baggiolini;3B;human/mouse;NeuN;REA1131;Miltenyi;130-119-492;;FITC;FFPE;in use;200;1.2;good;161.75;115
+Baggiolini;4B;human;Synaptotagmin;REAL1459;Miltenyi;130-132-781;;APC;FFPE;in use;200;2.1;no;178;116
+Baggiolini;5B;human/mouse;S100B;REAL1328;Miltenyi;130-130-619;;PE;FFPE;in use;200;1.8;good;194.5;117
+Baggiolini;6B;human;CD44;REA690;Miltenyi;130-113-341;;FITC;FFPE;in use;200;1.2;good;189;118
+Baggiolini;7B;human;MAP2;REAL1048;Miltenyi;130-128-142;;PE;FFPE;in use;200;2.1;good;189;119
+Baggiolini;8B;human;Ki-67;REA183;Miltenyi;130-117-691;;FITC;FFPE;in use;200;1.2;good;189;120
+Baggiolini;9B;human;MART-1;REA1093;Miltenyi;130-118-609;;PE;FFPE;in use;200;1.5;good;189;121
+Baggiolini;10B;human/mouse;Synapsin-1;REA1125;Miltenyi;130-119-358;;FITC;FFPE;in use;200;1.2;good;134.5;122
+Baggiolini;11B;human;VEGF;REAL1004;Miltenyi;130-127-122;;PE;FFPE;in use;200;2.1;no;178;123
+Baggiolini;12B;human;Melanocyte PMEL;REA927;Miltenyi;130-115-472;;FITC;FFPE;in use;200;1.2;good;189;124
+Baggiolini;13B;human;Desmin;REA1134;Miltenyi;130-119-490;;PE;FFPE;in use;200;1.5;ok;189;125
+Baggiolini;14B;human/mouse;Neurofilament;REA1127;Miltenyi;130-119-495;;FITC;FFPE;in use;200;1.2;good;146;126
+Baggiolini;15B;human;TOM22;REA1185;Miltenyi;130-122-079;;APC;FFPE;in use;200;1.5;good;189;127
+Baggiolini;16B;human;Sox2;REA320;Miltenyi;130-121-053;;PE;FFPE;in use;200;1.4;good;189;128
+Baggiolini;17B;human/mouse;Synaptophysin;REA1143;Miltenyi;130-119-724;;FITC;FFPE;in use;200;1.2;ok;156;129
+Baggiolini;18B;human;GFAP;REAL735;Miltenyi;130-125-681;;PE;FFPE;in use;200;2.1;good;166;130
+Baggiolini;19B;human;Vimentin;REA409;Miltenyi;130-118-361;;APC;FFPE;in use;200;1.4;good;189;131
+Baggiolini;20B;human/mouse;SOX10;EPR4007;Abcam;ab305382;;PE;FFPE;in use;100;5.6;good;73;132
+Baggiolini;21B;human;PSD95 pdz domain;108E10_;SYSY antibodies;124011;;APC (in house conj);FFPE;in use;100;7.8;good;10;133
+Alimonti;1A;mouse;CD20;Goat polyclonal;Abcam;AB194970-1001;;FITC (in house conj);FFPE;in use;100;6.9;no;68;134
+Alimonti;2A;mouse;CD19 ;EPR23174-145;Abcam;ab245235;;primary;FFPE;in use;20;Free;not tested;20;135
+Alimonti;3A;mouse;Microtubule Associated Protein Tau 13;T49;Sigma Aldrich;ZMS1137-4X25UL;;APC (in-house conj);FFPE;in use;100;7.1;good;79;136
+Alimonti;4A;mouse;Ubiquitin C-Terminal Hydrolase L1 (PGP9.5);13C4 / I3C4;abcam;ab8189;;APC (in-house conj);FFPE;in use;100;8.7;no;89;137
+Alimonti;5A;mouse;CHRNA 1 (Cholinergic Receptor_Nicotinic_Alpha Polypeptide 1 (Muscle));Rabbit polyclonal;Proteintech Europe;10613-1-AP;;APC (in-house conj);FFPE;in use;100;7.1;not tested;78;138
+Alimonti;6A;mouse;Neural Cell Adhesion Molecule 1 - NCAM (CD56);EPR21827;Abcam;ab302694;;AF647;FFPE;in use;100;6.7;good;68;139
+Alimonti;7A;mouse;PDGRa (Platelet Derived Growth Factor Receptor alpha);Goat polyclonal;Biotechne;AF1062;;APC (in-house conj);FFPE;in use;100;10.1;good;78;140
+Alimonti;8A;mouse;CD4;D7D2Z;BioConcept;25229T;;primary;FFPE;in use;20;11.8;no;20;141
+Alimonti;44A;mouse;CD4;D7D2Z;BioConcept;27520;;FITC (in-house conj);FFPE;in use;100;11.3;no;57;142
+Alimonti;9A;mouse;phospho-Histone H2A.X (Ser139);20E3;BioConcept;5763S;;PE;FFPE;in use;100;7.4;good;100;143
+Alimonti;10A;mouse;Nectin 2;EPR6717;Abcam;AB237121-1004;;PE;FFPE;in use;100;5.9;good;58;144
+Alimonti;11A;human;FOXP3;REA1253;Miltenyi;130-125-580;;APC;FFPE;in use;200;1.5;not tested;200;145
+Alimonti;12A;human;CD3;REA1151;Miltenyi;130-120-269;;APC;FFPE;in use;200;1.5;good;156;146
+Alimonti;13A;human/mouse;PARP1;EPR18461;Abcam;ab311131;;AF647;FFPE;in use;100;6.6;OK;68.5;147
+Alimonti;14A;human;53BP1;REAL 1211;Miltenyi;130-130-617;;PE;FFPE;in use;200;2.2;not tested;188;148
+Alimonti;15A;human/mouse/rat;PCNA;REA858;Miltenyi;130-114-511;;FITC;FFPE;in use;200;1.2;good;0;149
+Alimonti;16A;mouse;HB9/HLXB9/MNX1;Rabbit polyclonal;Abcam;AB92606-1001;;APC (in-house conj);FFPE;in use;100;8.5;OK;89;150
+Alimonti;17A;mouse;TRPV1;EPR25057-67;Abcam;AB313673;;AF647;FFPE;in use;100;6.6;no;89;151
+Alimonti;18A;Human (maybe mouse?);Anti-Choline Acetyltransferase;EPR13024(B);Abcam;AB192466-1002;;AF647;FFPE;in use;100;6.6;good;92;152
+Alimonti;19A;mouse;Neurofilament/NF-L;EPR22035-112;Abcam;ab307394;;AF488;FFPE;in use;100;6.6;not tested;100;153
+Alimonti;20A;mouse;BRN3A;EPR23257-285;Abcam;ab300744;;AF647;FFPE;in use;100;6.4;OK;89;154
+Alimonti;21A;mouse;SLC18A3;Rabbit polyclonal;LuBioScience GmbH;A16068-100ul;;FITC (in-house conj);FFPE;in use;100;6.9;OK;94.5;155
+Alimonti;22A;mouse;CD11c;EPR21826;Abcam;ab240558;;APC (in-house conj);FFPE;in use;100;9.3;no;47;156
+Alimonti;23A;mouse/human;CD3 ;SP162;Abcam;AB245731;;FITC (in-house conj);FFPE;in use;100;8.6;no;58;157
+Alimonti;24A;mouse;MHC1;R1-21.2;Abcam;ab281902;;primary;FFPE;in use;200;2.5;good;179;158
+Alimonti;25A;mouse;MSH2;EPR21017-2;Abcam;ab228325;;APC (in-house conj);FFPE;in use;100;9.3;good;58;159
+Alimonti;26A;mouse;PTEN;EPR9941-2;Abcam;ab271924;;primary;FFPE;in use;100;9.3;not tested;100;160
+Alimonti;27A;mouse;p27 KIP 1;Y236];Abcam;AB310920;;PE;FFPE;in use;100;5.6;good;25;161
+Alimonti;28A0;mouse;CDKN2A/p16INK4a;PABLO33B;Abcam;AB241543;;FITC (in-house conj);FFPE;in use;100;6.5;OK;37;162
+Alimonti;28A1;mouse;CDKN2A/p16INK4a;PABLO33B;Abcam;AB241543;;FITC (in-house conj);FFPE;backup;100;6.5;OK;100;162
+Alimonti;29A;mouse;PAI1;EPR21850-262;Abcam;AB317605;;APC (in-house conj);FFPE;in use;100;9.6;good;46;163
+Alimonti;30A;human;TET2 Recombinant Superclonal (C-terminal);7HCLC;Thermo;712150;;FITC (in-house conj);FFPE;in use;200;5.8;not tested;200;164
+Alimonti;31A;human;TET2 (N-terminal);C-7;Santa Cruz;sc-398535 PE;;PE;FFPE;in use;1000;0.5;not tested;1000;165
+Alimonti;32A;human;TET2 (N-terminal2);GT649;Thermo;MA5-27838;;APC (in-house conj);FFPE;in use;100;10;not tested;100;166
+Alimonti;33A;mouse;NCR1;EPR23097-35;Abcam;ab267792;;APC (in-house conj);FFPE;in use;100;11.2;not tested;79;167
+Alimonti;34A;mouse;Ly6G;REA526 | 1A8;Miltenyi;130-123-780;;PE;PFA;in use;200;0.4;good;116;168
+Alimonti;35A;mouse;CD101;Moushi101;Thermo Fisher;12-1011-82;;PE;PFA;in use;500;0.8;not tested;479;169
+Alimonti;36A;mouse;Gr-1;REA810 | RB6-8C5;Miltenyi;130-112-306;;PE;PFA;in use;200;0.4;good;157;170
+Alimonti;37A;mouse;CD73;REA778 | TY/11.8;Miltenyi;130-111-517;;PE;PFA;in use;200;0.5;not tested;179;171
+Alimonti;38A;mouse;Anti-Glucose Transporter GLUT1 antibody [SP168];SP168;Abcam;ab243915;;APC (in-house conj);PFA;in use;100;11.2;not tested;79;172
+Alimonti;39A;mouse;DcTRAIL-R1;mDcR1-3;Biolegend;133804;;PE;PFA;in use;500;0.5;not tested;479;173
+Alimonti;40A;mouse;Histone H3;RM1001;Abcam;ab281584;;APC (in-house conj);PFA;in use;80;5;not tested;56.38;174
+Alimonti;41A;mouse;CXCR2;242216;R and D;MAB2164;;primary;FFPE;in use;25;10;good;0;175
+Alimonti;42A;human;CLEC4F;goat polyclonal;BioTechne;AF2784-SP;;primary;FFPE;in use;25;10.6;good;22;176
+Alimonti;43A;mouse;CD45;D3F8Q;Cell Signaling;81143S;;AF647;FFPE;in use;100;7;good;79;177
+Calcinotto;1C0;human;CD279 (PD1);PD1.3.1.3;Miltenyi;130-117-694;;APC;FFPE;none;60;2.3;OK;0;178
+Calcinotto;1C1;human;CD279 (PD1);PD1.3.1.3;Miltenyi;130-117-694;;APC;FFPE;in use;200;1.8;OK;189;178
+Calcinotto;2C;human;LOX1;LOX1;BioLegend;358604;;PE;FFPE;in use;100;2.9;good;79.25;179
+Calcinotto;3C;human;H2AX pS139;REA502;Miltenyi;130-125-860;;PE;FFPE;in use;200;1.7;good;97.25;180
+Calcinotto;4C0;human;CD45;5B1;Miltenyi;130-113-114;;APC;FFPE;none;60;2;no;0;181
+Calcinotto;4C1;human;CD45;5B1;Miltenyi;130-113-114;;APC;FFPE;in use;200;2;no;200;181
+Calcinotto;5C;human;CD274 (PD-L1);REA1308;Miltenyi;130-127-907;;PE;FFPE;in use;200;1.7;good;192.5;182
+Calcinotto;6C;human;CAIX/CA9;polyclonal goat;R and D systems;AF2188;;APC (in-house conj);FFPE;in use;100;9.7;good;92.5;183
+Calcinotto;7C;human;Cleaved PARP (Asp214);F21-852;BD Biosciences;552933;;PE;FFPE;in use;2000;0.2;no;1950.5;184
+Calcinotto;8C;human/mouse;Active Caspase-3;C92-605.rMAb;BD Biosciences;570185;;PE;FFPE;in use;500;0.6;good;384.25;185
+Calcinotto;9C;human/rat;CCR4;Polyclonal rabbit IgG;abcam;AB216560;;APC (in-house conj);FFPE;in use;100;8.5;no;41.25;186
+Calcinotto;10C;human;Cytokeratin 5;REAL899;Miltenyi;130-127-020;;FITC;FFPE;in use;200;2.1;good;168.5;187
+Calcinotto;11C;human;CD183 (CXCR3);REAL756;Miltenyi;130-125-780;;APC;FFPE;in use;200;2.4;good;162.67;188
+Calcinotto;12C;human;CD31;REA1312;Miltenyi;130-128-769;;PE;FFPE;in use;200;2.5;good;147;189
+Calcinotto;13C0;human;CD15;VIMC6;Miltenyi;130-113-482;;APC;FFPE;none;60;2.3;good;0;190
+Calcinotto;13C1;human;CD15;VIMC6;Miltenyi;130-113-482;;APC;FFPE;in use;200;2.3;good;91.5;190
+Calcinotto;14C;human;ErbB-2 (HER2);REA1315;Miltenyi;130-127-979;;PE;FFPE;in use;200;1.7;good;164.64;191
+Calcinotto;15C;human;CD117;REA787;Miltenyi;130-111-671;;APC;FFPE;in use;60;2;no;52.5;192
+Calcinotto;16C;human;FcER1a;CRA1;Miltenyi;130-117-361;;FITC;FFPE;in use;200;1.4;no;192.5;193
+Calcinotto;17C0;human;CD182 (CXCR2);REA208;Miltenyi;130-126-167;;PE;FFPE;in use;60;2.3;good;6;194
+Calcinotto;17C1;human;CD182 (CXCR2);REA208;Miltenyi;130-126-167;;PE;FFPE;backup;200;1.9;good;200;194
+Calcinotto;18C;human;Collagen I;REAL958;Miltenyi;130-127-017;;APC;FFPE;in use;200;2.4;good;165.5;195
+Calcinotto;19C0;human;Bcl-2;REA872;Miltenyi;130-114-230;;FITC;FFPE;in use;60;1.9;good;25.5;196
+Calcinotto;19C1;human;Bcl-2;REA872;Miltenyi;130-114-230;;FITC;FFPE;backup;200;1.5;good;200;197
+Calcinotto;20C;human;IFN-g;REAL788;Miltenyi;130-125-275;;PE;FFPE;in use;200;2.4;no;137.5;198
+Calcinotto;21C;human;MPO;REA491;Miltenyi;130-120-062;;PE;FFPE;in use;200;1.4;OK;139.5;199
+Calcinotto;22C0;human;p2y14;5A3F1;Invitrogen;MA5-31819;;APC (in-house conj);FFPE;none;100;8.1;good;0;200
+Calcinotto;22C1;human;p2y14;5A3F1;Invitrogen;MA5-31819;;APC (in-house conj);FFPE;in use;100;8.1;good;67;200
+Calcinotto;23C;human;Siglec 8;Polyclonal rabbit IgG;abcam;AB198690;;FITC (in house conj);FFPE;in use;100;8.1;no;96.25;201
+Calcinotto;24C0;human;CD44;REA690;Miltenyi;130-113-338;;APC;FFPE;in use;60;2.3;good;5;202
+Calcinotto;24C1;human;CD44;REA690;Miltenyi;130-113-338;;APC;FFPE;backup;200;2.3;good;186.5;202
+Calcinotto;25C0;human;CD66b;REA306;Miltenyi;130-123-694;;FITC;FFPE;none;200;0.6;OK;0;203
+Calcinotto;25C1;human;CD66b;REA306;Miltenyi;130-123-694;;FITC;FFPE;in use;200;0.6;OK;189.5;203
+Calcinotto;26C;human;CD4;REA1307;Miltenyi;130-127-906;;PE;FFPE;in use;200;1.5;good;78.5;204
+Calcinotto;27C;human;CD8a;REA1024;Miltenyi;130-117-202;;APC;FFPE;in use;200;1.7;good;136;205
+Calcinotto;28C;human;HLA-DR;REAL550;Miltenyi;130-123-076;;FITC;FFPE;in use;200;1.6;good;106.13;206
+Calcinotto;29C;human;CD11b;REA1321;Miltenyi;130-128-773;;PE;FFPE;in use;200;1.5;good;114.25;207
+Calcinotto;30C;human;CD56 (NCAM1);REAL1142;Miltenyi;130-128-467;;FITC;FFPE;in use;200;2;no;179.25;208
+Calcinotto;31C;human/mouse;TREM2;237920;R and D systems;FAB17291A;;APC;FFPE;in use;100;6.5;no;92.5;209
+Calcinotto;32C;human;CD16;REA1324;Miltenyi;130-128-774;;PE;FFPE;in use;200;1.5;good;157.5;210
+Calcinotto;33C;human;CD20 Cytoplasmic;REA1087;Miltenyi;130-118-292;;FITC;FFPE;in use;200;1.5;good;157.25;211
+Calcinotto;34C;human;CD14;REA1314;Miltenyi;130-128-771;;PE;FFPE;in use;200;1.5;good;149.5;212
+Calcinotto;35C0;human;Ki-67;REA183;Miltenyi;130-117-691;;FITC;FFPE;none;60;1.9;good;0;213
+Calcinotto;35C1;human;Ki-67;REA183;Miltenyi;130-130-859;;FITC;FFPE;in use;200;1.4;good;115;213
+Calcinotto;36C;human;CD11c;REA1310;Miltenyi;130-128-346;;PE;FFPE;in use;200;1.4;good;135.25;214
+Calcinotto;37C0;human;Cytokeratin 8;REA885;Miltenyi;130-114-455;;FITC;FFPE;in use;60;2;good;9.75;215
+Calcinotto;37C1;human;Cytokeratin 8;REA885;Miltenyi;130-114-455;;FITC;FFPE;backup;200;1.5;good;200;215
+Calcinotto;38C;human;CD68;REA1306;Miltenyi;130-128-345;;PE;FFPE;in use;200;1.5;good;149.25;216
+Calcinotto;39C;human;Cytokeratin 14;REAL831;Miltenyi;130-125-683;;FITC;FFPE;in use;200;2.1;good;173.75;217
+Calcinotto;40C;human;beta-Actin;REAL571;Miltenyi;130-122-273;;PE;FFPE;in use;200;2.4;good;184.5;218
+Calcinotto;41C;human;Vimentin;REAL1008;Miltenyi;130-127-022;;FITC;FFPE;in use;200;2;good;168.5;219
+Calcinotto;42C;human;Cytokeratin 19;REAL822;Miltenyi;130-125-272;;PE;FFPE;in use;200;2.4;good;159.5;220
+Calcinotto;43C;human;Cytokeratin HMW;REAL645;Miltenyi;130-125-783;;FITC;FFPE;in use;200;2.1;good;192.5;221
+Calcinotto;44C;human;CD326 (EpCAM);REA1311;Miltenyi;130-127-909;;PE;FFPE;in use;200;1.7;good;174;222
+Calcinotto;45C;human;Actin (Smooth Muscle);REAL650;Miltenyi;130-123-363;;FITC;FFPE;in use;200;1.6;good;179;223
+Calcinotto;46C;human;CCR6;REA190;Miltenyi;130-120-458;;PE;FFPE;in use;200;1.3;no;154.75;224
+Calcinotto;47C;human;CD66b;REA306;Miltenyi;130-122-922;;PE;FFPE;in use;60;2.3;OK;60;225
+Calcinotto;48C0;human;Pan-Cytokeratin;REA1141;Miltenyi;130-120-094;;FITC;FFPE;in use;200;1.5;good;26.5;226
+Calcinotto;48C1;human;Pan-Cytokeratin;REA1141;Miltenyi;130-120-094;;FITC;FFPE;backup;200;1.5;good;200;226
+Calcinotto;49C;human;CD324 (E-cadherin);REA1319;Miltenyi;130-135-494;;APC;FFPE;in use;200;1.8;good;149.5;227
+Calcinotto;50C0;human;Tryptase;AA1;abcam;ab2378;;FITC (in house conj);FFPE;none;100;8;good;0;228
+Calcinotto;50C1;human;Tryptase;AA1;abcam;ab2378;;FITC (in house conj);FFPE;none;100;8;good;0;228
+Calcinotto;50C2;human;Tryptase;AA1;abcam;ab2378;;FITC (in house conj);FFPE;none;100;8;good;0;228
+Calcinotto;50C3;human;Tryptase;AA1;abcam;ab2378;;FITC (in house conj);FFPE;in use;100;8;good;62.5;228
+Calcinotto;51C;human;cKIT (CD117);YR145;abcam;ab32363;;APC (in-house conj);FFPE;in use;60;10;good;16;229
+Calcinotto;62C0;human;cKIT (CD117);YR145;abcam;ab216450;;APC (in-house conj);FFPE;none;100;11.2;good;0;229
+Calcinotto;62C1;human;cKIT (CD117);YR145;abcam;ab216450;;APC (in-house conj);FFPE;none;100;11.2;good;0;229
+Calcinotto;62C2;human;cKIT (CD117);YR145;abcam;ab216450;;APC (in-house conj);FFPE;in use;100;11.2;good;34.5;229
+Calcinotto;70C;human;CCR4;Polyclonal rabbit IgG;abcam;ab216560-1003;;primary;FFPE;in use;100;5.5;no;86.5;230
+Calcinotto;71C;human;IFNg;EPR21704;abcam;ab231301;;FITC (in house conj);FFPE;in use;100;11.2;OK;14;231
+Calcinotto;73C;human;TBET;4B10;Santa Cruz;sc-21749 PE;;PE;FFPE;in use;1000;0.5;good;935;232
+Calcinotto;74C;human;Granzyme B;EPR8260;abcam;ab225185;;AF647;FFPE;in use;100;6.3;not tested;100;233
+Calcinotto;75C;human;Perforin;5B10;abcam;ab89821;1123866-1;primary;FFPE;in use;500;0.9;good;472.75;234
+Calcinotto;76C;human;UAP1;Polyclonal rabbit IgG;abcam;ab95949;;primary;FFPE;in use;50;10;good;39.27;235
+Calcinotto;77C;human;COX2;(D5H5) Rabbit;cell signaling;12282T;;primary;FFPE;in use;20;10.9;good;0;236
+Calcinotto;80C;human;COX2;(D5H5) Rabbit;cell signaling;81707S;;AF647;FFPE;in use;100;6.3;good;78.5;237
+Calcinotto;78C;human;IL-1b;(3A6) Mouse;cell signaling;12242T;;primary;FFPE;in use;20;9.8;good;0;238
+Calcinotto;81C;human;IL-1b;(3A6) Mouse;cell signaling;27989SF;;APC (in-house conj);FFPE;in use;100;11.2;good;94.64;239
+Calcinotto;79C;human;CD45;2B11 and PD7/26;Novus Biologicals;NBP2-34528AF647;;AF647;FFPE;in use;100;6.3;good;72.5;240
+Calcinotto;83C;human;cKIT (CD117);YR145;abcam;ab311175;;AF647;FFPE;in use;100;6.6;not tested;100;241
+Calcinotto;52C;human;p53;REA609;Miltenyi;130-131-265;;APC;FFPE;in use;200;1.5;no;98.75;242
+Calcinotto;53C;human;S100A9/MRP14;REA859;Miltenyi;130-114-516;;PE;FFPE;in use;200;1.5;good;159.58;243
+Calcinotto;54C0;human/mouse/rat;PCNA;REA858;Miltenyi;130-114-511;;FITC;FFPE;none;200;1.2;good;0;244
+Calcinotto;54C1;human/mouse/rat;PCNA;REA858;Miltenyi;130-114-511;;FITC;FFPE;in use;200;1.2;good;145.5;244
+Calcinotto;55C;human;CD68;REA1306;Miltenyi;130-128-345;;PE;FFPE;in use;200;1.5;good;155;245
+Calcinotto;56C;human;Laminin;polyclonal rabbit;bioTechne;NB300-144PE;;PE;FFPE;in use;100;7.1;no;57;246
+Calcinotto;82C;human;IL-8 antibody;EPR19358-37;Abcam;ab242515;;primary;FFPE;in use;100;7.5;not tested;100;247
+Calcinotto;57C;mouse;Cytokeratin 8;EP1628Y;Abcam;AB209297;;PE;FFPE;in use;100;5.2;good;57.44;248
+Calcinotto;58C;mouse;Cytokeratin 5;EP1601Y;Abcam;AB224984;;APC;FFPE;in use;100;4.7;good;61.3;249
+Calcinotto;59C;mouse;CD117;polyclonal goat;R and D bioTechne;AF1356;;APC (in-house conj);FFPE;in use;100;9.9;good;83.5;250
+Calcinotto;63C;mouse Human;PDGF Receptor alpha;rabbit IgG;Cell Signaling;32641SF;;APC (in-house conj);FFPE;in use;100;12.2;good;75.25;251
+Calcinotto;64C;mouse Human;TOP2A;rabbit IgG;ThermoFischer;24641-1-AP;;APC (in-house conj);FFPE;in use;100;7.1;no;75.25;252
+Calcinotto;66C;mouse;CD45;D3F8Q;Cell Signaling;81143S;;AF647;FFPE;in use;100;7;good;17.75;253
+Calcinotto;67C;mouse Human;Beta Actin;2F1-1;BioLegend;643810;;AF647;FFPE;in use;200;1.1;no;178.25;254
+Calcinotto;68C;mouse Human;Collagen 1;EPR24331-53;abcam;ab309248;;AF488;FFPE;in use;100;6.6;good;53.5;255
+Calcinotto;69C;human;CD34;REA1164;Miltenyi;130-120-520;;PE;FFPE;in use;60;1.7;OK;54;256
+Calcinotto;60C;human;CXCR2 (CD182);REA208;Miltenyi;130-120-133;;APC;FFPE;in use;60;1.9;good;54;257
+Calcinotto;61C;human;CD117;REA787;Miltenyi;130-111-670;;PE;FFPE;in use;60;1.7;no;54;258

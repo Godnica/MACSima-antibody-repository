@@ -59,6 +59,8 @@ export default class ExperimentDetailComponent implements OnInit {
     'titration_ratio', 'ul_per_slide', 'chf_per_ul', 'total_chf'];
 
   searchControl = this.fb.control('');
+  importCodesControl = this.fb.control('');
+  importing = false;
 
   get isPlanning() { return this.experiment?.status === 'planning'; }
   get columns() { return this.isPlanning ? this.displayedColumns : this.displayedColumnsReadonly; }
@@ -153,6 +155,60 @@ export default class ExperimentDetailComponent implements OnInit {
     });
   }
 
+  importByCodes() {
+    if (!this.experiment) return;
+    const raw = (this.importCodesControl.value ?? '').trim();
+    if (!raw) return;
+    const codes = Array.from(new Set(
+      raw.split(/[,\s]+/)
+        .map(s => s.trim())
+        .filter(Boolean)
+        .map(s => parseInt(s, 10))
+        .filter(n => Number.isFinite(n) && n > 0)
+    ));
+    if (codes.length === 0) {
+      this.snackBar.open('No valid codes', 'Close', { duration: 3000 });
+      return;
+    }
+    this.importing = true;
+    this.experimentService.importAntibodies(this.experiment.id, codes).subscribe({
+      next: (res) => {
+        this.importing = false;
+        this.importCodesControl.setValue('');
+        this.load(this.experiment!.id);
+
+        const emptyEntries = Object.entries(res.empty || {});
+        const messageLines: string[] = [];
+        messageLines.push(`Added: ${res.added.length} antibody(ies).`);
+        if (emptyEntries.length) {
+          messageLines.push('');
+          messageLines.push('Finiti (current_volume = 0):');
+          emptyEntries.forEach(([code, tubes]) => {
+            messageLines.push(`  • Code ${code}: ${tubes.join(', ')}`);
+          });
+        }
+        if (res.not_found?.length) {
+          messageLines.push('');
+          messageLines.push(`Not found: ${res.not_found.join(', ')}`);
+        }
+
+        this.dialog.open(ConfirmDialogComponent, {
+          width: '480px',
+          data: {
+            title: 'Import Result',
+            message: messageLines.join('\n'),
+            confirmLabel: 'OK',
+            hideCancel: true,
+          },
+        });
+      },
+      error: (err) => {
+        this.importing = false;
+        this.snackBar.open(err.error?.error || 'Import failed', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
+      },
+    });
+  }
+
   removeAntibody(ea: ExperimentAntibody) {
     this.experimentService.removeAntibody(this.experiment!.id, ea.id).subscribe({
       next: () => this.load(this.experiment!.id),
@@ -171,6 +227,28 @@ export default class ExperimentDetailComponent implements OnInit {
         window.URL.revokeObjectURL(url);
       },
       error: () => this.snackBar.open('Error downloading quote', 'Close', { duration: 5000, panelClass: 'error-snackbar' }),
+    });
+  }
+
+  deleteExperiment() {
+    if (!this.experiment) return;
+    this.dialog.open(ConfirmDialogComponent, {
+      width: '480px',
+      data: {
+        title: 'Delete Experiment',
+        message: `Delete experiment "${this.experiment.name}"? This cannot be undone.`,
+        confirmLabel: 'Delete',
+        confirmColor: 'warn',
+      },
+    }).afterClosed().subscribe(confirmed => {
+      if (!confirmed) return;
+      this.experimentService.delete(this.experiment!.id).subscribe({
+        next: () => {
+          this.snackBar.open('Experiment deleted', 'Close', { duration: 3000 });
+          this.router.navigate(['/experiments']);
+        },
+        error: (err) => this.snackBar.open(err.error?.error || 'Error', 'Close', { duration: 5000, panelClass: 'error-snackbar' }),
+      });
     });
   }
 

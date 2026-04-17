@@ -43,7 +43,9 @@ import { Experiment } from '../../core/models/experiment.model';
           <mat-select formControlName="requesting_lab_id">
             <mat-option [value]="null">— None —</mat-option>
             @for (lab of labs; track lab.id) {
-              <mat-option [value]="lab.id">{{ lab.name }}</mat-option>
+              <mat-option [value]="lab.id">
+                {{ lab.name }} <strong *ngIf="lab.pi_name">({{ lab.pi_name }})</strong>
+              </mat-option>
             }
           </mat-select>
         </mat-form-field>
@@ -63,7 +65,7 @@ import { Experiment } from '../../core/models/experiment.model';
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Experiment Type</mat-label>
+          <mat-label>Tissue Type</mat-label>
           <input matInput formControlName="experiment_type">
         </mat-form-field>
       </form>

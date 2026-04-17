@@ -4,6 +4,7 @@ export interface Antibody {
   id: number;
   lab_id: number;
   lab_name: string;
+  pi_name?: string | null;
   tube_number: string;
   species: string | null;
   antigen_target: string | null;

@@ -45,11 +45,26 @@
 }
 
 .selector-row {
-  margin-bottom: 16px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
 
   .search-field {
-    width: 100%;
+    flex: 1 1 360px;
     max-width: 560px;
+  }
+
+  .import-field {
+    flex: 1 1 280px;
+    max-width: 420px;
+  }
+
+  .import-btn {
+    height: 56px;
+    display: flex;
+    align-items: center;
   }
 }
 

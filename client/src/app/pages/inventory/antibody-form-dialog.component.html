@@ -7,7 +7,9 @@
       <mat-label>Lab</mat-label>
       <mat-select formControlName="lab_id">
         @for (lab of labs; track lab.id) {
-        <mat-option [value]="lab.id">{{ lab.name }}</mat-option>
+        <mat-option [value]="lab.id">
+          {{ lab.name }} <strong *ngIf="lab.pi_name">({{ lab.pi_name }})</strong>
+        </mat-option>
         }
       </mat-select>
       <mat-error *ngIf="form.get('lab_id')?.hasError('required')">Required</mat-error>

@@ -17,6 +17,7 @@ router.get('/',    auth, adminOnly, ctrl.getAll);
 router.post('/',   auth, adminOnly, ...expValidators, ctrl.create);
 router.get('/:id', auth, adminOnly, ctrl.getById);
 router.put('/:id', auth, adminOnly, ...expValidators, ctrl.update);
+router.delete('/:id', auth, adminOnly, ctrl.remove);
 
 router.get('/:id/quote-pdf',    auth, adminOnly, ctrl.quotePdf);
 router.post('/:id/execute',     auth, adminOnly, ctrl.execute);
@@ -29,6 +30,7 @@ router.post('/:id/antibodies',         auth, adminOnly,
   validate,
   ctrl.addAntibody
 );
+router.post('/:id/antibodies/import',  auth, adminOnly, ctrl.importAntibodies);
 router.put('/:id/antibodies/:eaId',    auth, adminOnly,
   body('titration_ratio').isInt({ min: 1 }).withMessage('titration_ratio must be > 0'),
   validate,

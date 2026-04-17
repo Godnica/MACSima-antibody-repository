@@ -7,6 +7,7 @@ export interface ConfirmDialogData {
   message: string;
   confirmLabel?: string;
   confirmColor?: 'primary' | 'warn';
+  hideCancel?: boolean;
 }
 
 @Component({
@@ -15,9 +16,11 @@ export interface ConfirmDialogData {
   imports: [MatDialogModule, MatButtonModule],
   template: `
     <h2 mat-dialog-title>{{ data.title }}</h2>
-    <mat-dialog-content>{{ data.message }}</mat-dialog-content>
+    <mat-dialog-content style="white-space: pre-line;">{{ data.message }}</mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>Cancel</button>
+      @if (!data.hideCancel) {
+        <button mat-button mat-dialog-close>Cancel</button>
+      }
       <button mat-flat-button [color]="data.confirmColor || 'warn'" [mat-dialog-close]="true">
         {{ data.confirmLabel || 'Confirm' }}
       </button>

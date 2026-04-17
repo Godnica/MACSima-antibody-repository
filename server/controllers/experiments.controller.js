@@ -83,6 +83,19 @@ exports.update = async (req, res, next) => {
   } catch (err) { next(err); }
 };
 
+exports.remove = async (req, res, next) => {
+  try {
+    const { rows: [exp] } = await pool.query('SELECT status FROM experiments WHERE id=$1', [req.params.id]);
+    if (!exp) return res.status(404).json({ error: 'Experiment not found' });
+    if (exp.status !== 'planning') {
+      return res.status(400).json({ error: 'Only experiments in planning status can be deleted' });
+    }
+    await pool.query('DELETE FROM experiment_antibodies WHERE experiment_id=$1', [req.params.id]);
+    await pool.query('DELETE FROM experiments WHERE id=$1', [req.params.id]);
+    res.json({ message: 'Experiment deleted' });
+  } catch (err) { next(err); }
+};
+
 // ── Quote PDF ────────────────────────────────────────────────────────────────
 
 exports.quotePdf = async (req, res, next) => {
@@ -233,7 +246,7 @@ exports.getAntibodies = async (req, res, next) => {
       SELECT ea.*,
              a.tube_number, a.antigen_target, a.clone, a.fluorochrome,
              a.chf_per_ul, a.current_volume,
-             l.name AS lab_name
+             l.name AS lab_name, l.pi_name
       FROM experiment_antibodies ea
       JOIN antibodies a ON ea.antibody_id = a.id
       JOIN laboratories l ON a.lab_id = l.id
@@ -265,6 +278,66 @@ exports.addAntibody = async (req, res, next) => {
     `, [req.params.id, antibody_id, titration_ratio, ulSlide, totalUl, totalChf]);
 
     res.status(201).json(rows[0]);
+  } catch (err) { next(err); }
+};
+
+exports.importAntibodies = async (req, res, next) => {
+  try {
+    const { rows: [exp] } = await pool.query('SELECT * FROM experiments WHERE id=$1', [req.params.id]);
+    if (!exp) return res.status(404).json({ error: 'Experiment not found' });
+    if (exp.status !== 'planning') return res.status(400).json({ error: 'Experiment is not in planning status' });
+
+    const codes = Array.isArray(req.body.codes) ? req.body.codes.map(Number).filter(Number.isFinite) : [];
+    if (codes.length === 0) return res.status(400).json({ error: 'No valid antibody codes provided' });
+
+    const titrationRatio = parseInt(req.body.titration_ratio) || 100;
+    const cocktail = parseFloat(exp.total_cocktail_volume);
+    const slides   = parseInt(exp.macswell_slides);
+
+    // Antibodies already in the experiment (to skip duplicates)
+    const { rows: existing } = await pool.query(
+      'SELECT antibody_id FROM experiment_antibodies WHERE experiment_id=$1',
+      [req.params.id]
+    );
+    const existingIds = new Set(existing.map(e => e.antibody_id));
+
+    // All antibodies matching any of the requested codes
+    const { rows: matching } = await pool.query(
+      `SELECT id, antibody_code, tube_number, chf_per_ul, current_volume
+       FROM antibodies WHERE antibody_code = ANY($1::int[])`,
+      [codes]
+    );
+
+    const added = [];
+    const emptyByCode = {};           // { code: [tube_number, ...] } — current_volume = 0
+    const notFoundCodes = [];         // codes with no matching antibody at all
+
+    for (const code of codes) {
+      const forCode = matching.filter(m => m.antibody_code === code);
+      if (forCode.length === 0) { notFoundCodes.push(code); continue; }
+
+      for (const ab of forCode) {
+        if (existingIds.has(ab.id)) continue;
+        if (parseFloat(ab.current_volume) <= 0) {
+          (emptyByCode[code] ||= []).push(ab.tube_number);
+          continue;
+        }
+
+        const ulSlide  = calc.ulPerSlide(cocktail, titrationRatio);
+        const totalUl  = calc.totalUlUsed(ulSlide, slides);
+        const totalChf = calc.totalChf(totalUl, parseFloat(ab.chf_per_ul));
+
+        await pool.query(
+          `INSERT INTO experiment_antibodies
+             (experiment_id, antibody_id, titration_ratio, ul_per_slide, total_ul_used, total_chf)
+           VALUES ($1,$2,$3,$4,$5,$6)`,
+          [req.params.id, ab.id, titrationRatio, ulSlide, totalUl, totalChf]
+        );
+        added.push({ antibody_id: ab.id, tube_number: ab.tube_number, antibody_code: code });
+      }
+    }
+
+    res.json({ added, empty: emptyByCode, not_found: notFoundCodes });
   } catch (err) { next(err); }
 };
 

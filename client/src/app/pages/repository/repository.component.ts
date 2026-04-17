@@ -13,6 +13,7 @@ import { RepositoryService } from '../../core/services/repository.service';
 import { LaboratoryService } from '../../core/services/laboratory.service';
 import { Antibody } from '../../core/models/antibody.model';
 import { Laboratory } from '../../core/models/laboratory.model';
+import { QualityLegendComponent } from '../../shared/components/quality-legend/quality-legend.component';
 
 @Component({
   selector: 'app-repository',
@@ -22,6 +23,7 @@ import { Laboratory } from '../../core/models/laboratory.model';
     MatTableModule, MatSortModule, MatPaginatorModule,
     MatFormFieldModule, MatInputModule, MatSelectModule,
     MatIconModule, MatButtonModule,
+    QualityLegendComponent,
   ],
   templateUrl: './repository.component.html',
   styleUrl: './repository.component.scss',

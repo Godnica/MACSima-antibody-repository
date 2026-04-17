@@ -16,6 +16,7 @@ export class ExperimentService {
   getById(id: number)    { return this.http.get<Experiment>(`${this.base}/${id}`); }
   create(data: Partial<Experiment>)       { return this.http.post<Experiment>(this.base, data); }
   update(id: number, data: Partial<Experiment>) { return this.http.put<Experiment>(`${this.base}/${id}`, data); }
+  delete(id: number) { return this.http.delete<void>(`${this.base}/${id}`); }
 
   downloadQuotePdf(id: number) {
     return this.http.get(`${this.base}/${id}/quote-pdf`, { responseType: 'blob' });
@@ -32,5 +33,12 @@ export class ExperimentService {
   }
   removeAntibody(id: number, eaId: number) {
     return this.http.delete<void>(`${this.base}/${id}/antibodies/${eaId}`);
+  }
+  importAntibodies(id: number, codes: number[], titration_ratio = 100) {
+    return this.http.post<{
+      added: { antibody_id: number; tube_number: string; antibody_code: number }[];
+      empty: Record<string, string[]>;
+      not_found: number[];
+    }>(`${this.base}/${id}/antibodies/import`, { codes, titration_ratio });
   }
 }
