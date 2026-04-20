@@ -59,6 +59,10 @@ export default class InventoryComponent implements OnInit, AfterViewInit {
       if (property === 'tube_number') {
         return this.tubeSortKey(item.tube_number);
       }
+      if (property === 'current_volume' || property === 'chf_per_ul') {
+        const n = parseFloat(item[property]);
+        return Number.isFinite(n) ? n : -Infinity;
+      }
       return item[property];
     };
   }

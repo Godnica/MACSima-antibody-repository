@@ -18,13 +18,16 @@ export interface ExperimentAntibody {
   id: number;
   experiment_id: number;
   antibody_id: number;
+  antibody_code?: number | null;
   tube_number: string;
   antigen_target: string;
   clone: string;
   fluorochrome: string;
+  status?: string | null;
   chf_per_ul: number;
   current_volume: number;
   lab_name: string;
+  pi_name?: string | null;
   titration_ratio: number;
   ul_per_slide: number;
   total_ul_used: number;

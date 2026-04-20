@@ -53,9 +53,9 @@ export default class ExperimentDetailComponent implements OnInit {
   loading = true;
   error: string | null = null;
 
-  displayedColumns = ['tube_number', 'antibody_code', 'antigen_target', 'clone', 'fluorochrome', 'lab_name',
+  displayedColumns = ['tube_number', 'antibody_code', 'antigen_target', 'clone', 'fluorochrome', 'status', 'lab_name',
     'titration_ratio', 'ul_per_slide', 'chf_per_ul', 'total_chf', 'actions'];
-  displayedColumnsReadonly = ['tube_number', 'antibody_code', 'antigen_target', 'clone', 'fluorochrome', 'lab_name',
+  displayedColumnsReadonly = ['tube_number', 'antibody_code', 'antigen_target', 'clone', 'fluorochrome', 'status', 'lab_name',
     'titration_ratio', 'ul_per_slide', 'chf_per_ul', 'total_chf'];
 
   searchControl = this.fb.control('');
@@ -231,6 +231,21 @@ export default class ExperimentDetailComponent implements OnInit {
     });
   }
 
+  downloadExecutionCsv() {
+    if (!this.experiment) return;
+    this.experimentService.downloadExecutionCsv(this.experiment.id).subscribe({
+      next: (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `execution_${this.experiment!.name.replace(/[^a-zA-Z0-9_-]/g, '_')}.csv`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: () => this.snackBar.open('Error downloading execution CSV', 'Close', { duration: 5000, panelClass: 'error-snackbar' }),
+    });
+  }
+
   deleteExperiment() {
     if (!this.experiment) return;
     this.dialog.open(ConfirmDialogComponent, {
@@ -267,6 +282,7 @@ export default class ExperimentDetailComponent implements OnInit {
       this.experimentService.execute(this.experiment!.id).subscribe({
         next: () => {
           this.snackBar.open('Experiment executed successfully', 'Close', { duration: 3000 });
+          this.downloadExecutionCsv();
           this.load(this.experiment!.id);
         },
         error: (err) => {

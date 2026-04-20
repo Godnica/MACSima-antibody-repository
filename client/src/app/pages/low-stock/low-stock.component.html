@@ -27,7 +27,8 @@
 
   <ng-container matColumnDef="lab_name">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Lab</th>
-    <td mat-cell *matCellDef="let row">{{ row.lab_name }}</td>
+    <td mat-cell *matCellDef="let row">{{ row.lab_name }}<strong>{{ row.pi_name ? '(' + row.pi_name + ')' : ''
+        }}</strong></td>
   </ng-container>
 
   <ng-container matColumnDef="current_volume">

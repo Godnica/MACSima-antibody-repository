@@ -222,6 +222,60 @@ exports.execute = async (req, res, next) => {
   }
 };
 
+// ── Execution CSV ─────────────────────────────────────────────────────────────
+
+function csvEscape(val) {
+  if (val === null || val === undefined) return '';
+  const s = String(val);
+  return /[",;\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+}
+
+exports.executionCsv = async (req, res, next) => {
+  try {
+    const { rows: [exp] } = await pool.query(
+      'SELECT * FROM experiments WHERE id=$1', [req.params.id]
+    );
+    if (!exp) return res.status(404).json({ error: 'Experiment not found' });
+
+    const { rows } = await pool.query(`
+      SELECT a.tube_number, a.antibody_code, a.antigen_target, a.species, a.clone,
+             a.fluorochrome, a.status, a.current_volume,
+             l.name AS lab_name, l.pi_name,
+             ea.titration_ratio, ea.ul_per_slide, ea.total_ul_used, ea.total_chf
+      FROM experiment_antibodies ea
+      JOIN antibodies a ON ea.antibody_id = a.id
+      JOIN laboratories l ON a.lab_id = l.id
+      WHERE ea.experiment_id = $1
+      ORDER BY a.tube_number
+    `, [req.params.id]);
+
+    const headers = [
+      'tube_number', 'antibody_code', 'antigen_target', 'species', 'clone',
+      'fluorochrome', 'status', 'lab_name', 'pi_name',
+      'titration_ratio', 'ul_per_slide', 'total_ul_used', 'total_chf',
+      'remaining_volume_ul',
+    ];
+    const lines = [headers.join(';')];
+    for (const r of rows) {
+      lines.push([
+        r.tube_number, r.antibody_code ?? '', r.antigen_target, r.species, r.clone,
+        r.fluorochrome, r.status ?? '', r.lab_name, r.pi_name ?? '',
+        r.titration_ratio,
+        parseFloat(r.ul_per_slide).toFixed(4),
+        parseFloat(r.total_ul_used).toFixed(4),
+        parseFloat(r.total_chf).toFixed(4),
+        parseFloat(r.current_volume).toFixed(2),
+      ].map(csvEscape).join(';'));
+    }
+
+    const safeName = String(exp.name).replace(/[^a-zA-Z0-9_-]/g, '_');
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition',
+      `attachment; filename="execution_${safeName}.csv"`);
+    res.send('\ufeff' + lines.join('\n'));
+  } catch (err) { next(err); }
+};
+
 // ── Mark Billed ───────────────────────────────────────────────────────────────
 
 exports.markBilled = async (req, res, next) => {
@@ -245,7 +299,7 @@ exports.getAntibodies = async (req, res, next) => {
     const { rows } = await pool.query(`
       SELECT ea.*,
              a.tube_number, a.antibody_code, a.antigen_target, a.clone, a.fluorochrome,
-             a.chf_per_ul, a.current_volume,
+             a.chf_per_ul, a.current_volume, a.status,
              l.name AS lab_name, l.pi_name
       FROM experiment_antibodies ea
       JOIN antibodies a ON ea.antibody_id = a.id

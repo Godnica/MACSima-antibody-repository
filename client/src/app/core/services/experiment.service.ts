@@ -21,6 +21,9 @@ export class ExperimentService {
   downloadQuotePdf(id: number) {
     return this.http.get(`${this.base}/${id}/quote-pdf`, { responseType: 'blob' });
   }
+  downloadExecutionCsv(id: number) {
+    return this.http.get(`${this.base}/${id}/execution-csv`, { responseType: 'blob' });
+  }
   execute(id: number)    { return this.http.post<any>(`${this.base}/${id}/execute`, {}); }
   markBilled(id: number) { return this.http.post<Experiment>(`${this.base}/${id}/mark-billed`, {}); }
 

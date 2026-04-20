@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   template: `
     <div class="quality-legend">
-      <span class="legend-title">Quality:</span>
+      <span class="legend-title">Staining Quality:</span>
       <span class="legend-item">
         <span class="legend-swatch quality-row-green"></span>
         <span>Green — Good</span>
@@ -16,7 +16,7 @@ import { Component } from '@angular/core';
       </span>
       <span class="legend-item">
         <span class="legend-swatch quality-row-grey"></span>
-        <span>Grey — Neutral</span>
+        <span>Grey — Not working</span>
       </span>
       <span class="legend-item">
         <span class="legend-swatch quality-row-none"></span>
@@ -60,4 +60,4 @@ import { Component } from '@angular/core';
     .quality-row-none   { background-color: transparent; }
   `],
 })
-export class QualityLegendComponent {}
+export class QualityLegendComponent { }
