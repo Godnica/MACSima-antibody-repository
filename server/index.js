@@ -25,6 +25,7 @@ app.use('/api/auth',         require('./routes/auth.routes'));
 app.use('/api/laboratories', require('./routes/laboratories.routes'));
 app.use('/api/antibodies',   require('./routes/antibodies.routes'));
 app.use('/api/experiments',  require('./routes/experiments.routes'));
+app.use('/api/templates',    require('./routes/templates.routes'));
 app.use('/api/billing',      require('./routes/billing.routes'));
 app.use('/api/repository',   require('./routes/repository.routes'));
 app.use('/api/users',        require('./routes/users.routes'));

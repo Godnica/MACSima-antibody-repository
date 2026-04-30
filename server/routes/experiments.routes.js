@@ -21,6 +21,12 @@ router.delete('/:id', auth, adminOnly, ctrl.remove);
 
 router.get('/:id/quote-pdf',    auth, adminOnly, ctrl.quotePdf);
 router.get('/:id/execution-csv',auth, adminOnly, ctrl.executionCsv);
+router.post('/:id/save-as-template', auth, adminOnly,
+  body('name').trim().notEmpty().withMessage('Name is required'),
+  body('notes').optional({ values: 'falsy' }).trim(),
+  validate,
+  require('../controllers/templates.controller').saveExperimentAsTemplate
+);
 router.post('/:id/execute',     auth, adminOnly, ctrl.execute);
 router.post('/:id/mark-billed', auth, adminOnly, ctrl.markBilled);
 

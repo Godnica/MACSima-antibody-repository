@@ -26,6 +26,9 @@ export class ExperimentService {
   }
   execute(id: number)    { return this.http.post<any>(`${this.base}/${id}/execute`, {}); }
   markBilled(id: number) { return this.http.post<Experiment>(`${this.base}/${id}/mark-billed`, {}); }
+  saveAsTemplate(id: number, data: { name: string; notes?: string | null }) {
+    return this.http.post<{ id: number; name: string }>(`${this.base}/${id}/save-as-template`, data);
+  }
 
   getAntibodies(id: number) { return this.http.get<ExperimentAntibody[]>(`${this.base}/${id}/antibodies`); }
   addAntibody(id: number, antibody_id: number, titration_ratio: number) {

@@ -1,0 +1,62 @@
+<div class="page-header">
+  <h2>Templates</h2>
+  <button mat-flat-button color="primary" (click)="openNew()">
+    <mat-icon>add</mat-icon> New Template
+  </button>
+</div>
+
+<div class="filter-row">
+  <mat-form-field appearance="outline" class="filter-field">
+    <mat-label>Search</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Name, lab...">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+</div>
+
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z1 clickable-rows">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+    <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="requesting_lab_name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Requesting Lab</th>
+    <td mat-cell *matCellDef="let row">{{ row.requesting_lab_name || '—' }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="experiment_type">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+    <td mat-cell *matCellDef="let row">{{ row.experiment_type || '—' }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="antibody_count">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Antibodies</th>
+    <td mat-cell *matCellDef="let row" class="num-cell">{{ row.antibody_count || 0 }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="created_at">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Created</th>
+    <td mat-cell *matCellDef="let row">{{ row.created_at | date:'dd/MM/yyyy' }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let row" class="actions-cell">
+      <button mat-icon-button color="primary" (click)="useTemplate(row, $event)" title="Use Template">
+        <mat-icon>play_arrow</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="deleteTemplate(row, $event)" title="Delete">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="goToDetail(row)"></tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell no-data" [attr.colspan]="displayedColumns.length">No templates found</td>
+  </tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons />

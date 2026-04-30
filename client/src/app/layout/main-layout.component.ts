@@ -18,6 +18,7 @@ interface NavItem {
 const NAV_ITEMS: NavItem[] = [
   { label: 'Inventory',    icon: 'science',       route: '/inventory',    adminOnly: true  },
   { label: 'Experiments',  icon: 'biotech',        route: '/experiments',  adminOnly: true  },
+  { label: 'Templates',    icon: 'bookmark',       route: '/templates',    adminOnly: true  },
   { label: 'Low Stock',    icon: 'warning',        route: '/low-stock',    adminOnly: true  },
   { label: 'Billing',      icon: 'receipt_long',   route: '/billing',      adminOnly: true  },
   { label: 'Laboratories', icon: 'business',       route: '/laboratories', adminOnly: true  },

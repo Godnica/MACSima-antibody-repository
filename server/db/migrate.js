@@ -3,6 +3,7 @@ const path = require('path');
 const pool = require('./pool');
 
 const MIGRATIONS_DIR = path.join(__dirname, '../../migrations');
+const DESTRUCTIVE_SQL_RE = /\b(TRUNCATE|DROP\s+TABLE|DROP\s+SCHEMA)\b/i;
 
 module.exports = async function migrate() {
   const client = await pool.connect();
@@ -29,9 +30,21 @@ module.exports = async function migrate() {
       if (rows.length > 0) continue; // already applied
 
       const sql = fs.readFileSync(path.join(MIGRATIONS_DIR, file), 'utf8');
+      const allowDestructive = process.env.ALLOW_DESTRUCTIVE_MIGRATIONS === 'true';
+      const guardedDestructive = sql.includes('app.allow_destructive_migrations');
+      if (DESTRUCTIVE_SQL_RE.test(sql) && !allowDestructive && !guardedDestructive) {
+        throw new Error(
+          `Refusing to run destructive migration ${file}. ` +
+          'Set ALLOW_DESTRUCTIVE_MIGRATIONS=true only for an intentional local reset.'
+        );
+      }
 
       await client.query('BEGIN');
       try {
+        await client.query(
+          `SELECT set_config('app.allow_destructive_migrations', $1, true)`,
+          [allowDestructive ? 'true' : 'false']
+        );
         await client.query(sql);
         await client.query(
           'INSERT INTO _migrations (filename) VALUES ($1)',

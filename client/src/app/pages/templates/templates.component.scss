@@ -1,0 +1,30 @@
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  h2 { margin: 0; }
+}
+
+.filter-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.filter-field {
+  width: 100%;
+  max-width: 400px;
+}
+
+table { width: 100%; }
+
+.clickable-rows tr.mat-mdc-row {
+  cursor: pointer;
+}
+
+.actions-cell {
+  width: 96px;
+  white-space: nowrap;
+}

@@ -1,0 +1,7 @@
+@use '../experiment-detail/experiment-detail.component.scss';
+
+.notes {
+  margin: 12px 0 0;
+  color: var(--text-secondary);
+  white-space: pre-line;
+}

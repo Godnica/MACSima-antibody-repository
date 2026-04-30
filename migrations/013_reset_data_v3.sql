@@ -1,3 +1,8 @@
--- Reset all data so seed.js re-populates from the CSV with the corrected
--- current_volume handling (explicit 0 in CSV must be preserved as 0).
-TRUNCATE TABLE experiment_antibodies, experiments, antibodies, laboratories, users CASCADE;
+-- Historical local reset migration.
+-- Kept as a no-op so fresh production databases never delete user data.
+DO $$
+BEGIN
+  IF current_setting('app.allow_destructive_migrations', true) = 'true' THEN
+    TRUNCATE TABLE experiment_antibodies, experiments, antibodies, laboratories, users CASCADE;
+  END IF;
+END $$;

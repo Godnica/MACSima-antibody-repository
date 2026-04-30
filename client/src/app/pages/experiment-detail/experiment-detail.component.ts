@@ -10,7 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDividerModule } from '@angular/material/divider';
@@ -129,6 +129,21 @@ export default class ExperimentDetailComponent implements OnInit {
         if (!result) return;
         this.experimentService.update(this.experiment!.id, result).subscribe({
           next: (exp) => { this.experiment = exp; this.load(exp.id); },
+          error: (err) => this.snackBar.open(err.error?.error || 'Error', 'Close', { duration: 5000, panelClass: 'error-snackbar' }),
+        });
+      });
+  }
+
+  saveAsTemplate() {
+    if (!this.experiment) return;
+    this.dialog.open(SaveTemplateDialogComponent, { data: this.experiment, width: '520px' })
+      .afterClosed().subscribe(result => {
+        if (!result || !this.experiment) return;
+        this.experimentService.saveAsTemplate(this.experiment.id, result).subscribe({
+          next: (tpl) => {
+            const ref = this.snackBar.open('Template saved', 'View', { duration: 6000 });
+            ref.onAction().subscribe(() => this.router.navigate(['/templates', tpl.id]));
+          },
           error: (err) => this.snackBar.open(err.error?.error || 'Error', 'Close', { duration: 5000, panelClass: 'error-snackbar' }),
         });
       });
@@ -322,5 +337,50 @@ export default class ExperimentDetailComponent implements OnInit {
       executed_billed: 'Executed – Billed',
     };
     return map[status] ?? status;
+  }
+}
+
+@Component({
+  selector: 'app-save-template-dialog',
+  standalone: true,
+  imports: [
+    CommonModule, ReactiveFormsModule, MatDialogModule,
+    MatFormFieldModule, MatInputModule, MatButtonModule,
+  ],
+  template: `
+    <h2 mat-dialog-title>Save as Template</h2>
+    <mat-dialog-content>
+      <form [formGroup]="form" class="dialog-form">
+        <mat-form-field appearance="outline">
+          <mat-label>Template Name</mat-label>
+          <input matInput formControlName="name">
+          <mat-error *ngIf="form.get('name')?.hasError('required')">Required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Notes</mat-label>
+          <textarea matInput rows="3" formControlName="notes"></textarea>
+        </mat-form-field>
+      </form>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-flat-button color="primary" (click)="onSave()" [disabled]="form.invalid">Save</button>
+    </mat-dialog-actions>
+  `,
+  styles: [`.dialog-form { display: flex; flex-direction: column; gap: 8px; padding-top: 8px; }`],
+})
+export class SaveTemplateDialogComponent {
+  private readonly dialogRef = inject(MatDialogRef<SaveTemplateDialogComponent>);
+  private readonly fb = inject(FormBuilder);
+  private readonly experiment = inject<Experiment>(MAT_DIALOG_DATA);
+
+  form = this.fb.group({
+    name: [`${this.experiment.name} Template`, Validators.required],
+    notes: [''],
+  });
+
+  onSave() {
+    if (this.form.valid) this.dialogRef.close(this.form.value);
   }
 }

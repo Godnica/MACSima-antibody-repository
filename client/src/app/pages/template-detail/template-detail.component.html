@@ -1,6 +1,6 @@
 <div class="back-bar">
-  <button mat-button routerLink="/experiments">
-    <mat-icon>arrow_back</mat-icon> Back to Experiments
+  <button mat-button routerLink="/templates">
+    <mat-icon>arrow_back</mat-icon> Back to Templates
   </button>
 </div>
 
@@ -10,54 +10,42 @@
 <div class="centered error-msg">
   <mat-icon>error_outline</mat-icon>
   <p>{{ error }}</p>
-  <button mat-stroked-button routerLink="/experiments">Back to list</button>
+  <button mat-stroked-button routerLink="/templates">Back to list</button>
 </div>
-} @else if (experiment) {
+} @else if (template) {
 
-<!-- Header card -->
 <mat-card class="header-card">
   <mat-card-content>
     <div class="header-row">
       <div class="header-info">
-        <h2>{{ experiment.name }}</h2>
+        <h2>{{ template.name }}</h2>
         <div class="meta">
-          <span>{{ experiment.date ? (experiment.date | date:'dd/MM/yyyy') : 'No date' }}</span>
-          <span>Lab: {{ experiment.requesting_lab_name || '—' }}</span>
-          <span>Slides: {{ experiment.macswell_slides }}</span>
-          <span>Cocktail: {{ experiment.total_cocktail_volume | number:'1.1-1' }} uL</span>
-          @if (experiment.experiment_type) {
-          <span>Type: {{ experiment.experiment_type }}</span>
+          <span>Lab: {{ template.requesting_lab_name || '—' }}</span>
+          <span>Slides: {{ template.macswell_slides || '—' }}</span>
+          <span>Cocktail: {{ template.total_cocktail_volume ? (template.total_cocktail_volume | number:'1.1-1') + ' uL' : '—' }}</span>
+          @if (template.experiment_type) {
+          <span>Type: {{ template.experiment_type }}</span>
           }
         </div>
+        @if (template.notes) {
+        <p class="notes">{{ template.notes }}</p>
+        }
       </div>
       <div class="header-actions">
-        <span class="status-badge status-{{ experiment.status }}">
-          {{ statusLabel(experiment.status) }}
-        </span>
-        <button mat-stroked-button (click)="downloadQuote()">
-          <mat-icon>description</mat-icon> Download Quote
+        <button mat-flat-button color="primary" (click)="useTemplate()">
+          <mat-icon>play_arrow</mat-icon> Use Template
         </button>
-        <button mat-stroked-button (click)="saveAsTemplate()">
-          <mat-icon>bookmark</mat-icon> Save as Template
-        </button>
-        @if (isPlanning) {
         <button mat-stroked-button (click)="openEdit()">
           <mat-icon>edit</mat-icon> Edit
         </button>
-        <button mat-stroked-button color="warn" (click)="deleteExperiment()">
+        <button mat-stroked-button color="warn" (click)="deleteTemplate()">
           <mat-icon>delete</mat-icon> Delete
         </button>
-        <button mat-flat-button color="warn" (click)="executeExperiment()">
-          <mat-icon>play_arrow</mat-icon> Execute Experiment
-        </button>
-        }
       </div>
     </div>
   </mat-card-content>
 </mat-card>
 
-<!-- Antibody selector (planning only) -->
-@if (isPlanning) {
 <div class="selector-row">
   <mat-form-field appearance="outline" class="search-field" subscriptSizing="dynamic">
     <mat-label>Add Antibody</mat-label>
@@ -83,24 +71,10 @@
       }
     </mat-autocomplete>
   </mat-form-field>
-
-  <mat-form-field appearance="outline" class="import-field" subscriptSizing="dynamic">
-    <mat-label>Bulk import (antibody codes, one per line)</mat-label>
-    <textarea matInput [formControl]="importCodesControl" rows="4"
-      placeholder="Paste a column of antibody codes:&#10;1&#10;3&#10;12&#10;27"></textarea>
-  </mat-form-field>
-  <button mat-flat-button color="primary" class="import-btn"
-    [disabled]="importing || !importCodesControl.value?.trim()"
-    (click)="importByCodes()">
-    <mat-icon>upload</mat-icon> Import
-  </button>
 </div>
-}
 
-<!-- Antibodies table + footer wrapper (ensures equal width) -->
 <div class="table-container mat-elevation-z1">
 <table mat-table [dataSource]="dataSource" matSort>
-
   <ng-container matColumnDef="tube_number">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Tube #</th>
     <td mat-cell *matCellDef="let row">{{ row.tube_number }}</td>
@@ -141,23 +115,9 @@
   <ng-container matColumnDef="titration_ratio">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Titration (1:x)</th>
     <td mat-cell *matCellDef="let row">
-      @if (isPlanning) {
       <input class="titration-input" type="number" min="1" [value]="row.titration_ratio"
         (change)="updateTitration(row, $event)">
-      } @else {
-      1:{{ row.titration_ratio }}
-      }
     </td>
-  </ng-container>
-
-  <ng-container matColumnDef="ul_per_slide">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>uL/slide</th>
-    <td mat-cell *matCellDef="let row" class="num-cell">{{ row.ul_per_slide | number:'1.1-1' }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="total_ul_used">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Total uL</th>
-    <td mat-cell *matCellDef="let row" class="num-cell">{{ row.total_ul_used | number:'1.1-1' }}</td>
   </ng-container>
 
   <ng-container matColumnDef="volume_on_arrival">
@@ -167,20 +127,12 @@
 
   <ng-container matColumnDef="current_volume">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Stock (uL)</th>
-    <td mat-cell *matCellDef="let row" class="num-cell"
-        [class.low-stock-cell]="isInsufficient(row)">
-      {{ row.current_volume | number:'1.1-1' }}
-    </td>
+    <td mat-cell *matCellDef="let row" class="num-cell">{{ row.current_volume | number:'1.1-1' }}</td>
   </ng-container>
 
   <ng-container matColumnDef="chf_per_ul">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>CHF/uL</th>
     <td mat-cell *matCellDef="let row" class="num-cell">{{ row.chf_per_ul | number:'1.2-4' }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="total_chf">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Total CHF</th>
-    <td mat-cell *matCellDef="let row" class="num-cell">{{ row.total_chf | number:'1.2-2' }}</td>
   </ng-container>
 
   <ng-container matColumnDef="actions">
@@ -192,19 +144,12 @@
     </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="columns"></tr>
-  <tr mat-row *matRowDef="let row; columns: columns;" [class.insufficient-volume]="isPlanning && isInsufficient(row)">
-  </tr>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
   <tr class="mat-row" *matNoDataRow>
-    <td class="mat-cell no-data" [attr.colspan]="columns.length">No antibodies added yet</td>
+    <td class="mat-cell no-data" [attr.colspan]="displayedColumns.length">No antibodies added yet</td>
   </tr>
 </table>
-
-<!-- Total cost footer -->
-<div class="total-footer">
-  <span>Total experiment cost</span>
-  <span class="total-value">{{ totalCost | number:'1.2-2' }} CHF</span>
-</div>
 </div>
 }
