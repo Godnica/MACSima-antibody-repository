@@ -8,9 +8,12 @@ const DESTRUCTIVE_SQL_RE = /\b(TRUNCATE|DROP\s+TABLE|DROP\s+SCHEMA)\b/i;
 module.exports = async function migrate() {
   const client = await pool.connect();
   try {
+    await client.query('CREATE SCHEMA IF NOT EXISTS public');
+    await client.query('SET search_path TO public');
+
     // Ensure migrations tracking table exists
     await client.query(`
-      CREATE TABLE IF NOT EXISTS _migrations (
+      CREATE TABLE IF NOT EXISTS public._migrations (
         id SERIAL PRIMARY KEY,
         filename VARCHAR(255) UNIQUE NOT NULL,
         applied_at TIMESTAMPTZ DEFAULT NOW()
@@ -24,7 +27,7 @@ module.exports = async function migrate() {
 
     for (const file of files) {
       const { rows } = await client.query(
-        'SELECT id FROM _migrations WHERE filename = $1',
+        'SELECT id FROM public._migrations WHERE filename = $1',
         [file]
       );
       if (rows.length > 0) continue; // already applied
@@ -45,9 +48,10 @@ module.exports = async function migrate() {
           `SELECT set_config('app.allow_destructive_migrations', $1, true)`,
           [allowDestructive ? 'true' : 'false']
         );
+        await client.query(`SELECT set_config('search_path', 'public', true)`);
         await client.query(sql);
         await client.query(
-          'INSERT INTO _migrations (filename) VALUES ($1)',
+          'INSERT INTO public._migrations (filename) VALUES ($1)',
           [file]
         );
         await client.query('COMMIT');
