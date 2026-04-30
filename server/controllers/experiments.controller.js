@@ -122,6 +122,7 @@ exports.quotePdf = async (req, res, next) => {
 
     const abData = antibodies.map(ab => ({
       tube_number: ab.tube_number,
+      antibody_code: ab.antibody_code != null ? ab.antibody_code : null,
       target: ab.antigen_target,
       clone: ab.clone,
       fluorochrome: ab.fluorochrome,
@@ -299,7 +300,7 @@ exports.getAntibodies = async (req, res, next) => {
     const { rows } = await pool.query(`
       SELECT ea.*,
              a.tube_number, a.antibody_code, a.antigen_target, a.clone, a.fluorochrome,
-             a.chf_per_ul, a.current_volume, a.status,
+             a.chf_per_ul, a.current_volume, a.volume_on_arrival, a.status,
              l.name AS lab_name, l.pi_name
       FROM experiment_antibodies ea
       JOIN antibodies a ON ea.antibody_id = a.id

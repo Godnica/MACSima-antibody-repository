@@ -4,10 +4,10 @@
 > Last updated: 2026-03-26 14:30
 
 ## Summary
-- Total: 68
-- Done: 68
+- Total: 82
+- Done: 73
 - In Progress: 0
-- Pending: 0
+- Pending: 9
 
 ---
 
@@ -159,3 +159,36 @@
 - [x] 15.4 — **Frontend Service**: Create `client/src/app/core/services/user.service.ts` with methods: `getAll()`, `create(data)`, `remove(id)`, `resetPassword(id, newPassword)`. Add `UserAdmin` interface to models.
 - [x] 15.5 — **Frontend Component**: Create `client/src/app/pages/admin-users/admin-users.component.ts|html|scss` (standalone). Table showing all users (username, display name, role, created_at). "Add User" button opens a dialog with form (username, display name, password, role dropdown admin/user). Delete button with confirmation. Reset password button with password input dialog. Wire to UserService.
 - [x] 15.6 — **Navigation & Routing**: Add route `/admin/users` in `app.routes.ts` (lazy-loaded, admin-only guard). Add "User Management" nav item in `main-layout.component.ts` with icon `group` and `adminOnly: true`. Place it after "Laboratories" in the nav list.
+
+
+---
+
+## Phase 16 — Experiment Detail & Billing Enhancements
+
+- [x] 16.1 — **Experiment detail — µL per number column (Frontend)**: In the experiment detail antibodies table (`client/src/app/pages/experiments/experiment-detail/`), add a new calculated column "µL / Number" showing `total_cocktail_volume / titration_ratio` (same as µL per slide but labeled clearly as per-number). Display as read-only alongside the existing per-slide and total µL columns. Update live as titration changes. (§3, §10 CLAUDE.md)
+- [x] 16.2 — **Experiment detail — current_volume column (Frontend)**: In the experiment detail antibodies table, add a read-only column "Stock (µL)" showing the antibody's current inventory volume (`current_volume`). Fetch this from the experiment antibodies API response (ensure `current_volume` is included in `GET /api/experiments/:id/antibodies`). Highlight the cell in red/orange if `current_volume < total_ul_used`. (§2.2, §10 CLAUDE.md)
+- [x] 16.3 — **Experiment detail — volume_on_arrival column (Frontend)**: In the experiment detail antibodies table, add a read-only column "Vol. on Arrival (µL)" showing `volume_on_arrival` for each antibody. Ensure this field is included in the `GET /api/experiments/:id/antibodies` response. (§2.2, §10 CLAUDE.md)
+- [x] 16.4 — **Experiment detail — sortable columns (Frontend)**: Add Angular Material `MatSort` to the experiment detail antibodies table. Wire `matSort` directive and `matSortHeader` to each column header. Connect to the `MatTableDataSource` so all columns are sortable client-side. (§10 CLAUDE.md)
+- [x] 16.5 — **Billing — clearer lab name labels (Frontend + Backend)**: In the billing PDF (`server/controllers/billing.controller.js`, pdfkit generation) and in the billing UI (`client/src/app/pages/billing/`), update lab name labels to be unambiguous: use "Requesting Lab" for the lab that commissioned the experiment (`requesting_lab`) and "Antibody Owner Lab" for the lab that owns the antibodies being charged. Replace any generic or unclear labels currently used. (§6 CLAUDE.md)
+
+---
+
+## Phase 17 — Experiment Templates
+
+Strategy: store templates in dedicated tables (`experiment_templates`, `experiment_template_antibodies`), separate from the live `experiments` table. Templates have no status, no inventory deduction, no billing. A template can be created from any existing experiment ("Save as Template") and used to spawn a new experiment in `planning` status with antibodies pre-populated. This keeps all existing queries (list, billing, low-stock, has_insufficient_volume) untouched.
+
+- [ ] 17.1 — **Migration**: Create `migrations/010_create_experiment_templates.sql` with two tables:
+  - `experiment_templates` (id SERIAL PK, name VARCHAR(255) NOT NULL, requesting_lab_id INTEGER FK → laboratories.id ON DELETE SET NULL, experiment_type VARCHAR(255), macswell_slides INTEGER, total_cocktail_volume NUMERIC(10,2), notes TEXT, created_at TIMESTAMPTZ DEFAULT NOW())
+  - `experiment_template_antibodies` (id SERIAL PK, template_id INTEGER FK → experiment_templates.id ON DELETE CASCADE NOT NULL, antibody_id INTEGER FK → antibodies.id ON DELETE CASCADE NOT NULL, titration_ratio INTEGER NOT NULL)
+  Use skill `db-admin`.
+- [ ] 17.2 — **Backend — Templates CRUD**: Create `server/controllers/templates.controller.js` and `server/routes/templates.routes.js`. Implement (all admin-only): `GET /api/templates` (list with requesting_lab_name joined + antibody count), `GET /api/templates/:id` (detail), `GET /api/templates/:id/antibodies` (joined with tube_number, antibody_code, antigen_target, clone, fluorochrome, lab_name), `POST /api/templates` (create empty template from form), `PUT /api/templates/:id` (update metadata), `DELETE /api/templates/:id` (cascade-deletes its antibodies). Mount in `server/index.js`. Use skill `back-end-developer`.
+- [ ] 17.3 — **Backend — Template antibodies CRUD**: Add to templates controller: `POST /api/templates/:id/antibodies` (antibody_id + titration_ratio), `PUT /api/templates/:id/antibodies/:tabId` (update titration), `DELETE /api/templates/:id/antibodies/:tabId`. No volume/cost calculations needed (templates store only the recipe).
+- [ ] 17.4 — **Backend — "Save experiment as template"**: `POST /api/experiments/:id/save-as-template` (admin-only). Accepts `{ name, notes? }` in body. Creates a new `experiment_templates` row copying `requesting_lab_id`, `experiment_type`, `macswell_slides`, `total_cocktail_volume` from the experiment, and copies all current `experiment_antibodies` (antibody_id + titration_ratio) into `experiment_template_antibodies`. Returns the new template id. Allowed in any experiment status.
+- [ ] 17.5 — **Backend — "Create experiment from template"**: `POST /api/templates/:id/instantiate` (admin-only). Accepts `{ name, date?, requesting_lab_id?, macswell_slides?, total_cocktail_volume?, experiment_type? }` (any field omitted falls back to template defaults). Creates a new experiment in `planning` status, then copies template's antibodies into `experiment_antibodies` recalculating `ul_per_slide`/`total_ul_used`/`total_chf` per §3 with the new slides/cocktail values. Use a DB transaction. Returns the new experiment id.
+- [ ] 17.6 — **Frontend — Service & model**: Create `client/src/app/core/services/template.service.ts` with methods `getAll()`, `getById(id)`, `getAntibodies(id)`, `create(data)`, `update(id, data)`, `delete(id)`, `addAntibody(id, antibody_id, titration_ratio)`, `updateAntibody(id, tabId, titration_ratio)`, `removeAntibody(id, tabId)`, `instantiate(id, overrides)`. Add `client/src/app/core/models/template.model.ts` with `ExperimentTemplate` and `ExperimentTemplateAntibody` interfaces.
+- [ ] 17.7 — **Frontend — Templates list page**: Create `client/src/app/pages/templates/templates.component.{ts,html,scss}` (standalone). Table mirroring experiments list (name, requesting_lab, experiment_type, # antibodies, created_at, actions). Search bar (filter by name). "New Template" button opens a creation dialog (reuse `experiment-form-dialog` pattern, no `date`/`status` fields). Row click → navigate to detail view. Per-row actions: "Use Template" (opens instantiate dialog), "Delete".
+- [ ] 17.8 — **Frontend — Template detail view + "Save as Template" + "Use Template" dialogs**:
+  - Create `client/src/app/pages/template-detail/template-detail.component.{ts,html,scss}` mirroring `experiment-detail` (header with metadata, antibody selector with autocomplete, antibodies table with editable titration, sortable columns). No status badge, no execute, no quote/billing buttons. Edit always allowed.
+  - Add **"Save as Template"** button in `experiment-detail.component.html` header (visible in any status). Opens a small dialog asking for `name` + optional `notes`, calls `POST /api/experiments/:id/save-as-template`, shows success snackbar with link to the new template.
+  - Add **"Use Template"** action on templates list rows (and in template detail header). Opens an instantiate dialog asking for `name` (required) + overrides (date, requesting_lab, macswell_slides, total_cocktail_volume, experiment_type — prefilled from template). On success, navigates to the new experiment's detail page.
+- [ ] 17.9 — **Frontend — Routing & navigation**: Add lazy route `/templates` and `/templates/:id` in `app.routes.ts` (admin-only guard). Add "Templates" nav item in `main-layout.component.ts` with icon `bookmark` (or `library_books`) and `adminOnly: true`. Place it right after "Experiments" in the nav list.

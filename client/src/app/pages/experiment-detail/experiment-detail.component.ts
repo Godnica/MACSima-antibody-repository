@@ -1,9 +1,9 @@
-import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,6 +15,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSortModule, MatSort } from '@angular/material/sort';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ExperimentService } from '../../core/services/experiment.service';
 import { AntibodyService } from '../../core/services/antibody.service';
@@ -31,7 +32,7 @@ import { ExperimentFormDialogComponent } from '../experiments/experiment-form-di
     MatCardModule, MatTableModule, MatButtonModule, MatIconModule,
     MatFormFieldModule, MatInputModule, MatSelectModule,
     MatDialogModule, MatSnackBarModule, MatAutocompleteModule, MatDividerModule,
-    MatProgressSpinnerModule,
+    MatProgressSpinnerModule, MatSortModule,
   ],
   templateUrl: './experiment-detail.component.html',
   styleUrl: './experiment-detail.component.scss',
@@ -47,16 +48,20 @@ export default class ExperimentDetailComponent implements OnInit {
   private readonly cdr = inject(ChangeDetectorRef);
 
   experiment: Experiment | null = null;
-  experimentAntibodies: ExperimentAntibody[] = [];
+  dataSource = new MatTableDataSource<ExperimentAntibody>([]);
+
+  @ViewChild(MatSort) set matSort(sort: MatSort) {
+    if (sort) this.dataSource.sort = sort;
+  }
   allAntibodies: Antibody[] = [];
   filteredAntibodies: Antibody[] = [];
   loading = true;
   error: string | null = null;
 
   displayedColumns = ['tube_number', 'antibody_code', 'antigen_target', 'clone', 'fluorochrome', 'status', 'lab_name',
-    'titration_ratio', 'ul_per_slide', 'chf_per_ul', 'total_chf', 'actions'];
+    'titration_ratio', 'ul_per_slide', 'total_ul_used', 'volume_on_arrival', 'current_volume', 'chf_per_ul', 'total_chf', 'actions'];
   displayedColumnsReadonly = ['tube_number', 'antibody_code', 'antigen_target', 'clone', 'fluorochrome', 'status', 'lab_name',
-    'titration_ratio', 'ul_per_slide', 'chf_per_ul', 'total_chf'];
+    'titration_ratio', 'ul_per_slide', 'total_ul_used', 'volume_on_arrival', 'current_volume', 'chf_per_ul', 'total_chf'];
 
   searchControl = this.fb.control('');
   importCodesControl = this.fb.control('');
@@ -64,11 +69,12 @@ export default class ExperimentDetailComponent implements OnInit {
 
   get isPlanning() { return this.experiment?.status === 'planning'; }
   get columns() { return this.isPlanning ? this.displayedColumns : this.displayedColumnsReadonly; }
+  get experimentAntibodies() { return this.dataSource.data; }
 
   totalCost = 0;
 
   private refreshAntibodies(eas: ExperimentAntibody[]) {
-    this.experimentAntibodies = eas;
+    this.dataSource.data = eas;
     this.totalCost = eas.reduce((sum, ea) => sum + Number(ea.total_chf), 0);
     this.cdr.detectChanges();
   }

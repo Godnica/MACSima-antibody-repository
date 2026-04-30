@@ -21,9 +21,9 @@ exports.generateBillingPdf = (data) => {
   doc.fontSize(10);
   doc.text(`Date: ${data.experimentDate}`);
   doc.text(`Experiment: ${data.experimentName}`);
-  doc.text(`Requesting Lab: ${data.requestingLab}`);
-  doc.text(`Billed to: ${data.ownerLab} (PI: ${data.ownerLabPI || '—'})`);
-  if (data.billingAddress) doc.text(`Address: ${data.billingAddress}`);
+  doc.text(`Requesting Lab (experiment commissioned by): ${data.requestingLab}`);
+  doc.text(`Antibody Owner Lab (billed to): ${data.ownerLab} (PI: ${data.ownerLabPI || '—'})`);
+  if (data.billingAddress) doc.text(`Billing Address: ${data.billingAddress}`);
   doc.moveDown();
 
   // Table header
@@ -82,7 +82,9 @@ exports.generateBillingPdf = (data) => {
  * @returns {PDFDocument}
  */
 exports.generateQuotePdf = (data) => {
-  const doc = new PDFDocument({ margin: 50 });
+  // Landscape Letter: 792 x 612 — usable area x: 50→742 (692px wide)
+  const doc = new PDFDocument({ margin: 50, layout: 'landscape', size: 'LETTER' });
+  const rightEdge = 742;
 
   // Header
   doc.fontSize(18).text('Experiment Cost Estimate', { align: 'center' });
@@ -98,47 +100,53 @@ exports.generateQuotePdf = (data) => {
   doc.text(`Total Cocktail Volume: ${data.totalCocktailVolume} µL`);
   doc.moveDown();
 
-  // Table header
+  // Table header — cols: Tube, Code, Target, Clone, Fluoro, Lab, Tit., µL/slide, Total µL, CHF/µL, Total CHF
   const tableTop = doc.y;
-  const cols = [50, 110, 175, 235, 305, 355, 400, 450, 505];
-  doc.font('Helvetica-Bold').fontSize(7);
-  doc.text('Tube', cols[0], tableTop);
-  doc.text('Target', cols[1], tableTop);
-  doc.text('Clone', cols[2], tableTop);
-  doc.text('Fluorochrome', cols[3], tableTop);
-  doc.text('Lab', cols[4], tableTop);
-  doc.text('Titration', cols[5], tableTop);
-  doc.text('µL/slide', cols[6], tableTop);
-  doc.text('CHF/µL', cols[7], tableTop);
-  doc.text('Total CHF', cols[8], tableTop);
+  const cols    = [50, 100, 145, 220, 290, 365, 495, 540, 590, 640, 685];
+  const widths  = [45,  40,  70,  65,  70, 125,  40,  45,  45,  40,  55];
 
-  doc.moveTo(50, tableTop + 12).lineTo(560, tableTop + 12).stroke();
+  doc.font('Helvetica-Bold').fontSize(8);
+  doc.text('Tube',         cols[0],  tableTop, { width: widths[0] });
+  doc.text('Code',         cols[1],  tableTop, { width: widths[1] });
+  doc.text('Target',       cols[2],  tableTop, { width: widths[2] });
+  doc.text('Clone',        cols[3],  tableTop, { width: widths[3] });
+  doc.text('Fluorochrome', cols[4],  tableTop, { width: widths[4] });
+  doc.text('Lab',          cols[5],  tableTop, { width: widths[5] });
+  doc.text('Tit.',         cols[6],  tableTop, { width: widths[6] });
+  doc.text('µL/slide',     cols[7],  tableTop, { width: widths[7] });
+  doc.text('Total µL',     cols[8],  tableTop, { width: widths[8] });
+  doc.text('CHF/µL',       cols[9],  tableTop, { width: widths[9] });
+  doc.text('Total CHF',    cols[10], tableTop, { width: widths[10] });
+
+  doc.moveTo(50, tableTop + 13).lineTo(rightEdge, tableTop + 13).stroke();
 
   // Table rows
-  doc.font('Helvetica').fontSize(7);
-  let y = tableTop + 18;
+  doc.font('Helvetica').fontSize(8);
+  let y = tableTop + 19;
   for (const ab of data.antibodies) {
-    if (y > 700) {
+    if (y > 540) {
       doc.addPage();
       y = 50;
     }
-    doc.text(ab.tube_number || '', cols[0], y, { width: 55 });
-    doc.text(ab.target || '', cols[1], y, { width: 60 });
-    doc.text(ab.clone || '', cols[2], y, { width: 55 });
-    doc.text(ab.fluorochrome || '', cols[3], y, { width: 65 });
-    doc.text(ab.lab_name || '', cols[4], y, { width: 45 });
-    doc.text(`1:${ab.titration_ratio}`, cols[5], y, { width: 40 });
-    doc.text(ab.ul_per_slide.toFixed(1), cols[6], y, { width: 45 });
-    doc.text(ab.chf_per_ul.toFixed(4), cols[7], y, { width: 50 });
-    doc.text(ab.total_chf.toFixed(2), cols[8], y, { width: 55 });
+    doc.text(ab.tube_number || '',                                               cols[0],  y, { width: widths[0] });
+    doc.text(ab.antibody_code != null ? String(ab.antibody_code) : '—',          cols[1],  y, { width: widths[1] });
+    doc.text(ab.target || '',                                                    cols[2],  y, { width: widths[2] });
+    doc.text(ab.clone || '',                                                     cols[3],  y, { width: widths[3] });
+    doc.text(ab.fluorochrome || '',                                              cols[4],  y, { width: widths[4] });
+    doc.text(ab.lab_name || '',                                                  cols[5],  y, { width: widths[5] });
+    doc.text(`1:${ab.titration_ratio}`,                                          cols[6],  y, { width: widths[6] });
+    doc.text(ab.ul_per_slide.toFixed(1),                                         cols[7],  y, { width: widths[7] });
+    doc.text(ab.total_ul_used.toFixed(1),                                        cols[8],  y, { width: widths[8] });
+    doc.text(ab.chf_per_ul.toFixed(4),                                           cols[9],  y, { width: widths[9] });
+    doc.text(ab.total_chf.toFixed(2),                                            cols[10], y, { width: widths[10] });
     y += 14;
   }
 
   // Total
   y += 10;
-  doc.moveTo(430, y - 4).lineTo(560, y - 4).stroke();
-  doc.font('Helvetica-Bold').fontSize(10);
-  doc.text(`Total: ${data.totalCost.toFixed(2)} CHF`, 430, y, { align: 'right', width: 130 });
+  doc.moveTo(rightEdge - 200, y - 4).lineTo(rightEdge, y - 4).stroke();
+  doc.font('Helvetica-Bold').fontSize(11);
+  doc.text(`Total: ${data.totalCost.toFixed(2)} CHF`, rightEdge - 200, y, { align: 'right', width: 200 });
 
   doc.end();
   return doc;

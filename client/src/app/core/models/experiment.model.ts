@@ -26,6 +26,7 @@ export interface ExperimentAntibody {
   status?: string | null;
   chf_per_ul: number;
   current_volume: number;
+  volume_on_arrival: number;
   lab_name: string;
   pi_name?: string | null;
   titration_ratio: number;

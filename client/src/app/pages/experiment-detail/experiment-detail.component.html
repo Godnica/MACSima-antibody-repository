@@ -94,48 +94,49 @@
 </div>
 }
 
-<!-- Antibodies table -->
-<table mat-table [dataSource]="experimentAntibodies" class="mat-elevation-z1">
+<!-- Antibodies table + footer wrapper (ensures equal width) -->
+<div class="table-container mat-elevation-z1">
+<table mat-table [dataSource]="dataSource" matSort>
 
   <ng-container matColumnDef="tube_number">
-    <th mat-header-cell *matHeaderCellDef>Tube #</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Tube #</th>
     <td mat-cell *matCellDef="let row">{{ row.tube_number }}</td>
   </ng-container>
 
   <ng-container matColumnDef="antibody_code">
-    <th mat-header-cell *matHeaderCellDef>Code</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Code</th>
     <td mat-cell *matCellDef="let row">{{ row.antibody_code || '—' }}</td>
   </ng-container>
 
   <ng-container matColumnDef="antigen_target">
-    <th mat-header-cell *matHeaderCellDef>Target</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Target</th>
     <td mat-cell *matCellDef="let row">{{ row.antigen_target }}</td>
   </ng-container>
 
   <ng-container matColumnDef="clone">
-    <th mat-header-cell *matHeaderCellDef>Clone</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Clone</th>
     <td mat-cell *matCellDef="let row">{{ row.clone }}</td>
   </ng-container>
 
   <ng-container matColumnDef="fluorochrome">
-    <th mat-header-cell *matHeaderCellDef>Fluorochrome</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Fluorochrome</th>
     <td mat-cell *matCellDef="let row">{{ row.fluorochrome }}</td>
   </ng-container>
 
   <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef>Status</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
     <td mat-cell *matCellDef="let row">{{ row.status || '—' }}</td>
   </ng-container>
 
   <ng-container matColumnDef="lab_name">
-    <th mat-header-cell *matHeaderCellDef>Lab</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Lab</th>
     <td mat-cell *matCellDef="let row">
       {{ row.lab_name }} <strong *ngIf="row.pi_name">({{ row.pi_name }})</strong>
     </td>
   </ng-container>
 
   <ng-container matColumnDef="titration_ratio">
-    <th mat-header-cell *matHeaderCellDef>Titration (1:x)</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Titration (1:x)</th>
     <td mat-cell *matCellDef="let row">
       @if (isPlanning) {
       <input class="titration-input" type="number" min="1" [value]="row.titration_ratio"
@@ -147,17 +148,35 @@
   </ng-container>
 
   <ng-container matColumnDef="ul_per_slide">
-    <th mat-header-cell *matHeaderCellDef>uL/slide</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>uL/slide</th>
     <td mat-cell *matCellDef="let row" class="num-cell">{{ row.ul_per_slide | number:'1.1-1' }}</td>
   </ng-container>
 
+  <ng-container matColumnDef="total_ul_used">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Total uL</th>
+    <td mat-cell *matCellDef="let row" class="num-cell">{{ row.total_ul_used | number:'1.1-1' }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="volume_on_arrival">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Vol. Arrival (uL)</th>
+    <td mat-cell *matCellDef="let row" class="num-cell">{{ row.volume_on_arrival | number:'1.1-1' }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="current_volume">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Stock (uL)</th>
+    <td mat-cell *matCellDef="let row" class="num-cell"
+        [class.low-stock-cell]="isInsufficient(row)">
+      {{ row.current_volume | number:'1.1-1' }}
+    </td>
+  </ng-container>
+
   <ng-container matColumnDef="chf_per_ul">
-    <th mat-header-cell *matHeaderCellDef>CHF/uL</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>CHF/uL</th>
     <td mat-cell *matCellDef="let row" class="num-cell">{{ row.chf_per_ul | number:'1.2-4' }}</td>
   </ng-container>
 
   <ng-container matColumnDef="total_chf">
-    <th mat-header-cell *matHeaderCellDef>Total CHF</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Total CHF</th>
     <td mat-cell *matCellDef="let row" class="num-cell">{{ row.total_chf | number:'1.2-2' }}</td>
   </ng-container>
 
@@ -179,9 +198,10 @@
   </tr>
 </table>
 
-<!-- Total cost footer (outside table to avoid colspan issues) -->
+<!-- Total cost footer -->
 <div class="total-footer">
   <span>Total experiment cost</span>
   <span class="total-value">{{ totalCost | number:'1.2-2' }} CHF</span>
+</div>
 </div>
 }
