@@ -14,7 +14,7 @@
     <mat-select [formControl]="labFilter" (selectionChange)="applyFilters()">
       <mat-option value="">All</mat-option>
       @for (lab of labs; track lab.id) {
-        <mat-option [value]="lab.id">{{ lab.name }}</mat-option>
+      <mat-option [value]="lab.id">{{ lab.name }}</mat-option>
       }
     </mat-select>
   </mat-form-field>
@@ -63,6 +63,11 @@
   <ng-container matColumnDef="fluorochrome">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Fluorochrome</th>
     <td mat-cell *matCellDef="let row">{{ row.fluorochrome }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="processing">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Processing</th>
+    <td mat-cell *matCellDef="let row">{{ row.processing || '—' }}</td>
   </ng-container>
 
   <ng-container matColumnDef="lab_name">

@@ -26,7 +26,7 @@ import { Antibody } from '../../core/models/antibody.model';
   styleUrl: './antibody-form-dialog.component.scss',
 })
 export class AntibodyFormDialogComponent implements OnInit {
-  readonly data = inject<Antibody | null>(MAT_DIALOG_DATA);
+  private readonly rawData = inject<Antibody | { __clone: Antibody } | null>(MAT_DIALOG_DATA);
   readonly dialogRef = inject(MatDialogRef<AntibodyFormDialogComponent>);
   private readonly fb = inject(FormBuilder);
   private readonly labService = inject(LaboratoryService);
@@ -47,26 +47,30 @@ export class AntibodyFormDialogComponent implements OnInit {
     { value: 'backup', label: 'Backup' },
   ];
 
-  isEdit = !!this.data;
+  readonly data = this.rawData;
+  isEdit = !!this.rawData && !('__clone' in (this.rawData as object));
+  private src: Antibody | null = !this.rawData
+    ? null
+    : ('__clone' in (this.rawData as object) ? (this.rawData as { __clone: Antibody }).__clone : this.rawData as Antibody);
 
   form = this.fb.group({
-    lab_id:            [this.data?.lab_id ?? null,             Validators.required],
-    antibody_code:     [this.data?.antibody_code ?? null,       []],
-    tube_number:       [this.data?.tube_number ?? '',          Validators.required],
-    species:           [this.data?.species ?? '',              []],
-    antigen_target:    [this.data?.antigen_target ?? '',       []],
-    clone:             [this.data?.clone ?? '',                []],
-    company:           [this.data?.company ?? '',              []],
-    order_number:      [this.data?.order_number ?? '',         []],
-    lot_number:        [this.data?.lot_number ?? '',           []],
-    fluorochrome:      [this.data?.fluorochrome ?? '',         []],
-    processing:        [this.data?.processing ?? '',           []],
-    status:            [this.data?.status ?? '',               []],
-    volume_on_arrival: [this.data?.volume_on_arrival ?? null,  [Validators.required, Validators.min(0.01)]],
-    current_volume:    [this.data?.current_volume ?? null,     [Validators.min(0)]],
-    cost_chf:          [this.data?.cost_chf ?? null,           [Validators.required, Validators.min(0.01)]],
-    quality_color:     [this.data?.quality_color ?? 'none',    []],
-    chf_per_ul:        [{ value: this.data?.chf_per_ul != null ? Number(this.data.chf_per_ul).toFixed(4) : '', disabled: true }, []],
+    lab_id:            [this.src?.lab_id ?? null,             Validators.required],
+    antibody_code:     [this.src?.antibody_code ?? null,       []],
+    tube_number:       [this.isEdit ? (this.src?.tube_number ?? '') : '', Validators.required],
+    species:           [this.src?.species ?? '',              []],
+    antigen_target:    [this.src?.antigen_target ?? '',       []],
+    clone:             [this.src?.clone ?? '',                []],
+    company:           [this.src?.company ?? '',              []],
+    order_number:      [this.src?.order_number ?? '',         []],
+    lot_number:        [this.src?.lot_number ?? '',           []],
+    fluorochrome:      [this.src?.fluorochrome ?? '',         []],
+    processing:        [this.src?.processing ?? '',           []],
+    status:            [this.isEdit ? (this.src?.status ?? '') : '', []],
+    volume_on_arrival: [this.src?.volume_on_arrival ?? null,  [Validators.required, Validators.min(0.01)]],
+    current_volume:    [this.src?.current_volume ?? null,     [Validators.min(0)]],
+    cost_chf:          [this.src?.cost_chf ?? null,           [Validators.required, Validators.min(0.01)]],
+    quality_color:     [this.src?.quality_color ?? 'none',    []],
+    chf_per_ul:        [{ value: this.src?.chf_per_ul != null ? Number(this.src.chf_per_ul).toFixed(4) : '', disabled: true }, []],
   });
 
   ngOnInit() {

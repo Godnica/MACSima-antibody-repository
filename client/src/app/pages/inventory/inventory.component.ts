@@ -117,6 +117,17 @@ export default class InventoryComponent implements OnInit, AfterViewInit {
       });
   }
 
+  openClone(ab: Antibody) {
+    this.dialog.open(AntibodyFormDialogComponent, { data: { __clone: ab }, width: '900px', maxHeight: '90vh' })
+      .afterClosed().subscribe(result => {
+        if (!result) return;
+        this.service.create(result).subscribe({
+          next: () => { this.snackBar.open('Antibody cloned', 'Close', { duration: 3000 }); this.load(); },
+          error: (err) => this.snackBar.open(err.error?.error || 'Error', 'Close', { duration: 5000, panelClass: 'error-snackbar' }),
+        });
+      });
+  }
+
   confirmDelete(ab: Antibody) {
     this.dialog.open(ConfirmDialogComponent, {
       width: '400px',
